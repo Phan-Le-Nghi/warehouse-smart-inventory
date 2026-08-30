@@ -1,0 +1,12 @@
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+!.env.template
+local-secrets/
+*.local-secret
+
+# Temporary working material
+tmp/
+.context-packs/
+context-packs-tmp/

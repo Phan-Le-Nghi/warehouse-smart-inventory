@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "name": "Product / Apps",
+      "path": "apps"
+    },
+    {
+      "name": "Project Vault",
+      "path": "vault"
+    },
+    {
+      "name": "Project Docs",
+      "path": "docs"
+    }
+  ],
+  "settings": {}
+}
