@@ -51,3 +51,17 @@ Ownership của Audit đã được xác nhận và không phải câu hỏi m�
 | OQ-033 | Non-functional requirement nào bắt buộc cho Report Round 1 hoặc sản phẩm cuối? | Architecture và chất lượng |
 
 Khi câu trả lời được phê duyệt, phải dẫn nguồn, cập nhật artifact canonical bị ảnh hưởng và ghi quyết định khi phù hợp. Không âm thầm xóa câu hỏi lịch sử.
+
+## Research Synthesis v1 — trạng thái được thông tin một phần
+
+Evidence P1/P2/P3 trong [`../01-sources/research-evidence.md`](../01-sources/research-evidence.md) chỉ mô tả vận hành hiện tại tại một minimart; các mục dưới đây **không được đóng**.
+
+| ID | Evidence đã thông tin | Nội dung vẫn `OPEN QUESTION` |
+|---|---|---|
+| OQ-009 | Có evidence từ ba participant tại một minimart (`EVD-018`, `EVD-019`). | Khả năng tiếp cận stakeholder/participant bổ sung và usability testing vẫn chưa rõ. |
+| OQ-013 | Có mô tả cấp cao về Receive, Putaway, Pick, Transfer, Adjust và Audit (`EVD-002` đến `EVD-017`). | Trigger, precondition, success outcome, exception và completion state chi tiết vẫn chưa rõ. |
+| OQ-016 | Có movement giữa backroom và sales shelf (`EVD-010`). | Transfer chính thức là giữa location, Warehouse hay cả hai vẫn chưa rõ. |
+| OQ-017 | Có re-check chênh lệch và manager involvement trong vận hành hiện tại (`EVD-012`, `EVD-013`, `EVD-017`). | Lý do, evidence, approval và authority bắt buộc vẫn chưa rõ. |
+| OQ-018 | Có inventory checking hằng ngày, gồm đếm và đối chiếu (`EVD-015`, `EVD-016`). | Audit là cycle count, full stocktake hay cả hai vẫn chưa rõ. |
+| OQ-020 | Staff hiện report/escalate chênh lệch cho manager (`EVD-013`). | Quyền chính thức của Warehouse Staff, Manager, Purchasing và Admin vẫn chưa rõ. |
+| OQ-028 | Có chênh lệch actual-vs-system trong vận hành hiện tại (`EVD-012`, `EVD-017`). | Định nghĩa anomaly, nguyên nhân, tần suất và cách chứng minh vẫn chưa rõ. |
