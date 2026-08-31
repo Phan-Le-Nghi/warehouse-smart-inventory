@@ -6,7 +6,8 @@ Vault là nguồn sự thật canonical. Các giá trị trạng thái dùng t�
 |---|---|---|---|
 | Quản trị nguồn | [`source-priority.md`](source-priority.md) | CONFIRMED | AI/Vault — Ly Na |
 | Nguồn giảng viên/môn học | [`01-sources/assignment-brief.md`](01-sources/assignment-brief.md) | Bản tóm tắt CONFIRMED; bản nguồn gốc TBD | AI/Vault — Ly Na |
-| Bằng chứng nghiên cứu | [`01-sources/research-evidence.md`](01-sources/research-evidence.md) | TBD | Product/BA — Thanh Ngân |
+| Ghi chú phỏng vấn nghiên cứu | [`01-sources/interview-notes.md`](01-sources/interview-notes.md) | P1/P2/P3 đã ingest; ngày/duration TBD | Product/BA — Thanh Ngân |
+| Bằng chứng nghiên cứu | [`01-sources/research-evidence.md`](01-sources/research-evidence.md) | Evidence index P1/P2/P3; chưa tạo requirement | Product/BA — Thanh Ngân |
 | Yêu cầu sản phẩm | [`02-requirements/requirements.md`](02-requirements/requirements.md) | Một phần; cần discovery | Product/BA — Thanh Ngân |
 | Quy tắc nghiệp vụ | [`02-requirements/business-rules.md`](02-requirements/business-rules.md) | TBD | Product/BA — Thanh Ngân |
 | Giả định | [`02-requirements/assumptions.md`](02-requirements/assumptions.md) | Không có giả định đang hoạt động | Product/BA — Thanh Ngân |
