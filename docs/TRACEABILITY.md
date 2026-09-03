@@ -15,3 +15,9 @@ Traceability sử dụng stable ID canonical. Artifact downstream còn thiếu p
 | AI-DIR-003 | TBD | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Hướng được giảng viên xác nhận |
 
 Deliverable môn học/báo cáo được theo dõi trong [`00-project-index.md`](00-project-index.md), không được gán ID yêu cầu sản phẩm tại đây.
+
+## Draft đang BA review
+
+| Requirement/Hướng | Draft User Story/AC | Flow/Design/Spec | Taiga | Implementation | Test | Bằng chứng |
+|---|---|---|---|---|---|---|
+| CAND-REQ-004 | `vault/04-product/transfer-draft.md` / `DRAFT-US-TRF-001` / `AC-TRF-001` scope-level only | Draft flow in `vault/04-product/transfer-draft.md`; functional behavior TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | `EVD-010`, `EVD-011` |

@@ -15,7 +15,7 @@ Không tạo User Story giả để đạt mục tiêu. Mỗi User Story trong t
 | Receive | Nghĩa | TBD | Chưa soạn |
 | Putaway | Nghi | TBD | Chưa soạn |
 | Pick | Thảo Ngân | TBD | Chưa soạn |
-| Transfer | Ly Na | TBD | Chưa soạn |
+| Transfer | Ly Na | TBD | Draft BA review: `vault/04-product/transfer-draft.md` |
 | Adjust | Thanh Ngân | TBD | Chưa soạn |
 | Audit | Nghi sở hữu/hỗ trợ | TBD | Chưa soạn |
 

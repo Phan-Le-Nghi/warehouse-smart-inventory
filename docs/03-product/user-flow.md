@@ -13,7 +13,7 @@
 | Receive | Nghĩa | TBD |
 | Putaway | Nghi | TBD |
 | Pick | Thảo Ngân | TBD |
-| Transfer | Ly Na | TBD |
+| Transfer | Ly Na | Draft BA review: `vault/04-product/transfer-draft.md` |
 | Adjust | Thanh Ngân | TBD |
 | Audit | Nghi sở hữu/hỗ trợ | TBD |
 
