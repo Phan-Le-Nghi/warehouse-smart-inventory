@@ -16,7 +16,7 @@ Không tạo User Story giả để đạt mục tiêu. Mỗi User Story trong t
 | Receive | Nghĩa | TBD | Chưa soạn |
 | Putaway | Nghi | `DRAFT-US-PUT-001` (ID tạm thời, chưa canonical) | DRAFT — plan đã được Product/BA duyệt; story chưa canonical hóa |
 | Pick | Thảo Ngân | TBD | Chưa soạn |
-| Transfer | Ly Na | TBD | Chưa soạn |
+| Transfer | Ly Na | `DRAFT-US-TRA-001` | DRAFT — chờ Product/BA review |
 | Adjust | Thanh Ngân | TBD | Chưa soạn |
 | Audit | Nghi sở hữu/hỗ trợ | `DRAFT-US-AUD-001` (ID tạm thời, chưa canonical) | DRAFT — plan đã được Product/BA duyệt; story chưa canonical hóa |
 
