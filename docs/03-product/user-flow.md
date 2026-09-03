@@ -64,7 +64,7 @@ Flow này không xác nhận record/lookup location, automatic assignment, quant
 
 - Putaway trigger, precondition, completion state và downstream handoff: `OQ-013`.
 - Partial Putaway: `OQ-014`.
-- Một SKU có thể tồn tại tại nhiều physical location: `OPEN QUESTION`; `OQ-034` là stable ID được đề xuất để BA/Vault kiểm tra và phê duyệt, chưa canonical và task này không resolve.
+- Một SKU có thể tồn tại tại nhiều physical location: `OPEN QUESTION`; chưa có canonical Open Question ID được xác nhận.
 - Putaway hay Transfer đối với movement giữa backroom và sales shelf: `OQ-016`.
 - Role có thể thực hiện/xem Putaway: `OQ-020`.
 - Putaway có ảnh hưởng Stock/Movement hay không: `TBD`.

@@ -29,8 +29,7 @@ REQ-002
     -> Putaway cautious flow: DRAFT
     -> Taiga / Implementation / Test: Chưa bắt đầu
 ```
-
-`CAND-REQ-003` vẫn là `DRAFT` và không được sử dụng tại đây như approval cho hành vi record/lookup location. Trigger, completion, partial Putaway, location cardinality (`OQ-034` chỉ là stable ID đề xuất, chưa canonical), Putaway/Transfer classification, role permission, Stock/Movement effect và device interaction tiếp tục là `TBD` / `OPEN QUESTION`.
+`CAND-REQ-003` vẫn là `DRAFT` và không được sử dụng tại đây như approval cho hành vi record/lookup location. Trigger, completion, partial Putaway, location cardinality, Putaway/Transfer classification, role permission, Stock/Movement effect và device interaction tiếp tục là `TBD` / `OPEN QUESTION`.
 
 ## Audit DRAFT trace
 
