@@ -15,7 +15,7 @@
 | Pick | Thảo Ngân | TBD |
 | Transfer | Ly Na | TBD |
 | Adjust | Thanh Ngân | TBD |
-| Audit | Nghi sở hữu/hỗ trợ | TBD |
+| Audit | Nghi sở hữu/hỗ trợ | DRAFT cautious flow; trigger, scope, role và completion criteria TBD |
 
 Flow chi tiết đã duyệt sẽ là canonical trong `vault/04-product/user-flows/` và được liên kết tại đây.
 
@@ -69,3 +69,60 @@ Flow này không xác nhận record/lookup location, automatic assignment, quant
 - Role có thể thực hiện/xem Putaway: `OQ-020`.
 - Putaway có ảnh hưởng Stock/Movement hay không: `TBD`.
 - Barcode/QR/scanner/mobile/offline có thuộc phạm vi không: `OQ-022`.
+
+## Audit — DRAFT cautious flow
+
+### Evidence boundary
+
+- `REQ-002`: Audit là khu vực quy trình bắt buộc; ý nghĩa trình tự và quan hệ với các flow khác vẫn TBD.
+- `REQ-004`: Audit thuộc core domain; định nghĩa, quan hệ, thuộc tính và hành vi vẫn TBD.
+- `CAND-REQ-005`: sản phẩm nên hỗ trợ đối chiếu số lượng đếm thực tế với dữ liệu tồn trong hệ thống trong khu vực Audit.
+- `EVD-015`, `EVD-016`: minimart được nghiên cứu kiểm kê hằng ngày bằng cách đếm/kiểm tra hàng thực tế và đối chiếu với dữ liệu tồn trong KiotViet.
+- `CAND-BR-002`, `EVD-012`, `EVD-017`: chênh lệch phải được kiểm tra lại trước khi thực hiện điều chỉnh tồn.
+- `EVD-013`, `EVD-014`: manager tham gia và staff report/escalate trong vận hành hiện tại, nhưng đây không phải permission model của sản phẩm mới.
+- `EVD-019`: evidence chỉ phản ánh vận hành của minimart được nghiên cứu và không tạo quy tắc Audit hằng ngày cho mọi Warehouse.
+
+### High-level flow
+
+```text
+Audit context begins
+(trigger, actor, schedule và precondition: TBD / OQ-013, OQ-020)
+  ↓
+Physical inventory is checked/counted
+(count scope và interaction: TBD)
+  ↓
+Physical count is compared with system inventory data
+  ├─ Quantities match
+  │    └─ Audit completion / next step: TBD / OQ-013
+  └─ Discrepancy detected
+       ↓
+     Discrepancy must be re-checked before any inventory adjustment
+       ↓
+     Result after re-check / further handling / relationship to Adjust: TBD
+```
+
+Nhánh “Quantities match” chỉ là nhánh logic tối thiểu của phép đối chiếu, không xác nhận completion state. Flow không xác nhận Audit tự động thay đổi Stock, tự động tạo Adjust, hoặc tự động chuyển sang Adjust.
+
+### Evidence-supported discrepancy path
+
+```text
+Physical count differs from system inventory data
+  ↓
+Re-check is required
+  ↓
+Any later inventory adjustment may occur only after that re-check
+  ↓
+Exact handling, reason, evidence, approval, actor and outcome: TBD / OPEN QUESTION
+```
+
+Trong minimart được nghiên cứu, staff report/escalate chênh lệch và manager tham gia xử lý (`EVD-013`). Chi tiết này được giữ làm evidence context, không được dùng để gán quyền hệ thống khi `OQ-020` còn mở.
+
+### Open Questions được bảo tồn
+
+- Trigger, precondition, success outcome, exception và completion state của Audit: `OQ-013`.
+- Lý do, bằng chứng và phê duyệt cho Adjust/Audit: `OQ-017`.
+- Audit là cycle count, full stocktake hay cả hai: `OQ-018`.
+- Quyền của Warehouse Staff, Manager, Purchasing và Admin: `OQ-020`.
+- Barcode/QR, scanner, mobile/offline và tích hợp bên ngoài: `OQ-022`.
+- Định nghĩa các loại dữ liệu tồn được dùng để đối chiếu: `OQ-011`.
+- Phạm vi đếm, lịch/tần suất trong sản phẩm mới, quan hệ Audit–Adjust và kết quả sau re-check: `TBD`; không được resolve trong flow này.
