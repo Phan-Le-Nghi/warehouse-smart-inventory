@@ -283,7 +283,7 @@ Các vấn đề này liên quan đến `OQ-013`, `OQ-014`, `OQ-015`, `OQ-016` v
 
 Chưa có requirement xác nhận:
 
-* Transfer/Mmovement có tạo audit log hay không;
+* Transfer/Movement có tạo audit log hay không;
 * log gồm actor/time/source/destination/quantity hay không;
 * có cần correlation ID hay transaction ID hay không.
 
@@ -430,5 +430,32 @@ Story Spec này **không xác nhận** các behavior sau:
 * ❌ Barcode/QR/scanner/mobile/offline.
 * ❌ Partial Transfer.
 * ❌ Negative stock handling.
+## Acceptance Criteria
 
+> Status: DRAFT — Pending Product/BA review
+
+### AC-01 — Track movement between areas
+**Given** có movement hàng giữa source và destination thuộc phạm vi được phê duyệt  
+**When** người dùng thực hiện hoặc tra cứu movement  
+**Then** hệ thống/giải pháp phải cung cấp thông tin movement theo behavior được BA/Product phê duyệt.
+
+### AC-02 — Invalid source/destination
+**Given** source hoặc destination không hợp lệ hoặc không xác định  
+**When** người dùng thực hiện Transfer  
+**Then** hệ thống không xử lý movement như một movement hợp lệ.
+
+### AC-03 — Authorization
+**Given** user không có quyền thực hiện operation Transfer  
+**When** user cố thực hiện operation  
+**Then** operation phải bị từ chối theo authorization rule được phê duyệt.
+
+### AC-04 — Partial Transfer
+**Given** user yêu cầu chuyển một phần quantity  
+**When** thực hiện Transfer  
+**Then** behavior phải tuân theo quyết định về partial Transfer được Product/BA xác nhận.
+
+### AC-05 — Stock effect
+**Given** movement được xử lý  
+**When** Transfer hoàn tất theo behavior được phê duyệt  
+**Then** bất kỳ thay đổi nào đối với Stock phải phù hợp với Data Model/API contract đã được phê duyệt.
 Các điểm trên phải được giải quyết bằng requirement/business decision tương ứng trước khi implementation.
