@@ -45,3 +45,16 @@ Không đưa secret, dữ liệu cá nhân, Context Pack tạm thời hoặc bư
   - Không tự ý thay đổi trạng thái `CAND-REQ-003`.
   - Không tự tạo `OQ-034`.
   - Đánh dấu hai vấn đề để BA/team xác nhận trước khi cập nhật artifact.
+
+  ## AI-USE-002 — Draft Transfer Story và Traceability consistency review
+
+* **Member:** Ly Na
+* **Date:** 2026-09-03
+* **Affected artifacts:** `docs/04-backlog/user-stories.md`, `docs/TRACEABILITY.md`
+* **AI purpose:** Hỗ trợ kiểm tra consistency và draft User Story Transfer từ các requirement, evidence và open questions đã có trong Vault.
+* **Scope:** `REQ-002`, `REQ-004`, `CAND-REQ-004`, `EVD-010`, `EVD-011`, `EVD-019`, `OQ-013`, `OQ-014`, `OQ-016`, `OQ-020`, `OQ-022`.
+* **AI output:** Đề xuất `DRAFT-US-TRA-001` và downstream trace tương ứng, đồng thời giữ các behavior chưa được xác nhận ở trạng thái `TBD` / `OPEN QUESTION`.
+* **Human verification:** Đã đối chiếu lại với `requirements.md`, `research-evidence.md`, `open-questions.md`, `user-stories.md` và `TRACEABILITY.md`.
+* **Consistency decision:** Giữ `CAND-REQ-004` ở trạng thái `DRAFT`; không biến `EVD-010` thành bằng chứng cho việc hệ thống bắt buộc có Transfer/Movement transaction riêng.
+* **Scope guard:** Không xác nhận automatic Stock update, Movement transaction, location change, warehouse scope hoặc role permission khi chưa có requirement được phê duyệt.
+* **Verification status:** AI output không phải nguồn authoritative; Product/BA review vẫn cần thiết trước khi canonical hóa Story.
