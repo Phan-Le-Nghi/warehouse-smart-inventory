@@ -53,7 +53,7 @@ Các AC về ghi nhận, lưu, tra cứu, trả về location hoặc theo dõi m
 
 - Trigger, precondition, completion state và downstream handoff: `TBD` / `OQ-013`.
 - Partial Putaway: `OPEN QUESTION` / `OQ-014`.
-- Một SKU có thể tồn tại tại nhiều physical location: `OPEN QUESTION`; `OQ-034` là stable ID được đề xuất để BA/Vault kiểm tra và phê duyệt, chưa canonical và chưa được resolve trong story này.
+- Một SKU có thể tồn tại tại nhiều physical location: `OPEN QUESTION`; chưa có canonical Open Question ID được xác nhận.
 - Ranh giới Putaway và Transfer: `OPEN QUESTION` / `OQ-016`.
 - Role thực hiện/xem Putaway: `OPEN QUESTION` / `OQ-020`.
 - Ảnh hưởng tới Stock/Movement: `TBD`.
