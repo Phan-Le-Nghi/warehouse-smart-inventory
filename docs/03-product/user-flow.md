@@ -10,7 +10,7 @@
 
 | Flow | Người phụ trách | Flow chi tiết |
 |---|---|---|
-| Receive | Nghĩa | TBD |
+| Receive | Nghĩa | DRAFT flow — `US-REC-001` (BA CONFIRMED), AC-01 đến AC-03 |
 | Putaway | Nghi | DRAFT cautious flow; system interaction và completion criteria TBD |
 | Pick | Thảo Ngân | TBD |
 | Transfer | Ly Na | DRAFT cautious flow; trigger, scope, system interaction và completion criteria TBD |
@@ -18,6 +18,47 @@
 | Audit | Nghi sở hữu/hỗ trợ | DRAFT cautious flow; trigger, scope, role và completion criteria TBD |
 
 Flow chi tiết đã duyệt sẽ là canonical trong `vault/04-product/user-flows/` và được liên kết tại đây.
+
+## Receive — DRAFT flow
+
+### Evidence boundary
+
+- `US-REC-001` — BA CONFIRMED; AC-01, AC-02, AC-03.
+- `CAND-REQ-001`: ghi nhận số lượng thực nhận và đối chiếu với số lượng kỳ vọng.
+- `CAND-REQ-002`: ghi nhận chênh lệch giữa số lượng thực nhận và số lượng kỳ vọng.
+- `CAND-BR-001`: khi có chênh lệch, ghi nhận Receive dùng số lượng thực nhận, không thay bằng số lượng kỳ vọng.
+- `EVD-002` đến `EVD-005`: check item, đếm actual quantity, đối chiếu expected quantity và ghi nhận actual quantity khi chênh lệch.
+
+### High-level flow
+
+```text
+Receive context
+(trigger, precondition và actor: TBD / OQ-013, OQ-020)
+  ↓
+Check received item and count actual received quantity
+  ↓
+Compare actual quantity with expected quantity
+(expected quantity source: TBD / OQ-019)
+  ├─ Quantities equal
+  │    ↓
+  │  Record Receive using actual quantity
+  └─ Quantities differ
+       ↓
+     Record Receive using actual quantity
+     and record discrepancy
+  ↓
+Completion state and downstream handoff: TBD / OQ-013
+```
+
+### Scope guard
+
+Flow này không xác nhận tra cứu lại Receive, approval, discrepancy reason, attachment, delivery-party handling UI, damaged goods, over-receive, cancellation, automatic stock update, barcode/scanner/mobile/offline, role permission hoặc auto-handoff sang Putaway.
+
+### Open Questions được bảo tồn
+
+- Receive trigger, precondition, success outcome, exception, completion state và downstream handoff: `OQ-013`.
+- Nguồn số lượng kỳ vọng và vai trò Purchasing/Purchase Order: `OQ-019`.
+- Role/authority có thể thực hiện hoặc ghi nhận Receive: `OQ-020`.
 
 ## Putaway — DRAFT cautious flow
 
