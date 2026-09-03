@@ -49,3 +49,32 @@ REQ-002 (Audit là khu vực quy trình bắt buộc)
 ```
 
 Audit type, trigger, precondition, completion state, count scope, schedule, role permission, reason/evidence/approval, device interaction, relationship to Adjust và result after re-check tiếp tục là `TBD` / `OPEN QUESTION`. Trace này không xác nhận Audit tự động thay đổi Stock hoặc tự động tạo Adjust.
+**## Transfer DRAFT trace**
+
+```text
+REQ-002 (Transfer là khu vực quy trình bắt buộc)
+
+  + REQ-004 (Movement và Transfer thuộc core domain; hành vi chi tiết TBD)
+
+  + CAND-REQ-004 (DRAFT — đề xuất đánh giá hỗ trợ theo dõi movement)
+
+  + EVD-010 (có physical movement giữa backroom và sales shelf)
+
+  + EVD-011 (chưa xác nhận movement có phải transaction riêng hay không)
+
+  + EVD-019 (research limitation)
+
+    -> DRAFT-US-TRA-001
+
+    -> Acceptance Criteria: TBD
+
+    -> Transfer user flow: TBD
+
+    -> Taiga / Implementation / Test: Chưa bắt đầu
+```
+
+`CAND-REQ-004` vẫn là `DRAFT` và không được sử dụng như approval cho system Transfer behavior. `EVD-010` chỉ xác nhận physical movement giữa backroom và sales shelf; `EVD-011` chưa xác nhận movement có được ghi nhận thành transaction riêng hay không.
+
+Phạm vi Transfer giữa location, Warehouse hay cả hai tiếp tục là `OPEN QUESTION` / `OQ-016`. Trigger, precondition, completion state, partial Transfer, role permission, Stock effect và device interaction tiếp tục là `TBD` / `OPEN QUESTION`.
+
+Trace này không xác nhận hệ thống phải tạo Transfer/Movement transaction riêng, tự động cập nhật Stock, tự động thay đổi location hoặc cho phép một role cụ thể thực hiện Transfer.
