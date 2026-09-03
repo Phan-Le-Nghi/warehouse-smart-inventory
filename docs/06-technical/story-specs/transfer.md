@@ -1,9 +1,13 @@
 # Story Spec — Transfer / Movement Tracking
 
 **Status:** DRAFT — Pending Product/BA review
+
 **Story ID:** `DRAFT-US-TRA-001`
+
 **Owner:** Ly Na
+
 **Process:** Transfer
+
 **Related workflow:** `Receive → Putaway → Pick → Transfer → Adjust → Audit`
 
 ---
@@ -27,6 +31,7 @@
 
 * `OQ-013` — Trigger, precondition, success outcome, exception và completion state.
 * `OQ-014` — Partial execution của các process.
+* `OQ-015` — Negative stock.
 * `OQ-016` — Transfer giữa location, warehouse hay cả hai.
 * `OQ-020` — Quyền của Warehouse Staff / Manager / Purchasing / Admin.
 * `OQ-022` — Barcode/QR/scanner/mobile/offline/external integration.
@@ -72,11 +77,11 @@ Các điều kiện dưới đây hiện chưa được chốt hoàn toàn:
 
 1. Người thực hiện xác định hàng cần di chuyển.
 2. Người thực hiện xác định khu vực nguồn và khu vực đích.
-3. Hệ thống/giải pháp ghi nhận hoặc hiển thị thông tin movement phù hợp với scope được BA phê duyệt.
-4. Movement được theo dõi với thông tin tối thiểu cần thiết.
-5. Người thực hiện có thể xác định movement đã được xử lý/ghi nhận theo behavior được phê duyệt.
+3. Hệ thống/giải pháp ghi nhận hoặc hiển thị thông tin movement phù hợp với scope được BA/Product phê duyệt.
+4. Người thực hiện theo dõi movement theo thông tin được Product/BA phê duyệt.
+5. Người thực hiện có thể xác định movement đã được xử lý/ghi nhận theo behavior và completion state được phê duyệt.
 
-**Lưu ý:** Bước 3–5 hiện chỉ là behavior đề xuất ở mức outcome. Cách ghi nhận, trạng thái và completion state chưa được chốt.
+**Lưu ý:** Bước 3–5 hiện chỉ là behavior đề xuất ở mức outcome. Cách ghi nhận, thông tin hiển thị, trạng thái và completion state chưa được chốt.
 
 ---
 
@@ -133,8 +138,9 @@ Ví dụ: nguồn và đích không phù hợp với phạm vi Transfer được
 * Transfer giữa location, warehouse hay cả hai.
 * Transfer có trạng thái hay không.
 * Có cho phép partial Transfer hay không.
+* Quy tắc xử lý negative stock khi Transfer được thực hiện.
 
-`CAND-REQ-004` hiện vẫn là DRAFT và chỉ đề xuất đánh giá việc theo dõi movement; `EVD-011` cũng chưa xác nhận movement là transaction riêng.
+`CAND-REQ-004` hiện vẫn là **DRAFT** và chỉ đề xuất đánh giá việc theo dõi movement; `EVD-011` cũng chưa xác nhận movement là transaction riêng.
 
 ---
 
@@ -146,8 +152,8 @@ Ví dụ: nguồn và đích không phù hợp với phạm vi Transfer được
 | Source location/area      | TBD    | Evidence hiện có backroom/sales shelf |
 | Destination location/area | TBD    | Evidence hiện có backroom/sales shelf |
 | Quantity                  | TBD    | Chưa có requirement xác nhận behavior |
-| Warehouse                 | TBD    | OQ-016                                |
-| Actor/user                | TBD    | OQ-020                                |
+| Warehouse                 | TBD    | `OQ-016`                              |
+| Actor/user                | TBD    | `OQ-020`                              |
 | Movement time             | TBD    | Chưa có requirement                   |
 | Reason                    | TBD    | Chưa có requirement                   |
 
@@ -183,8 +189,8 @@ Các entity trên thuộc core domain, nhưng quan hệ và behavior chi tiết 
 **Read:**
 
 * SKU
-* khu vực/location hiện tại
-* thông tin stock liên quan — nếu được xác nhận
+* Khu vực/location hiện tại
+* Thông tin stock liên quan — nếu được xác nhận
 
 **Write:**
 
@@ -273,7 +279,13 @@ Chưa có validation rule cụ thể nào được phê duyệt trực tiếp ch
 * Transfer giữa warehouse có được phép không?
 * Actor có quyền thực hiện không?
 
-Các vấn đề này liên quan đến `OQ-013`, `OQ-014`, `OQ-015`, `OQ-016` và `OQ-020`.
+Các vấn đề này liên quan đến:
+
+* `OQ-013` — Trigger/precondition/outcome/exception/completion.
+* `OQ-014` — Partial execution.
+* `OQ-015` — Negative stock.
+* `OQ-016` — Location/Warehouse scope.
+* `OQ-020` — Role/permission.
 
 ---
 
@@ -296,7 +308,9 @@ Nếu sau này Transfer được xác nhận là transaction nghiệp vụ, các
 ### Test Case 01 — Theo dõi movement giữa hai khu vực
 
 **Given:** Có movement hàng giữa hai khu vực được phép.
+
 **When:** Người dùng thực hiện/tra cứu movement theo behavior đã được phê duyệt.
+
 **Then:** Movement được hiển thị/ghi nhận đúng theo scope.
 
 **Status:** DRAFT — phụ thuộc behavior được BA xác nhận.
@@ -304,23 +318,33 @@ Nếu sau này Transfer được xác nhận là transaction nghiệp vụ, các
 ### Test Case 02 — Không xác định được source/destination
 
 **Given:** Source hoặc destination không hợp lệ/không xác định.
+
 **When:** Người dùng thực hiện Transfer.
+
 **Then:** Hệ thống không xử lý movement như một movement hợp lệ.
 
 **Expected validation message:** TBD.
 
+**Related OQ:** `OQ-013`, `OQ-016`.
+
 ### Test Case 03 — User không có quyền
 
 **Given:** User không có permission Transfer.
+
 **When:** User cố thực hiện operation yêu cầu quyền.
-**Then:** Operation bị từ chối.
+
+**Then:** Operation bị từ chối theo authorization rule được phê duyệt.
 
 **Expected authorization behavior:** TBD.
+
+**Related OQ:** `OQ-020`.
 
 ### Test Case 04 — Partial Transfer
 
 **Given:** User yêu cầu chuyển một phần quantity.
+
 **When:** Thực hiện Transfer.
+
 **Then:** Kết quả phụ thuộc vào việc partial Transfer có được hỗ trợ hay không.
 
 **Status:** OPEN — `OQ-014`.
@@ -328,7 +352,9 @@ Nếu sau này Transfer được xác nhận là transaction nghiệp vụ, các
 ### Test Case 05 — Transfer giữa warehouse
 
 **Given:** Source và destination thuộc hai warehouse khác nhau.
+
 **When:** User thực hiện Transfer.
+
 **Then:** Kết quả phụ thuộc scope Transfer được xác nhận.
 
 **Status:** OPEN — `OQ-016`.
@@ -336,10 +362,14 @@ Nếu sau này Transfer được xác nhận là transaction nghiệp vụ, các
 ### Test Case 06 — Stock effect
 
 **Given:** Có movement từ source sang destination.
+
 **When:** Movement được xử lý.
+
 **Then:** Việc Stock có thay đổi hay không phải khớp Data Model/API contract đã được phê duyệt.
 
-**Status:** OPEN.
+**Status:** OPEN — phụ thuộc quyết định về Transfer behavior và Stock/negative-stock rules.
+
+**Related OQ:** `OQ-015`.
 
 ---
 
@@ -347,53 +377,82 @@ Nếu sau này Transfer được xác nhận là transaction nghiệp vụ, các
 
 ```text
 REQ-001
-  └── Business problem:
-      Kiểm soát nhập/xuất/chuyển kho và tồn kho
+
+ └── Business problem:
+     Kiểm soát nhập/xuất/chuyển kho và tồn kho
 
 REQ-002
-  └── Required workflow:
-      Receive → Putaway → Pick → Transfer → Adjust → Audit
-          └── DRAFT-US-TRA-001
+
+ └── Required workflow:
+     Receive → Putaway → Pick → Transfer → Adjust → Audit
+
+         └── DRAFT-US-TRA-001
 
 REQ-004
-  └── Core domain:
-      SKU / Warehouse / Stock / Movement / Transfer
-          └── DRAFT-US-TRA-001
+
+ └── Core domain:
+     SKU / Warehouse / Stock / Movement / Transfer
+
+         └── DRAFT-US-TRA-001
 
 CAND-REQ-004 [DRAFT]
-  └── Đề xuất đánh giá hỗ trợ theo dõi movement
-      giữa backroom và sales shelf
-          └── DRAFT-US-TRA-001
+
+ └── Đề xuất đánh giá hỗ trợ theo dõi movement
+     giữa backroom và sales shelf
+
+         └── DRAFT-US-TRA-001
 
 EVD-010
-  └── Physical movement giữa backroom và sales shelf
-      └── DRAFT-US-TRA-001
+
+ └── Physical movement giữa backroom và sales shelf
+
+         └── DRAFT-US-TRA-001
 
 EVD-011
-  └── Chưa xác nhận movement là transaction riêng
-      └── Scope guard / TBD
+
+ └── Chưa xác nhận movement là transaction riêng
+
+         └── Scope guard / TBD
 
 EVD-019
-  └── Research limitation
-      └── Không generalize ngoài evidence hiện có
+
+ └── Research limitation
+
+         └── Không generalize ngoài evidence hiện có
 
 OQ-013
-  └── Trigger / precondition / outcome / exception / completion
+
+ └── Trigger / precondition / outcome / exception / completion
 
 OQ-014
-  └── Partial execution
+
+ └── Partial execution
+
+OQ-015
+
+ └── Negative stock handling
 
 OQ-016
-  └── Location vs Warehouse scope
+
+ └── Location vs Warehouse scope
 
 OQ-020
-  └── Role / permission
+
+ └── Role / permission
 
 OQ-022
-  └── Barcode / QR / scanner / mobile / offline
+
+ └── Barcode / QR / scanner / mobile / offline
+
 ```
 
-Traceability hiện tại cũng đã nối `REQ-002 + REQ-004 + CAND-REQ-004 + EVD-010 + EVD-011 + EVD-019` tới `DRAFT-US-TRA-001`.
+Traceability hiện tại nối:
+
+`REQ-002 + REQ-004 + CAND-REQ-004 + EVD-010 + EVD-011 + EVD-019`
+
+tới `DRAFT-US-TRA-001`.
+
+Các `OQ` được dùng trong validation/test cũng được trace tại đây để tránh tạo hoặc sử dụng Open Question ID không canonical.
 
 ---
 
@@ -408,9 +467,10 @@ Story Spec này chỉ được xem là **Ready for Implementation** khi:
 * [ ] Role & permission được chốt.
 * [ ] Partial Transfer được chốt.
 * [ ] Stock effect được chốt.
+* [ ] Negative stock handling được chốt.
 * [ ] Data Model liên quan được chốt.
 * [ ] API contract được chốt.
-* [ ] Acceptance Criteria được chuyển từ TBD sang testable criteria.
+* [ ] Acceptance Criteria được chuyển từ TBD/DRAFT sang testable criteria đã approved.
 * [ ] Test cases được cập nhật theo behavior đã approved.
 * [ ] Traceability `REQ → Story → Spec → Design/API/Data → Task/Test` hoàn chỉnh.
 * [ ] Story đạt Definition of Ready trước khi bắt đầu code.
@@ -430,32 +490,74 @@ Story Spec này **không xác nhận** các behavior sau:
 * ❌ Barcode/QR/scanner/mobile/offline.
 * ❌ Partial Transfer.
 * ❌ Negative stock handling.
-## Acceptance Criteria
 
-> Status: DRAFT — Pending Product/BA review
+---
+
+## 19. Acceptance Criteria — DRAFT
+
+> **Status: DRAFT — Pending Product/BA review.**
+>
+> Các AC dưới đây là **candidate acceptance criteria** để Product/BA review, chưa phải acceptance criteria đã được approved.
 
 ### AC-01 — Track movement between areas
-**Given** có movement hàng giữa source và destination thuộc phạm vi được phê duyệt  
-**When** người dùng thực hiện hoặc tra cứu movement  
+
+**Given** có movement hàng giữa source và destination thuộc phạm vi được phê duyệt.
+
+**When** người dùng thực hiện hoặc tra cứu movement.
+
 **Then** hệ thống/giải pháp phải cung cấp thông tin movement theo behavior được BA/Product phê duyệt.
 
+**Status:** DRAFT.
+
 ### AC-02 — Invalid source/destination
-**Given** source hoặc destination không hợp lệ hoặc không xác định  
-**When** người dùng thực hiện Transfer  
+
+**Given** source hoặc destination không hợp lệ hoặc không xác định.
+
+**When** người dùng thực hiện Transfer.
+
 **Then** hệ thống không xử lý movement như một movement hợp lệ.
 
+**Status:** DRAFT — phụ thuộc `OQ-013` / `OQ-016`.
+
 ### AC-03 — Authorization
-**Given** user không có quyền thực hiện operation Transfer  
-**When** user cố thực hiện operation  
+
+**Given** user không có quyền thực hiện operation Transfer.
+
+**When** user cố thực hiện operation.
+
 **Then** operation phải bị từ chối theo authorization rule được phê duyệt.
 
+**Status:** DRAFT — phụ thuộc `OQ-020`.
+
 ### AC-04 — Partial Transfer
-**Given** user yêu cầu chuyển một phần quantity  
-**When** thực hiện Transfer  
+
+**Given** user yêu cầu chuyển một phần quantity.
+
+**When** thực hiện Transfer.
+
 **Then** behavior phải tuân theo quyết định về partial Transfer được Product/BA xác nhận.
 
+**Status:** DRAFT — phụ thuộc `OQ-014`.
+
 ### AC-05 — Stock effect
-**Given** movement được xử lý  
-**When** Transfer hoàn tất theo behavior được phê duyệt  
+
+**Given** movement được xử lý.
+
+**When** Transfer hoàn tất theo behavior được phê duyệt.
+
 **Then** bất kỳ thay đổi nào đối với Stock phải phù hợp với Data Model/API contract đã được phê duyệt.
-Các điểm trên phải được giải quyết bằng requirement/business decision tương ứng trước khi implementation.
+
+**Status:** DRAFT — phụ thuộc quyết định về Stock effect và `OQ-015`.
+
+---
+
+## 20. Implementation Guard
+
+Trước khi implementation:
+
+* Không implement endpoint/API chưa được chốt.
+* Không tự tạo Transfer/Movement entity hoặc transaction chỉ dựa trên tên story.
+* Không tự động cập nhật Stock hoặc Location khi chưa có approved business rule.
+* Không tự suy ra permission từ role name.
+* Không biến `TBD`, `DRAFT`, `Proposed` hoặc `OPEN QUESTION` thành confirmed behavior.
+* Mọi thay đổi behavior phải được trace ngược về Requirement/Evidence/Decision tương ứng.
