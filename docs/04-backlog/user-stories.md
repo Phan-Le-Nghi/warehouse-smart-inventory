@@ -4,8 +4,12 @@
 
 - Mục tiêu môn học: tổng cộng 8–12 User Story
 - File User Story canonical: `vault/04-product/stories/` sau khi yêu cầu được phê duyệt
+<<<<<<< HEAD
+- User Story đã review hiện tại: **1**
+=======
 - User Story đã review hiện tại: **0**
 - User Story DRAFT có plan được Product/BA duyệt: **2** (`DRAFT-US-PUT-001`, `DRAFT-US-AUD-001`)
+>>>>>>> origin/main
 
 Không tạo User Story giả để đạt mục tiêu. Mỗi User Story trong tương lai phải dẫn ID yêu cầu/bằng chứng đã xác nhận và có Acceptance Criteria kiểm thử được.
 
@@ -13,8 +17,13 @@ Không tạo User Story giả để đạt mục tiêu. Mỗi User Story trong t
 
 | Flow | Người phụ trách | Story ID canonical | Trạng thái review |
 |---|---|---|---|
+<<<<<<< HEAD
+| Receive | Nghĩa | `US-REC-001` | BA CONFIRMED |
+| Putaway | Nghi | TBD | Chưa soạn |
+=======
 | Receive | Nghĩa | TBD | Chưa soạn |
 | Putaway | Nghi | `DRAFT-US-PUT-001` (ID tạm thời, chưa canonical) | DRAFT — plan đã được Product/BA duyệt; story chưa canonical hóa |
+>>>>>>> origin/main
 | Pick | Thảo Ngân | TBD | Chưa soạn |
 | Transfer | Ly Na | `DRAFT-US-TRA-001` | DRAFT — chờ Product/BA review |
 | Adjust | Thanh Ngân | TBD | Chưa soạn |
