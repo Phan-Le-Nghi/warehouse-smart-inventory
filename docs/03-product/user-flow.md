@@ -13,7 +13,7 @@
 | Receive | Nghĩa | TBD |
 | Putaway | Nghi | DRAFT cautious flow; system interaction và completion criteria TBD |
 | Pick | Thảo Ngân | TBD |
-| Transfer | Ly Na | TBD |
+| Transfer | Ly Na | DRAFT cautious flow; trigger, scope, system interaction và completion criteria TBD |
 | Adjust | Thanh Ngân | TBD |
 | Audit | Nghi sở hữu/hỗ trợ | DRAFT cautious flow; trigger, scope, role và completion criteria TBD |
 
@@ -69,6 +69,85 @@ Flow này không xác nhận record/lookup location, automatic assignment, quant
 - Role có thể thực hiện/xem Putaway: `OQ-020`.
 - Putaway có ảnh hưởng Stock/Movement hay không: `TBD`.
 - Barcode/QR/scanner/mobile/offline có thuộc phạm vi không: `OQ-022`.
+## Transfer — DRAFT cautious flow
+
+### Evidence boundary
+
+* `REQ-002`: Transfer là một khu vực trong chuỗi quy trình bắt buộc `Receive → Putaway → Pick → Transfer → Adjust → Audit`.
+* `REQ-004`: `Movement` và `Transfer` thuộc core domain; định nghĩa, quan hệ và behavior chi tiết vẫn TBD.
+* `CAND-REQ-004`: đề xuất đánh giá việc hỗ trợ theo dõi movement giữa các khu vực lưu trữ; **DRAFT**.
+* `EVD-010`: có hoạt động di chuyển hàng giữa backroom và sales shelf trong vận hành hiện tại.
+* `EVD-011`: chưa xác nhận movement có được ghi nhận thành transaction riêng trong hệ thống hiện tại hay không.
+* `EVD-019`: evidence chỉ phản ánh phạm vi nghiên cứu hiện tại và không nên khái quát cho mọi Warehouse.
+
+### High-level flow
+
+```text
+Transfer context
+
+(trigger, precondition và actor: TBD / OQ-013, OQ-020)
+
+ ↓
+
+Item/SKU cần di chuyển được xác định
+
+(SKU validation: TBD)
+
+ ↓
+
+Source và destination được xác định
+
+(location / warehouse scope: TBD / OQ-016)
+
+ ↓
+
+Physical movement occurs
+
+ ↓
+
+System interaction / movement recording: TBD
+
+ ↓
+
+Movement outcome / completion state: TBD / OQ-013
+
+ ↓
+
+Downstream inventory effect: TBD
+```
+
+Flow này chỉ phản ánh movement ở mức high-level. Không xác nhận movement bắt buộc phải được tạo thành Transfer transaction riêng, tự động cập nhật Stock hoặc tự động thay đổi Location.
+
+### Putaway/Transfer boundary
+
+```text
+Physical movement between backroom and sales shelf exists
+
+ ↓
+
+Classification as Putaway or Transfer: OPEN QUESTION / OQ-016
+
+ ↓
+
+Transfer system recording/tracking behavior: TBD
+```
+
+Physical movement giữa backroom và sales shelf đã được evidence xác nhận, nhưng chưa đủ căn cứ để xác định mọi movement như vậy thuộc Transfer thay vì Putaway.
+
+Flow không xác nhận Transfer bắt buộc giữa hai Warehouse, một SKU chỉ có một Location, hoặc Transfer luôn tạo Movement/Transfer record.
+
+### Open Questions được bảo tồn
+
+* Transfer trigger, precondition, success outcome, exception và completion state: `OQ-013`.
+* Partial Transfer: `OQ-014`.
+* Negative stock handling: `OQ-015`.
+* Transfer giữa location, warehouse hay cả hai: `OQ-016`.
+* Role có thể thực hiện/xem/sửa/xác nhận Transfer: `OQ-020`.
+* Barcode/QR, scanner, mobile/offline và tích hợp bên ngoài: `OQ-022`.
+* Transfer có tạo Movement/Transfer record hay không: `TBD`.
+* Transfer có ảnh hưởng Stock/Location hay không: `TBD`.
+* Quan hệ giữa Transfer và Putaway đối với movement giữa backroom và sales shelf: `OQ-016`.
+
 
 ## Audit — DRAFT cautious flow
 
