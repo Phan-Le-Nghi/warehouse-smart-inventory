@@ -4,7 +4,7 @@
 
 - Mục tiêu môn học: tổng cộng 8–12 User Story
 - File User Story canonical: `vault/04-product/stories/` sau khi yêu cầu được phê duyệt
-- User Story đã review hiện tại: **0**
+- User Story đã review hiện tại: **1**
 
 Không tạo User Story giả để đạt mục tiêu. Mỗi User Story trong tương lai phải dẫn ID yêu cầu/bằng chứng đã xác nhận và có Acceptance Criteria kiểm thử được.
 
@@ -12,7 +12,7 @@ Không tạo User Story giả để đạt mục tiêu. Mỗi User Story trong t
 
 | Flow | Người phụ trách | Story ID canonical | Trạng thái review |
 |---|---|---|---|
-| Receive | Nghĩa | TBD | Chưa soạn |
+| Receive | Nghĩa | `US-REC-001` | BA CONFIRMED |
 | Putaway | Nghi | TBD | Chưa soạn |
 | Pick | Thảo Ngân | TBD | Chưa soạn |
 | Transfer | Ly Na | TBD | Chưa soạn |
