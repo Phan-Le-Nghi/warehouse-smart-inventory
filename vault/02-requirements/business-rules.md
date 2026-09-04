@@ -2,7 +2,7 @@
 
 ## Trạng thái hiện tại
 
-Hai business rule được human review từ Research Synthesis v1 được bảo tồn. Mười hai business rule bổ sung được phê duyệt như HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS từ Round 2; chúng không phải verified research findings.
+Hai business rule được human review từ Research Synthesis v1 được bảo tồn. Mười hai business rule bổ sung được phê duyệt như HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS từ Round 2; `CAND-BR-015` được phê duyệt sau đó cho baseline Product Definition. Các rule dựa trên decision không phải verified research findings.
 
 Tên quy trình và các khái niệm domain đã xác nhận chưa đủ để suy ra ngưỡng phê duyệt, chuyển trạng thái, cách tính tồn kho, hành vi ngoại lệ, quy tắc phân quyền hoặc quy tắc kiểm tra hợp lệ.
 
@@ -13,7 +13,7 @@ Quy tắc trong tương lai phải dùng stable ID, dẫn bằng chứng, xác �
 - Trạng thái tồn kho và ý nghĩa các loại số lượng
 - Điều kiện bắt đầu và hoàn tất Receive, Putaway, Pick, Transfer, Adjust và Audit
 - Hành vi khi thực hiện một phần
-- Hành vi khi tồn kho âm
+- Hành vi retry/cancel sau khi operation bị chặn bởi negative-stock guard
 - Yêu cầu phê duyệt và bằng chứng
 - Điều kiện kích hoạt và người nhận Alert
 - Quyền của role
@@ -40,5 +40,6 @@ Các mục này được dẫn xuất có giới hạn từ vận hành hiện t
 | CAND-BR-012 | Attachment/evidence là optional đối với Adjust trong MVP. | `DEC-015` — HUMAN PRODUCT DECISION / MVP ASSUMPTION. | APPROVED — HUMAN PRODUCT DECISION |
 | CAND-BR-013 | Approved Adjust cập nhật `system stock quantity` tại affected internal location. Nếu re-check không còn discrepancy hoặc Manager reject, quantity không được thay đổi. | `DEC-015` — HUMAN PRODUCT DECISION / MVP ASSUMPTION. | APPROVED — HUMAN PRODUCT DECISION |
 | CAND-BR-014 | Khi system reference và document reference khác nhau, Receive không được tự chọn authoritative source; user phải review reference mismatch trước khi hoàn tất Receive. | `DEC-016` — HUMAN PRODUCT DECISION / MVP ASSUMPTION. | APPROVED — HUMAN PRODUCT DECISION |
+| CAND-BR-015 | `system stock quantity` tại internal location không được phép âm. Pick không được confirm vượt tổng quantity tại các selected source locations; Transfer không được confirm vượt source location quantity; Adjust không được tạo affected-location quantity nhỏ hơn 0. Nếu validation không đạt, không apply quantity change và operation được báo không hợp lệ/không thể confirm. | `DEC-019` — HUMAN PRODUCT DECISION / MVP ASSUMPTION; resolve `OQ-015`. | APPROVED — HUMAN PRODUCT DECISION |
 
-Các khoảng trống không được quyết định trong Round 2 vẫn là `TBD` / `OPEN QUESTION`, gồm negative-stock behavior, partial Receive/Putaway/Transfer, lifecycle gaps tại `OQ-013` và device/integration behavior tại `OQ-022`.
+Các khoảng trống chưa được quyết định vẫn là `TBD` / `OPEN QUESTION`, gồm partial Receive/Putaway/Transfer, lifecycle gaps tại `OQ-013`, retry/cancel behavior ngoài negative-stock guard và device/integration behavior tại `OQ-022`.

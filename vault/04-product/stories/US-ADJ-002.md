@@ -16,11 +16,11 @@ Story cover Manager decision, approved apply effect và no-change branches. Stor
 
 ## Traceability
 
-- Requirements: `REQ-001`, `REQ-002`, `REQ-003`, `CAND-REQ-003`, `CAND-REQ-008`, `CAND-REQ-010`.
-- Business rules: `CAND-BR-002`, `CAND-BR-011`, `CAND-BR-013`.
+- Requirements: `REQ-001`, `REQ-002`, `REQ-003`, `CAND-REQ-003`, `CAND-REQ-008`, `CAND-REQ-010`, `CAND-REQ-011`.
+- Business rules: `CAND-BR-002`, `CAND-BR-011`, `CAND-BR-013`, `CAND-BR-015`.
 - Evidence: `EVD-012`, `EVD-013`, `EVD-017` hỗ trợ current-state re-check/Manager involvement.
-- Human decisions: `DEC-010`, `DEC-015`, `DEC-017`.
-- Open questions: `OQ-013`, `OQ-015`.
+- Human decisions: `DEC-010`, `DEC-015`, `DEC-017`, `DEC-019`.
+- Open question: `OQ-013`.
 - Source classification: verified evidence + HUMAN PRODUCT DECISION.
 
 ## Acceptance Criteria
@@ -37,7 +37,11 @@ Given Manager rejects request, when rejection được ghi nhận, then `system 
 
 Given re-check không còn discrepancy, when case được xử lý, then Adjust không được apply và quantity không thay đổi.
 
+### AC-ADJ2-004 — Prevent negative adjusted quantity
+
+Given một approved Adjust sẽ làm `system stock quantity` tại affected internal location nhỏ hơn 0, when Adjust được cân nhắc apply, then Adjust không được apply, quantity không thay đổi và operation được báo không hợp lệ/không thể confirm.
+
 ## Remaining gaps và scope guards
 
 - Rejected-case final closure vẫn `TBD / OQ-013`.
-- Negative-stock behavior vẫn `OQ-015`.
+- Retry/cancel lifecycle sau failed validation chưa được quyết định.

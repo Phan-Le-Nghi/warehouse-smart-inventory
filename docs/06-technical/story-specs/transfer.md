@@ -10,11 +10,11 @@ This spec records approved functional outcomes only. It does not choose architec
 
 ## 1. Traceability
 
-- Requirements: `REQ-002`, `REQ-004`, `CAND-REQ-003`, `CAND-REQ-004`.
-- Business Rules: `CAND-BR-003`, `CAND-BR-007`, `CAND-BR-008`.
-- Human decisions: `DEC-005`, `DEC-007`, `DEC-009`, `DEC-010`, `DEC-013`, `DEC-017`.
+- Requirements: `REQ-002`, `REQ-004`, `CAND-REQ-003`, `CAND-REQ-004`, `CAND-REQ-011`.
+- Business Rules: `CAND-BR-003`, `CAND-BR-007`, `CAND-BR-008`, `CAND-BR-015`.
+- Human decisions: `DEC-005`, `DEC-007`, `DEC-009`, `DEC-010`, `DEC-013`, `DEC-017`, `DEC-019`.
 - Current-state evidence only: `EVD-010`, `EVD-011`, `EVD-019`.
-- Open: `OQ-013` for Transfer exception/reversal, `OQ-014` for partial Transfer, `OQ-015` for negative stock, `OQ-022` for device/integration behavior.
+- Open: `OQ-013` for Transfer exception/reversal, `OQ-014` for partial Transfer and `OQ-022` for device/integration behavior. `OQ-015` is resolved by `DEC-019`.
 
 `OQ-011`, `OQ-016` and `OQ-020` are resolved by HUMAN PRODUCT DECISIONS. Their resolution does not turn the supporting simulated input into verified research evidence.
 
@@ -97,6 +97,16 @@ When system Transfer record được ghi nhận
 Then record chứa SKU, quantity, source internal location, destination internal location và confirmation timestamp
 ```
 
+### US-TRF-001 / AC-TRF1-004 — Prevent negative source quantity
+
+```gherkin
+Given Transfer quantity lớn hơn system stock quantity tại source location
+When Warehouse Staff cố confirm Transfer
+Then Transfer không được confirm
+And quantity change không được apply
+And operation được báo không hợp lệ hoặc không thể confirm
+```
+
 ### US-TRF-002 / AC-TRF2-001 to AC-TRF2-003 — Transfer history
 
 ```gherkin
@@ -112,9 +122,9 @@ The canonical story files are authoritative if this historical technical draft b
 
 - Transfer exception, cancellation, reversal and failed-confirmation behavior: `OQ-013`.
 - Partial Transfer: `OQ-014`.
-- Negative-stock behavior: `OQ-015`.
+- Negative-stock guard: approved at `DEC-019`; retry/cancel lifecycle after failed validation remains TBD.
 - Barcode/QR/scanner/mobile/offline/integration behavior: `OQ-022`.
-- Validation details beyond the approved same-Warehouse/tracked-location boundary: TBD.
+- Validation details beyond the approved same-Warehouse/tracked-location and negative-stock guards: TBD.
 
 No unresolved behavior above may be inferred during implementation.
 

@@ -17,8 +17,8 @@ Round 2 đã bổ sung HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS cho per-locatio
 
 ## Quy tắc nghiệp vụ
 
-Các rule canonical đã human review gồm `CAND-BR-001` đến `CAND-BR-014`. Chúng bao phủ actual Receive quantity, re-check trước Adjust, location aggregation, Putaway/Pick/Transfer effects, Transfer recording, Audit comparison/no-auto-Adjust, Adjust control/outcome và Receive reference mismatch. Xem [`../../vault/02-requirements/business-rules.md`](../../vault/02-requirements/business-rules.md) để có wording và classification chính xác.
+Các rule canonical đã human review gồm `CAND-BR-001` đến `CAND-BR-015`. Chúng bao phủ actual Receive quantity, re-check trước Adjust, location aggregation, Putaway/Pick/Transfer effects, Transfer recording, Audit comparison/no-auto-Adjust, Adjust control/outcome, Receive reference mismatch và negative-stock guard. Xem [`../../vault/02-requirements/business-rules.md`](../../vault/02-requirements/business-rules.md) để có wording và classification chính xác.
 
 ## Khoảng trống
 
-`OQ-013` vẫn `PARTIALLY DECIDED / OPEN`; `OQ-014`, `OQ-015`, `OQ-022` và các OQ AI chưa có quyết định vẫn mở. Xem [`../../vault/02-requirements/open-questions.md`](../../vault/02-requirements/open-questions.md).
+`OQ-015` đã được resolve bởi `DEC-019`. `OQ-013` vẫn `PARTIALLY DECIDED / OPEN`; `OQ-014`, `OQ-022` và các OQ AI chưa có quyết định vẫn mở. Xem [`../../vault/02-requirements/open-questions.md`](../../vault/02-requirements/open-questions.md).

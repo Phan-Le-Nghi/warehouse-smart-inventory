@@ -11,6 +11,8 @@ Final backlog có **9 canonical User Stories**, nằm trong mục tiêu môn h�
 
 Canonical source cho từng story nằm tại [`../../vault/04-product/stories/`](../../vault/04-product/stories/).
 
+Product Definition baseline: [PRD](../03-product/PRD.md), [MVP Scope](../03-product/mvp-scope.md) và [Consolidated User Flow](../03-product/user-flow.md).
+
 ## Canonical backlog và ownership
 
 | Story ID | Title | Actor | Owner | Source classification |
@@ -53,8 +55,9 @@ Trace: `CAND-REQ-003/007/010`, `CAND-BR-003/004`, `DEC-006/010/011/017`, `OQ-013
 - Given Pick request có SKU/requested quantity, when Warehouse Staff confirm full requested quantity từ một hoặc nhiều source locations, then Pick là fully completed và confirmed quantity được giảm tại các source tương ứng.
 - Given một location không đủ nhưng location khác có quantity cho cùng SKU, when Pick được thực hiện, then requested quantity có thể được lấy từ nhiều tracked internal locations.
 - Given tổng quantity được lấy nhỏ hơn requested quantity, when result được ghi nhận, then Pick là `PARTIAL / INSUFFICIENT` và không fully completed.
+- Given confirmed quantity lớn hơn tổng `system stock quantity` tại các selected source locations, when Warehouse Staff cố confirm Pick, then Pick không được confirm, quantity change không được apply và operation được báo không hợp lệ/không thể confirm.
 
-Trace: `CAND-REQ-003/006/010`, `CAND-BR-003/005/006`, `DEC-010/012/017`, `OQ-013/015/022`.
+Trace: `CAND-REQ-003/006/010/011`, `CAND-BR-003/005/006/015`, `DEC-010/012/017/019`, `OQ-013/022`.
 
 ## US-TRF-001 — Xác nhận Internal Transfer
 
@@ -63,8 +66,9 @@ Trace: `CAND-REQ-003/006/010`, `CAND-BR-003/005/006`, `DEC-010/012/017`, `OQ-013
 - Given SKU, quantity, source và destination tracked locations trong cùng Warehouse, when Warehouse Staff confirm Transfer, then source giảm Transfer quantity và destination tăng cùng quantity.
 - Given Internal Transfer được confirm, when quantity effects được ghi nhận, then Warehouse total quantity không thay đổi.
 - Given Transfer được confirm, when system record được tạo, then record chứa SKU, quantity, source, destination và confirmation timestamp.
+- Given Transfer quantity lớn hơn `system stock quantity` tại source location, when Warehouse Staff cố confirm Transfer, then Transfer không được confirm, quantity change không được apply và operation được báo không hợp lệ/không thể confirm.
 
-Trace: `CAND-REQ-003/004/010`, `CAND-BR-003/007/008`, `DEC-005/007/009/010/013/017`, `OQ-013/014/015/022`.
+Trace: `CAND-REQ-003/004/010/011`, `CAND-BR-003/007/008/015`, `DEC-005/007/009/010/013/017/019`, `OQ-013/014/022`.
 
 ## US-TRF-002 — Xem Transfer history
 
@@ -115,12 +119,13 @@ Trace: `CAND-REQ-008/010`, `CAND-BR-002/011/012`, `EVD-012/013/017`, `DEC-015/01
 - Given discrepancy đã re-check, reason đã ghi và Manager approves request, when Adjust được apply, then `system stock quantity` tại affected internal location được cập nhật.
 - Given Manager rejects request, when rejection được ghi nhận, then `system stock quantity` không thay đổi.
 - Given re-check không còn discrepancy, when case được xử lý, then Adjust không được apply và quantity không thay đổi.
+- Given một approved Adjust sẽ làm `system stock quantity` tại affected internal location nhỏ hơn 0, when Adjust được cân nhắc apply, then Adjust không được apply, quantity không thay đổi và operation được báo không hợp lệ/không thể confirm.
 
-Trace: `CAND-REQ-003/008/010`, `CAND-BR-002/011/013`, `EVD-012/013/017`, `DEC-010/015/017`, `OQ-013/015`.
+Trace: `CAND-REQ-003/008/010/011`, `CAND-BR-002/011/013/015`, `EVD-012/013/017`, `DEC-010/015/017/019`, `OQ-013`.
 
 ## Preserved open boundaries
 
 - `OQ-013` remains `PARTIALLY DECIDED / OPEN`.
-- `OQ-014`, `OQ-015`, `OQ-022` remain open.
-- Không có AC về Receive final completion, automatic Putaway handoff, Putaway exception, Transfer failure/cancel/reversal, Audit mismatch closure, Adjust rejected-case closure hoặc negative-stock behavior.
+- `OQ-015` is `RESOLVED — HUMAN PRODUCT DECISION` by `DEC-019`; `OQ-014` and `OQ-022` remain open.
+- Không có AC về Receive final completion, automatic Putaway handoff, Putaway exception, Transfer failure/cancel/reversal, Audit mismatch closure, Adjust rejected-case closure hoặc retry/cancel sau failed negative-stock validation.
 - Không có barcode, mobile/offline, FIFO/FEFO, reservation, multi-Warehouse hoặc Purchase Order lifecycle behavior.

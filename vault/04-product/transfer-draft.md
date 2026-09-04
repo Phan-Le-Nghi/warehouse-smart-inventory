@@ -80,7 +80,7 @@ Transfer history supports trace/discrepancy investigation
 
 - Cross-Warehouse Transfer is outside MVP.
 - Partial Transfer remains `OQ-014`.
-- Negative-stock behavior remains `OQ-015`.
+- Historical note superseded: negative-stock behavior was later resolved by `DEC-019`; canonical behavior is in `US-TRF-001` and `CAND-BR-015`.
 - Transfer exception, cancellation/reversal and failed-confirmation behavior remain `TBD / OQ-013`.
 - No API, data model, persistence technology or architecture is defined here.
 
