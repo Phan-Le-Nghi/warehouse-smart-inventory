@@ -11,6 +11,7 @@ Traceability sử dụng stable ID canonical. Artifact downstream còn thiếu p
 | REQ-003 | TBD | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Bối cảnh được giảng viên xác nhận |
 | REQ-004 | TBD | Bảng thuật ngữ domain mới có một phần | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Bối cảnh được giảng viên xác nhận |
 | CAND-REQ-005 | [`DRAFT-US-AUD-001`](04-backlog/user-stories.md) — `AC-AUD-01`, `AC-AUD-02` là DRAFT | [Audit cautious flow](03-product/user-flow.md) là DRAFT | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | `EVD-012`, `EVD-013`, `EVD-014`, `EVD-015`, `EVD-016`, `EVD-017`, `EVD-019`; `CAND-BR-002` |
+| CAND-BR-002 | [`DRAFT-US-ADJ-001`](04-backlog/user-stories.md) — `AC-ADJ-001`, `AC-ADJ-002` là DRAFT | [Adjust cautious flow](03-product/user-flow.md) là DRAFT | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Trực tiếp: `EVD-012`, `EVD-017`; liên quan, không bắt buộc: `CAND-REQ-005`; `EVD-013` chỉ là current-state evidence |
 | AI-DIR-001 | TBD | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Hướng được giảng viên xác nhận |
 | AI-DIR-002 | TBD | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Hướng được giảng viên xác nhận |
 | AI-DIR-003 | TBD | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Hướng được giảng viên xác nhận |
@@ -58,6 +59,23 @@ REQ-002 (Audit là khu vực quy trình bắt buộc)
 ```
 
 Audit type, trigger, precondition, completion state, count scope, schedule, role permission, reason/evidence/approval, device interaction, relationship to Adjust và result after re-check tiếp tục là `TBD` / `OPEN QUESTION`. Trace này không xác nhận Audit tự động thay đổi Stock hoặc tự động tạo Adjust.
+
+## Adjust DRAFT trace
+
+```text
+REQ-002 (Adjust là khu vực quy trình bắt buộc)
+  + CAND-BR-002 (APPROVED — re-check chênh lệch trước điều chỉnh tồn)
+  + EVD-012 / EVD-017 (evidence trực tiếp)
+  + CAND-REQ-005 (liên quan đến Audit; không phải nguồn bắt buộc của Adjust)
+  + EVD-013 (current-state evidence, không phải product role/permission/approval behavior)
+    -> DRAFT-US-ADJ-001
+    -> DRAFT AC-ADJ-001 / AC-ADJ-002
+    -> Adjust cautious flow: DRAFT
+    -> Taiga / Implementation / Test: Chưa bắt đầu
+```
+
+Nguồn/trigger chênh lệch, detailed recheck, completion state, exception handling, adjustment mechanism, reason/evidence/approval, role/permission, quantity definition, negative-stock handling và anomaly/discrepancy definition vẫn là `TBD` / `OPEN QUESTION`. Trace này không xác nhận Audit là trigger/dependency bắt buộc, automatic stock update, hoặc behavior ngoài `CAND-BR-002`.
+
 **## Transfer DRAFT trace**
 
 ```text
@@ -87,3 +105,4 @@ REQ-002 (Transfer là khu vực quy trình bắt buộc)
 Phạm vi Transfer giữa location, Warehouse hay cả hai tiếp tục là `OPEN QUESTION` / `OQ-016`. Trigger, precondition, completion state, partial Transfer, role permission, Stock effect và device interaction tiếp tục là `TBD` / `OPEN QUESTION`.
 
 Trace này không xác nhận hệ thống phải tạo Transfer/Movement transaction riêng, tự động cập nhật Stock, tự động thay đổi location hoặc cho phép một role cụ thể thực hiện Transfer.
+
