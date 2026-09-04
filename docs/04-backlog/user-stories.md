@@ -5,7 +5,7 @@
 - Mục tiêu môn học: tổng cộng 8–12 User Story
 - File User Story canonical: `vault/04-product/stories/` sau khi yêu cầu được phê duyệt
 - User Story đã review hiện tại: **0**
-- User Story DRAFT có plan được Product/BA duyệt: **2** (`DRAFT-US-PUT-001`, `DRAFT-US-AUD-001`)
+- User Story DRAFT có plan được Product/BA duyệt: **3** (`DRAFT-US-PUT-001`, `DRAFT-US-ADJ-001`, `DRAFT-US-AUD-001`)
 
 Không tạo User Story giả để đạt mục tiêu. Mỗi User Story trong tương lai phải dẫn ID yêu cầu/bằng chứng đã xác nhận và có Acceptance Criteria kiểm thử được.
 
@@ -17,7 +17,7 @@ Không tạo User Story giả để đạt mục tiêu. Mỗi User Story trong t
 | Putaway | Nghi | `DRAFT-US-PUT-001` (ID tạm thời, chưa canonical) | DRAFT — plan đã được Product/BA duyệt; story chưa canonical hóa |
 | Pick | Thảo Ngân | TBD | Chưa soạn |
 | Transfer | Ly Na | TBD | Chưa soạn |
-| Adjust | Thanh Ngân | TBD | Chưa soạn |
+| Adjust | Thanh Ngân | `DRAFT-US-ADJ-001` (ID tạm thời, chưa canonical) | DRAFT — plan đã được Product/BA duyệt; story chưa canonical hóa |
 | Audit | Nghi sở hữu/hỗ trợ | `DRAFT-US-AUD-001` (ID tạm thời, chưa canonical) | DRAFT — plan đã được Product/BA duyệt; story chưa canonical hóa |
 
 User Story bổ sung và ownership phụ thuộc vào yêu cầu đã kiểm chứng (`OQ-023`).
@@ -118,3 +118,54 @@ Hai AC này là DRAFT ở mức outcome được evidence/rule hỗ trợ. Cách
 - Định nghĩa dữ liệu tồn được dùng để đối chiếu: `OPEN QUESTION` / `OQ-011`.
 
 Không giả định Audit tự động thay đổi Stock, tự động tạo Adjust, yêu cầu lý do/evidence/approval cụ thể, áp dụng lịch hằng ngày cho mọi Warehouse, hay có device/permission behavior cụ thể.
+
+## DRAFT-US-ADJ-001 — Kiểm tra lại chênh lệch trước điều chỉnh tồn
+
+### Trace nguồn
+
+- Requirement phạm vi: `REQ-002` — Adjust thuộc chuỗi quy trình bắt buộc.
+- Business Rule đã duyệt: `CAND-BR-002` — chênh lệch giữa tồn thực tế và tồn hệ thống phải được kiểm tra lại trước khi điều chỉnh tồn.
+- Evidence trực tiếp: `EVD-012`, `EVD-017`.
+- Liên quan nhưng không phải nguồn bắt buộc của Adjust: `CAND-REQ-005` — đối chiếu tồn trong Audit.
+- `EVD-013` chỉ mô tả vận hành minimart hiện tại; không xác nhận role, permission, authority hoặc approval của sản phẩm.
+
+### DRAFT User Story
+
+> As a person handling stock discrepancies, I want to recheck the discrepancy between physical stock and system stock before performing a stock adjustment.
+
+Actor là nhãn trung tính. Role, authority và permission chính thức là `TBD` / `OPEN QUESTION OQ-020`.
+
+### DRAFT Acceptance Criteria
+
+#### AC-ADJ-001 — Re-check trước điều chỉnh tồn
+
+```gherkin
+Given a discrepancy exists between physical stock and system stock,
+when a stock adjustment is performed,
+then the discrepancy must be rechecked before the adjustment.
+```
+
+Nguồn: `CAND-BR-002`, `EVD-012`, `EVD-017`.
+
+#### AC-ADJ-002 — Không tiếp tục điều chỉnh khi chưa re-check
+
+```gherkin
+Given a discrepancy exists between physical stock and system stock,
+when the discrepancy has not been rechecked,
+then the stock adjustment must not continue.
+```
+
+Nguồn: `CAND-BR-002`, `EVD-012`, `EVD-017`.
+
+Hai AC chỉ thể hiện thứ tự nghiệp vụ trong `CAND-BR-002`; không xác nhận cơ chế technical blocking.
+
+### Phạm vi chưa xác nhận
+
+- Nguồn hoặc trigger xác định chênh lệch: `TBD`.
+- Detailed recheck steps, completion state, exception handling và adjustment mechanism: `TBD` / `OQ-013`.
+- Reason, evidence và approval requirements: `OPEN QUESTION OQ-017`.
+- Stock quantity definitions: `OPEN QUESTION OQ-011`; negative-stock handling: `OPEN QUESTION OQ-015`.
+- Anomaly/discrepancy definition và proof: `OPEN QUESTION OQ-028`.
+- Quan hệ Audit–Adjust: `TBD`; không giả định Audit là trigger hoặc dependency bắt buộc của Adjust.
+
+Không giả định role/permission cụ thể, approval, reason, attachment, quantity validation, automatic stock update, hoặc edge case Adjust ngoài evidence hiện có.

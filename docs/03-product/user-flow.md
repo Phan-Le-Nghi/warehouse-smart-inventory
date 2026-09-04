@@ -14,7 +14,7 @@
 | Putaway | Nghi | DRAFT cautious flow; system interaction và completion criteria TBD |
 | Pick | Thảo Ngân | TBD |
 | Transfer | Ly Na | TBD |
-| Adjust | Thanh Ngân | TBD |
+| Adjust | Thanh Ngân | DRAFT cautious flow; trigger, role, re-check detail và completion criteria TBD |
 | Audit | Nghi sở hữu/hỗ trợ | DRAFT cautious flow; trigger, scope, role và completion criteria TBD |
 
 Flow chi tiết đã duyệt sẽ là canonical trong `vault/04-product/user-flows/` và được liên kết tại đây.
@@ -126,3 +126,37 @@ Trong minimart được nghiên cứu, staff report/escalate chênh lệch và m
 - Barcode/QR, scanner, mobile/offline và tích hợp bên ngoài: `OQ-022`.
 - Định nghĩa các loại dữ liệu tồn được dùng để đối chiếu: `OQ-011`.
 - Phạm vi đếm, lịch/tần suất trong sản phẩm mới, quan hệ Audit–Adjust và kết quả sau re-check: `TBD`; không được resolve trong flow này.
+
+## Adjust — DRAFT cautious flow
+
+### Evidence boundary
+
+- `REQ-002`: Adjust là khu vực quy trình bắt buộc; trigger, trạng thái và hành vi chi tiết vẫn TBD.
+- `CAND-BR-002`: chênh lệch giữa tồn thực tế và tồn hệ thống phải được kiểm tra lại trước khi thực hiện điều chỉnh tồn.
+- `EVD-012`, `EVD-017`: evidence trực tiếp cho nghĩa vụ re-check trước Adjust.
+- `CAND-REQ-005` có liên quan đến đối chiếu tồn trong Audit, nhưng không xác nhận Audit là trigger hoặc dependency bắt buộc của Adjust.
+- `EVD-013` là current-state evidence; không xác nhận role, permission, authority hoặc approval behavior của sản phẩm.
+
+### High-level flow
+
+```text
+[TBD: source/trigger that identifies the discrepancy]
+  ↓
+Discrepancy between physical stock and system stock is identified
+  ↓
+Recheck discrepancy
+  ↓
+Perform stock adjustment
+```
+
+### Open Questions được bảo tồn
+
+- Nguồn/trigger xác định chênh lệch: `TBD`.
+- Detailed recheck steps, completion state, exception handling và adjustment mechanism: `TBD` / `OQ-013`.
+- Reason, evidence và approval requirements: `OPEN QUESTION` / `OQ-017`.
+- Official role, authority và permission: `OPEN QUESTION` / `OQ-020`.
+- Stock quantity definitions: `OPEN QUESTION` / `OQ-011`.
+- Negative-stock handling: `OPEN QUESTION` / `OQ-015`.
+- Anomaly/discrepancy definition và proof: `OPEN QUESTION` / `OQ-028`.
+
+Flow này không xác nhận Audit tự động tạo Adjust, system behavior sau re-check, role/permission cụ thể, approval, reason, attachment/evidence, quantity validation, negative-stock handling, automatic stock update hoặc edge case Adjust.
