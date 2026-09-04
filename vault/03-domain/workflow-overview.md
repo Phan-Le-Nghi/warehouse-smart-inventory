@@ -21,7 +21,7 @@ Các mục trên là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải ve
 
 ## Lifecycle đã quyết định một phần
 
-### Receive — Nghĩa
+### Receive — `US-REC-001` — Nguyễn Thị Nghĩa
 
 - Trigger: Receive context khi hàng được giao để kiểm nhận; wording cuối vẫn thuộc `OQ-013`.
 - Precondition/input: item, actual quantity và external/manual expected quantity từ order or delivery reference.
@@ -29,7 +29,7 @@ Các mục trên là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải ve
 - Exception: nếu system reference và document reference khác nhau, user phải review mismatch trước completion; system không tự chọn authoritative source (`CAND-BR-014`).
 - Completion/handoff: wording cuối và exact handoff sang Putaway vẫn `PARTIALLY DECIDED / OPEN` tại `OQ-013`.
 
-### Putaway — Nghi
+### Putaway — `US-PUT-001` — Phan Lê Nghi
 
 - Trigger: initial placement sau Receive.
 - Precondition/input: SKU, quantity, destination `Backroom` hoặc `Sales Shelf`.
@@ -38,7 +38,7 @@ Các mục trên là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải ve
 - Guard: không tự tạo Transfer hoặc Movement system record.
 - Exception/downstream handoff: `TBD / OQ-013`; partial Putaway vẫn `OQ-014`.
 
-### Pick — Thảo Ngân
+### Pick — `US-PICK-001` — Trương Huỳnh Thảo Ngân
 
 - Trigger: Pick request có SKU và requested quantity.
 - Precondition/input: request và một hoặc nhiều tracked source internal locations.
@@ -48,7 +48,7 @@ Các mục trên là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải ve
 - Handoff: downstream fulfilment/use; downstream module ngoài MVP.
 - Guard: FIFO/FEFO/reservation/scanning ngoài MVP hiện tại.
 
-### Transfer — Ly Na
+### Transfer — `US-TRF-001`, `US-TRF-002` — Nguyễn Thị Ly Na
 
 - Trigger: nhu cầu subsequent relocation giữa tracked internal locations trong cùng Warehouse.
 - Precondition/input: SKU, quantity, source internal location, destination internal location.
@@ -57,7 +57,7 @@ Các mục trên là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải ve
 - Completion: system Transfer được confirm; exception vẫn `TBD / OQ-013`.
 - Handoff: history hỗ trợ trace và discrepancy investigation.
 
-### Audit — Nghi sở hữu/hỗ trợ ngoài Putaway
+### Audit — `US-AUD-001`, `US-AUD-002` — Phan Lê Nghi
 
 - Trigger/precondition: selected-scope Audit session được bắt đầu và scope được chọn.
 - Input/action: scope là nhóm SKU/location hoặc toàn Warehouse; ghi physical count, compare với `system stock quantity`, record result.
@@ -65,7 +65,7 @@ Các mục trên là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải ve
 - Mismatch: tạo discrepancy/review context, bắt buộc re-check, không auto Adjust.
 - Mismatch completion và schedule: `TBD / OQ-013`; không canonicalize `cycle count`.
 
-### Adjust — Thanh Ngân
+### Adjust — `US-ADJ-001`, `US-ADJ-002` — Đặng Thị Thanh Ngân
 
 - Trigger/input: Warehouse Staff tạo discrepancy/Adjust request cho affected SKU/location với Adjust reason; attachment/evidence optional.
 - Precondition/action: re-check bắt buộc; Manager approve/reject trước apply.

@@ -2,9 +2,9 @@
 
 ## Status
 
-`DRAFT / NEEDS HUMAN CANONICAL REVIEW`
+`SUPERSEDED — SPLIT INTO US-TRF-001 AND US-TRF-002`
 
-This artifact reflects approved HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS from Round 2. Those decisions are not verified research findings. The story remains DRAFT until explicit canonical story review.
+This historical artifact reflects approved HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS from Round 2. Human review split it into [`US-TRF-001`](stories/US-TRF-001.md) for execution/confirmation and [`US-TRF-002`](stories/US-TRF-002.md) for history lookup. Use those canonical stories for current wording and Acceptance Criteria.
 
 ## Approved scope and sources
 
@@ -50,7 +50,7 @@ When Manager xem Transfer history
 Then history cho phép xem source, destination, quantity và time
 ```
 
-These AC IDs remain part of this DRAFT artifact until explicit canonical story review.
+These ACs are preserved as historical draft content. Current canonical ACs are split between `US-TRF-001` and `US-TRF-002`.
 
 ## High-level Transfer flow
 
@@ -86,4 +86,4 @@ Transfer history supports trace/discrepancy investigation
 
 ## Readiness
 
-`READY FOR HUMAN CANONICAL REVIEW`; not promoted and not implementation-ready until that review occurs.
+`SUPERSEDED`; canonical story review is complete. Technical implementation readiness remains subject to separately approved technical contracts.

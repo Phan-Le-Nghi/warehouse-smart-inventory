@@ -2,9 +2,9 @@
 
 ## Status
 
-`DRAFT / NEEDS HUMAN CANONICAL REVIEW`
+`SUPERSEDED — CANONICALIZED AS US-PICK-001`
 
-This artifact reflects approved HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS from Round 2. Those decisions are not verified research findings. The draft ID and proposed Acceptance Criteria remain non-canonical until explicit story review.
+This historical artifact reflects approved HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS from Round 2. Human review canonicalized its approved scope as [`US-PICK-001`](stories/US-PICK-001.md). Use the canonical story for current wording and Acceptance Criteria.
 
 ## Approved scope and sources
 
@@ -55,7 +55,7 @@ And Pick không được xem là fully completed
 And Manager có thể review exception
 ```
 
-These AC IDs remain part of this DRAFT artifact until explicit canonical story review.
+These ACs are preserved as historical draft content. Current canonical ACs are in `US-PICK-001`.
 
 ## High-level Pick flow
 
@@ -87,4 +87,4 @@ Warehouse Staff takes quantity and confirms result
 
 ## Readiness
 
-`READY FOR HUMAN CANONICAL REVIEW`; not promoted and not implementation-ready until that review occurs.
+`SUPERSEDED`; canonical story review is complete. Technical implementation readiness remains subject to separately approved technical contracts.
