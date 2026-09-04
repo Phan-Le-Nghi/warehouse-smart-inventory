@@ -47,6 +47,22 @@ Final backlog gồm 9 canonical stories đã được human approve. PRD, MVP Sc
 | `US-ADJ-001` | request/reason; re-check; optional attachment; no pre-decision change | Not started |
 | `US-ADJ-002` | approve/apply; reject/no change; no-discrepancy/no change; negative-stock guard | Not started |
 
+## Requirement → Canonical Story → Taiga → Design/Prototype → Implementation/Test
+
+Taiga references dưới đây theo dõi thực thi và không thay thế nguồn yêu cầu canonical. Trạng thái implementation/test không được suy ra từ trạng thái Taiga.
+
+| Requirement | Canonical Story | Taiga Story | Taiga Tasks | Design/Prototype | Implementation/Test status |
+|---|---|---|---|---|---|
+| `REQ-001/002/003`, `CAND-REQ-001/002/009/010` | `US-REC-001` | [#7](https://tree.taiga.io/project/lenghi-group-07-project/us/7) / ID `9523822` — Ready | `T-REC-01` [#16](https://tree.taiga.io/project/lenghi-group-07-project/task/16); `T-REC-02` [#17](https://tree.taiga.io/project/lenghi-group-07-project/task/17); `T-REC-03` [#18](https://tree.taiga.io/project/lenghi-group-07-project/task/18) — New | `PF-01 — Receive → Putaway`; screen inventory/Figma parity chờ human review | Chưa bắt đầu / Chưa bắt đầu |
+| `REQ-002/003/004`, `CAND-REQ-003/007/010` | `US-PUT-001` | [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) / ID `9523823` — Ready | `T-PUT-01` [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19); `T-PUT-02` [#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20); `T-PUT-03` [#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) — New | `PF-01 — Receive → Putaway`; screen inventory/Figma parity chờ human review | Chưa bắt đầu / Chưa bắt đầu |
+| `REQ-002/003`, `CAND-REQ-003/006/010/011` | `US-PICK-001` | [#9](https://tree.taiga.io/project/lenghi-group-07-project/us/9) / ID `9523824` — Ready | `T-PICK-01` [#22](https://tree.taiga.io/project/lenghi-group-07-project/task/22); `T-PICK-02` [#23](https://tree.taiga.io/project/lenghi-group-07-project/task/23); `T-PICK-03` [#24](https://tree.taiga.io/project/lenghi-group-07-project/task/24) — New | `PF-02 — Pick`; screen inventory/Figma parity chờ human review | Chưa bắt đầu / Chưa bắt đầu |
+| `REQ-001/002/004`, `CAND-REQ-003/004/010/011` | `US-TRF-001` | [#10](https://tree.taiga.io/project/lenghi-group-07-project/us/10) / ID `9523825` — New | `T-TRF1-01` [#25](https://tree.taiga.io/project/lenghi-group-07-project/task/25); `T-TRF1-02` [#26](https://tree.taiga.io/project/lenghi-group-07-project/task/26); `T-TRF1-03` [#27](https://tree.taiga.io/project/lenghi-group-07-project/task/27) — New | Consolidated User Flow; technical contract vẫn TBD | Chưa bắt đầu / Chưa bắt đầu |
+| `REQ-002/003/004`, `CAND-REQ-004/010` | `US-TRF-002` | [#11](https://tree.taiga.io/project/lenghi-group-07-project/us/11) / ID `9523826` — New | `T-TRF2-01` [#28](https://tree.taiga.io/project/lenghi-group-07-project/task/28); `T-TRF2-02` [#29](https://tree.taiga.io/project/lenghi-group-07-project/task/29); `T-TRF2-03` [#30](https://tree.taiga.io/project/lenghi-group-07-project/task/30) — New | Consolidated User Flow; technical contract vẫn TBD | Chưa bắt đầu / Chưa bắt đầu |
+| `REQ-002/004`, `CAND-REQ-003/005/010` | `US-AUD-001` | [#12](https://tree.taiga.io/project/lenghi-group-07-project/us/12) / ID `9523827` — Ready | `T-AUD1-01` [#31](https://tree.taiga.io/project/lenghi-group-07-project/task/31); `T-AUD1-02` [#32](https://tree.taiga.io/project/lenghi-group-07-project/task/32); `T-AUD1-03` [#33](https://tree.taiga.io/project/lenghi-group-07-project/task/33) — New | `PF-03 — Audit → Adjust`; screen inventory/Figma parity chờ human review | Chưa bắt đầu / Chưa bắt đầu |
+| `REQ-002/004`, `CAND-REQ-005/010` | `US-AUD-002` | [#13](https://tree.taiga.io/project/lenghi-group-07-project/us/13) / ID `9523828` — Ready | `T-AUD2-01` [#34](https://tree.taiga.io/project/lenghi-group-07-project/task/34); `T-AUD2-02` [#35](https://tree.taiga.io/project/lenghi-group-07-project/task/35); `T-AUD2-03` [#36](https://tree.taiga.io/project/lenghi-group-07-project/task/36) — New | `PF-03 — Audit → Adjust`; screen inventory/Figma parity chờ human review | Chưa bắt đầu / Chưa bắt đầu |
+| `REQ-001/002/003`, `CAND-REQ-008/010` | `US-ADJ-001` | [#14](https://tree.taiga.io/project/lenghi-group-07-project/us/14) / ID `9523829` — Ready | `T-ADJ1-01` [#37](https://tree.taiga.io/project/lenghi-group-07-project/task/37); `T-ADJ1-02` [#38](https://tree.taiga.io/project/lenghi-group-07-project/task/38); `T-ADJ1-03` [#39](https://tree.taiga.io/project/lenghi-group-07-project/task/39) — New | `PF-03 — Audit → Adjust`; screen inventory/Figma parity chờ human review | Chưa bắt đầu / Chưa bắt đầu |
+| `REQ-001/002/003`, `CAND-REQ-003/008/010/011` | `US-ADJ-002` | [#15](https://tree.taiga.io/project/lenghi-group-07-project/us/15) / ID `9523830` — Ready | `T-ADJ2-01` [#40](https://tree.taiga.io/project/lenghi-group-07-project/task/40); `T-ADJ2-02` [#41](https://tree.taiga.io/project/lenghi-group-07-project/task/41); `T-ADJ2-03` [#42](https://tree.taiga.io/project/lenghi-group-07-project/task/42) — New | `PF-03 — Audit → Adjust`; screen inventory/Figma parity chờ human review | Chưa bắt đầu / Chưa bắt đầu |
+
 ## OQ decision trace
 
 | OQ | Current status | Decision/impact |
@@ -105,6 +121,6 @@ Historical draft references are valid only when explicitly labeled as promoted, 
 | Report user flow | Consolidated flow updated; independent operational paths and lifecycle gaps preserved |
 | Design/Figma/Prototype | Figma URL đã được cung cấp; screen inventory ghi 10 base screens/3 flows; quyền truy cập và frame parity cần human review |
 | Usability artifacts | Script và 3 human-reviewed findings đã được tổng hợp; không claim AI thực hiện participant test |
-| Taiga | Chưa tạo item; URL/access TBD |
+| Taiga | Project metadata và 6 Epic / 9 User Story / 27 Task references đã đồng bộ; quyền truy cập/người phụ trách công cụ vẫn TBD |
 | Architecture/Data Model/API | Still subject to separate human approval |
 | Implementation/Test | Chưa bắt đầu |
