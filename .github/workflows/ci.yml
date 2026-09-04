@@ -35,6 +35,23 @@ jobs:
 
   backend-checks:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: warehouse_test
+          POSTGRES_USER: warehouse_test
+          POSTGRES_PASSWORD: warehouse_test_only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U warehouse_test -d warehouse_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql+psycopg://warehouse_test:warehouse_test_only@localhost:5432/warehouse_test
+      TEST_DATABASE_URL: postgresql+psycopg://warehouse_test:warehouse_test_only@localhost:5432/warehouse_test
     defaults:
       run:
         working-directory: apps/backend
@@ -51,9 +68,62 @@ jobs:
           enable-cache: true
       - name: Install dependencies
         run: uv sync --locked
+      - name: Verify migration upgrade and downgrade
+        run: |
+          uv run alembic upgrade head
+          uv run alembic downgrade base
+          uv run alembic upgrade head
       - name: Ruff lint
         run: uv run ruff check .
       - name: Ruff format
         run: uv run ruff format --check .
       - name: Test
         run: uv run pytest
+
+  putaway-e2e:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: warehouse_e2e
+          POSTGRES_USER: warehouse_e2e
+          POSTGRES_PASSWORD: warehouse_e2e_only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U warehouse_e2e -d warehouse_e2e"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgresql+psycopg://warehouse_e2e:warehouse_e2e_only@localhost:5432/warehouse_e2e
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+      - name: Install backend dependencies
+        working-directory: apps/backend
+        run: uv sync --locked
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: apps/frontend/package-lock.json
+      - name: Install frontend dependencies
+        working-directory: apps/frontend
+        run: npm ci
+      - name: Install Chromium
+        working-directory: apps/frontend
+        run: npx playwright install --with-deps chromium
+      - name: Run real vertical-slice test
+        working-directory: apps/frontend
+        run: npm run test:e2e

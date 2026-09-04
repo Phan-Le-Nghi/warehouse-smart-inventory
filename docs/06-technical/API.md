@@ -14,6 +14,7 @@ Canonical technical proposal: [`../../vault/06-technical/api-contract.md`](../..
 | `GET /api/v1/stock?sku_id={id}` | Location balances + derived Warehouse total | `CAND-REQ-003` |
 | `POST /api/v1/receives` | Actual quantity + discrepancy/reference context | `US-REC-001`; completion/handoff remains OPEN |
 | `POST /api/v1/putaways` | Initial destination allocation | `US-PUT-001`; detailed below |
+| `GET /api/v1/putaways/context/{receive_line_id}` | SKU, eligible quantity và tracked destination IDs cho Putaway screen | `US-PUT-001`; không tạo automatic Receive handoff |
 | `POST /api/v1/picks` | Multi-location/full/`PARTIAL / INSUFFICIENT` Pick | `US-PICK-001` |
 | `POST /api/v1/transfers` | Atomic internal Transfer confirmation | `US-TRF-001` |
 | `GET /api/v1/transfers` | Confirmed Transfer history | `US-TRF-002` |
@@ -33,11 +34,11 @@ Proposed request:
   "receive_line_id": "<id>",
   "sku_id": "<id>",
   "quantity": 16,
-  "destination_location": "BACKROOM"
+  "destination_location_id": "<tracked-location-id>"
 }
 ```
 
-Request dùng proposed `Idempotency-Key` header. Success trả Putaway ID, Receive line, SKU, quantity, destination, confirmation time, committed destination balance và derived Warehouse total.
+Request dùng proposed `Idempotency-Key` header. Destination ID phải tham chiếu `BACKROOM` hoặc `SALES_SHELF` thuộc Warehouse của Receive line. Success trả Putaway ID, Receive line, SKU, quantity, destination ID/code, confirmation time, committed destination balance và derived Warehouse total.
 
 Error cases gồm missing/mismatched Receive/SKU, non-positive or malformed Round 1 integer quantity, invalid destination, allocation vượt eligible remaining và idempotency conflict. Tất cả failure đều không có data effect. Same-key/same-payload replay trả original result và không increment lần hai.
 

@@ -1,9 +1,59 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+
+from warehouse_api.config import get_settings
+from warehouse_api.errors import ApiError
+from warehouse_api.routes import router
 
 app = FastAPI(
     title="Warehouse & Smart Inventory Management API",
     version="0.1.0",
 )
+
+settings = get_settings()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=list(settings.cors_origins),
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type", "Idempotency-Key"],
+)
+app.include_router(router)
+
+
+@app.exception_handler(ApiError)
+def handle_api_error(_request: Request, error: ApiError) -> JSONResponse:
+    return JSONResponse(
+        status_code=error.status_code,
+        content={
+            "error": {
+                "code": error.code,
+                "message": error.message,
+                "details": error.details,
+            }
+        },
+    )
+
+
+@app.exception_handler(RequestValidationError)
+def handle_validation_error(
+    _request: Request, error: RequestValidationError
+) -> JSONResponse:
+    quantity_error = any(item["loc"][-1] == "quantity" for item in error.errors())
+    code = "INVALID_QUANTITY" if quantity_error else "INVALID_REQUEST"
+    message = (
+        "Quantity must be an integer."
+        if quantity_error
+        else "The request could not be validated."
+    )
+    return JSONResponse(
+        status_code=422,
+        content={
+            "error": {"code": code, "message": message, "details": error.errors()}
+        },
+    )
 
 
 @app.get("/health", tags=["technical"])

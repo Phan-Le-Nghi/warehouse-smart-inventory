@@ -42,4 +42,4 @@ Frontend không sở hữu authoritative stock. Application service giữ use-ca
 - Advanced pagination/filtering và quantitative NFR tại `OQ-033`.
 - `OQ-012`, `OQ-013` và `OQ-014` không bị đóng bởi Technical Foundation.
 
-Technical application scaffold, PostgreSQL Compose configuration và CI baseline đã được tạo, đang chờ human diff review; evidence được theo dõi tại [`../TRACEABILITY.md`](../TRACEABILITY.md). Chưa có business feature/schema, `US-PUT-001` vẫn Not started và Docker runtime chưa được verify trên máy tạo scaffold.
+Technical application scaffold và `US-PUT-001` vertical slice đã được tạo, đang chờ human diff review; evidence được theo dõi tại [`../TRACEABILITY.md`](../TRACEABILITY.md). Docker/PostgreSQL runtime chưa được verify trên máy triển khai slice nên PostgreSQL integration và Playwright local không được claim Pass.

@@ -32,6 +32,7 @@ Proposed mapping: `403` for a known actor without the canonical permission, `404
 | `GET /api/v1/stock?sku_id={id}` | Return location balances and derived Warehouse total | `CAND-REQ-003`, `CAND-BR-003` | Advanced filtering/pagination TBD |
 | `POST /api/v1/receives` | Record actual quantity and discrepancy/reference context | `US-REC-001` | Completion/handoff remains `OQ-013`; exact reference shape needs story-contract review |
 | `POST /api/v1/putaways` | Confirm initial allocation into a tracked destination | `US-PUT-001` | Detailed contract below |
+| `GET /api/v1/putaways/context/{receive_line_id}` | Load the SKU, eligible quantity and tracked destination IDs needed by the standalone Putaway screen | `US-PUT-001` UI support only | Does not define an automatic Receive → Putaway handoff |
 | `POST /api/v1/picks` | Confirm one-or-many source allocations and report full or `PARTIAL / INSUFFICIENT` | `US-PICK-001` | Retry/cancel lifecycle remains open |
 | `POST /api/v1/transfers` | Atomically reduce source, increase destination and record confirmation | `US-TRF-001` | Partial/failure/reversal remain open |
 | `GET /api/v1/transfers` | Return confirmed Transfer history fields | `US-TRF-002` | Advanced filter/sort/export TBD |
@@ -57,11 +58,11 @@ Idempotency-Key: <client-generated opaque value>
   "receive_line_id": "<id>",
   "sku_id": "<id>",
   "quantity": 16,
-  "destination_location": "BACKROOM"
+  "destination_location_id": "<tracked-location-id>"
 }
 ```
 
-Round 1 quantity is an integer-unit simplification; this request shape does not resolve `OQ-012`. `destination_location` accepts only `BACKROOM` or `SALES_SHELF` in the MVP.
+Round 1 quantity is an integer-unit simplification; this request shape does not resolve `OQ-012`. `destination_location_id` must reference `BACKROOM` or `SALES_SHELF` in the Receive line's MVP Warehouse.
 
 ### Success response
 
@@ -73,6 +74,7 @@ Proposed status: `201 Created` for the first successful confirmation and `200 OK
   "receive_line_id": "<id>",
   "sku_id": "<id>",
   "quantity": 16,
+  "destination_location_id": "<tracked-location-id>",
   "destination_location": "BACKROOM",
   "confirmed_at": "<timestamp>",
   "stock": {

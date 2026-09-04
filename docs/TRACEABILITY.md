@@ -32,7 +32,15 @@ Final backlog gồm 9 canonical stories đã được human approve. PRD, MVP Sc
 
 | Status | Artifact path | Verification evidence | Scope boundary |
 |---|---|---|---|
-| Implemented; pending human diff review | `apps/frontend/`, `apps/backend/`, `apps/docker/`, `apps/.env.example`, `apps/README.md`, `.github/workflows/ci.yml` | `npm ci`, lint, typecheck, 1 unit test, build and 1 Playwright smoke test passed; `uv sync --locked`, Ruff lint/format check and 1 pytest passed | Technical scaffold only; Docker CLI unavailable so Compose/PostgreSQL runtime is unverified; no business schema/API/feature; `US-PUT-001` remains not started |
+| Implemented; pending human diff review | `apps/frontend/`, `apps/backend/`, `apps/docker/`, `apps/.env.example`, `apps/README.md`, `.github/workflows/ci.yml` | Baseline verification was recorded in `AI-USE-006`; current slice evidence is listed below | Scaffold baseline has been extended only by the `US-PUT-001` vertical slice |
+
+## US-PUT-001 vertical-slice implementation
+
+| Requirement / Story / delivery trace | Implementation artifact | Test IDs and current evidence | Scope boundary |
+|---|---|---|---|
+| `REQ-002/003/004`, `CAND-REQ-003/007/010` → `US-PUT-001` → Taiga [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) → tasks [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19)/[#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20)/[#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) → `PF-01` / `SCR-03` → Technical Story Spec | `POST /api/v1/putaways`; Putaway context read; actor dependency boundary; SQLAlchemy models; Alembic `20260905_0001`; React Putaway page | `TEST-PUT-001`…`TEST-PUT-005`: local component DB pass; frontend destination/submit/error: pass; `TEST-PUT-E2E-001`: not run locally because Docker/PostgreSQL runtime is unavailable | No Transfer/Movement table or write path; no persisted Warehouse total; Receive actual unchanged; full 16-unit placement is fixture scope only; `OQ-012/013/014` remain open |
+
+Local evidence on 2026-09-05: Ruff lint and format-check pass; pytest `8 passed` (SQLite component database); frontend ESLint, TypeScript, Vitest `3 passed`, and Vite build pass; Alembic upgrade/downgrade smoke pass on a temporary SQLite database. PostgreSQL migration/integration and Playwright are **not claimed as passed locally**. CI now provisions PostgreSQL 18 for migration, API tests, and real-browser vertical-slice verification.
 
 ## Canonical story coverage
 
@@ -53,7 +61,7 @@ Final backlog gồm 9 canonical stories đã được human approve. PRD, MVP Sc
 | Story | Canonical AC coverage | Downstream status |
 |---|---|---|
 | `US-REC-001` | actual entry/compare; match; quantity discrepancy; reference mismatch review | Design/spec/implementation/test not started |
-| `US-PUT-001` | destination allocation; tracked location; no automatic Movement record | Human-reviewed technical Story Spec documented; business implementation/test not started |
+| `US-PUT-001` | destination allocation; tracked location; no automatic Movement record | Vertical slice implemented; local component/frontend tests pass; PostgreSQL integration and Playwright await CI or a local Docker runtime; pending human diff review |
 | `US-PICK-001` | full Pick; multi-location; `PARTIAL / INSUFFICIENT`; negative-stock guard | Not started |
 | `US-TRF-001` | source/destination effects; Warehouse total; minimum record; negative-stock guard | Technical contract still TBD |
 | `US-TRF-002` | Manager history access; history fields; confirmation time | Technical contract still TBD |
@@ -69,7 +77,7 @@ Taiga references dưới đây theo dõi thực thi và không thay thế nguồ
 | Requirement | Canonical Story | Taiga Story | Taiga Tasks | Design/Prototype | Implementation/Test status |
 |---|---|---|---|---|---|
 | `REQ-001/002/003`, `CAND-REQ-001/002/009/010` | `US-REC-001` | [#7](https://tree.taiga.io/project/lenghi-group-07-project/us/7) / ID `9523822` — Ready | `T-REC-01` [#16](https://tree.taiga.io/project/lenghi-group-07-project/task/16); `T-REC-02` [#17](https://tree.taiga.io/project/lenghi-group-07-project/task/17); `T-REC-03` [#18](https://tree.taiga.io/project/lenghi-group-07-project/task/18) — New | `PF-01 — Receive → Putaway`; screen inventory/Figma parity chờ human review | Chưa bắt đầu / Chưa bắt đầu |
-| `REQ-002/003/004`, `CAND-REQ-003/007/010` | `US-PUT-001` | [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) / ID `9523823` — Ready | `T-PUT-01` [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19); `T-PUT-02` [#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20); `T-PUT-03` [#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) — New | `PF-01 — Receive → Putaway`; `SCR-03`; [`06-technical/story-specs/putaway.md`](06-technical/story-specs/putaway.md) | Technical spec documented / `US-PUT-001` implementation and tests not started |
+| `REQ-002/003/004`, `CAND-REQ-003/007/010` | `US-PUT-001` | [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) / ID `9523823` — Ready | `T-PUT-01` [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19); `T-PUT-02` [#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20); `T-PUT-03` [#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) — New | `PF-01 — Receive → Putaway`; `SCR-03`; [`06-technical/story-specs/putaway.md`](06-technical/story-specs/putaway.md) | API/DB/migration/UI implemented; local component/frontend tests pass; PostgreSQL integration/E2E not run locally; pending human review |
 | `REQ-002/003`, `CAND-REQ-003/006/010/011` | `US-PICK-001` | [#9](https://tree.taiga.io/project/lenghi-group-07-project/us/9) / ID `9523824` — Ready | `T-PICK-01` [#22](https://tree.taiga.io/project/lenghi-group-07-project/task/22); `T-PICK-02` [#23](https://tree.taiga.io/project/lenghi-group-07-project/task/23); `T-PICK-03` [#24](https://tree.taiga.io/project/lenghi-group-07-project/task/24) — New | `PF-02 — Pick`; screen inventory/Figma parity chờ human review | Chưa bắt đầu / Chưa bắt đầu |
 | `REQ-001/002/004`, `CAND-REQ-003/004/010/011` | `US-TRF-001` | [#10](https://tree.taiga.io/project/lenghi-group-07-project/us/10) / ID `9523825` — New | `T-TRF1-01` [#25](https://tree.taiga.io/project/lenghi-group-07-project/task/25); `T-TRF1-02` [#26](https://tree.taiga.io/project/lenghi-group-07-project/task/26); `T-TRF1-03` [#27](https://tree.taiga.io/project/lenghi-group-07-project/task/27) — New | Consolidated User Flow; technical contract vẫn TBD | Chưa bắt đầu / Chưa bắt đầu |
 | `REQ-002/003/004`, `CAND-REQ-004/010` | `US-TRF-002` | [#11](https://tree.taiga.io/project/lenghi-group-07-project/us/11) / ID `9523826` — New | `T-TRF2-01` [#28](https://tree.taiga.io/project/lenghi-group-07-project/task/28); `T-TRF2-02` [#29](https://tree.taiga.io/project/lenghi-group-07-project/task/29); `T-TRF2-03` [#30](https://tree.taiga.io/project/lenghi-group-07-project/task/30) — New | Consolidated User Flow; technical contract vẫn TBD | Chưa bắt đầu / Chưa bắt đầu |
@@ -138,4 +146,4 @@ Historical draft references are valid only when explicitly labeled as promoted, 
 | Usability artifacts | Script và 3 human-reviewed findings đã được tổng hợp; không claim AI thực hiện participant test |
 | Taiga | Project metadata và 6 Epic / 9 User Story / 27 Task references đã đồng bộ; quyền truy cập/người phụ trách công cụ vẫn TBD |
 | Architecture/Data Model/API | Technical Foundation human reviewed; 3 accepted ADR; MVP route map proposed; Putaway contract documented |
-| Implementation/Test | Repo scaffold + CI baseline đã tạo và verify local trong phạm vi nêu trên; Docker runtime chưa verify; mọi business feature và `US-PUT-001` vẫn chưa bắt đầu |
+| Implementation/Test | Repo scaffold + `US-PUT-001` vertical slice đã triển khai; local component/frontend checks pass; Docker/PostgreSQL/Playwright local bị blocked và không được ghi Pass; chờ human diff review |
