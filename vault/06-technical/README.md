@@ -6,7 +6,7 @@
 
 Thư mục này là nguồn canonical cho các technical decisions đã được human review. Product requirements, Business Rules và Acceptance Criteria vẫn do các artifact product canonical quản lý; technical documentation không được thay đổi hoặc mở rộng chúng.
 
-Application scaffold và `US-PUT-001` vertical slice hiện đã có tại `apps/` và `.github/workflows/ci.yml`, đang chờ human diff review. Production authentication chưa được implement; Docker/PostgreSQL runtime chưa được verify trên máy triển khai slice.
+Application scaffold và first vertical slice `US-PUT-001` tại `apps/` và `.github/workflows/ci.yml` đã completed, được human review và được GitHub Actions xác minh bằng PostgreSQL 18 backend checks, frontend checks và Playwright React → FastAPI → PostgreSQL 18 E2E. Không claim local Docker/PostgreSQL pass. Production authentication chưa được implement và deployment vẫn `TBD`.
 
 ## Approved foundation
 
@@ -29,7 +29,7 @@ Decision trace: `DEC-020` đến `DEC-023` tại [`../08-decisions/decision-log.
 | [`adrs/ADR-001-location-stock-authoritative.md`](adrs/ADR-001-location-stock-authoritative.md) | ACCEPTED | Per-location stock authority và derived Warehouse total |
 | [`adrs/ADR-002-transactional-stock-consistency.md`](adrs/ADR-002-transactional-stock-consistency.md) | ACCEPTED | Transactional stock consistency và non-negative guard |
 | [`adrs/ADR-003-receive-putaway-stock-posting.md`](adrs/ADR-003-receive-putaway-stock-posting.md) | ACCEPTED | Receive records actual quantity; Putaway performs initial posting |
-| [`story-specs/US-PUT-001.md`](story-specs/US-PUT-001.md) | HUMAN-REVIEWED TECHNICAL SPEC | First vertical slice mapping; no canonical AC changes |
+| [`story-specs/US-PUT-001.md`](story-specs/US-PUT-001.md) | IMPLEMENTATION COMPLETED / CI VERIFIED | First vertical slice mapping and test evidence; no canonical AC changes |
 
 ## Preserved open boundaries
 

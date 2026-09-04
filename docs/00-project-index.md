@@ -14,7 +14,7 @@
 | Requirements + Business Rules | [`02-requirements/requirements-and-business-rules.md`](02-requirements/requirements-and-business-rules.md) | `vault/02-requirements/` | Product/BA — Thanh Ngân | Round 2 decisions/rules đã cập nhật; một số OQ vẫn mở |
 | Project Vault | [`../vault/00-index.md`](../vault/00-index.md) | `vault/` | AI/Vault — Ly Na | Đã scaffold |
 | Vault Q&A Benchmark | [`02-requirements/vault-qa-benchmark.md`](02-requirements/vault-qa-benchmark.md) | `vault/09-ai/qa-benchmark.md` | AI/Vault — Ly Na | TBD — cần ít nhất 20 câu đã review |
-| AI Usage Log v1 | [`AI_USAGE_LOG.md`](AI_USAGE_LOG.md) | Việc dùng AI cá nhân đã kiểm chứng | Tất cả thành viên; Ly Na điều phối | 7 mục; `US-PUT-001` slice đã ghi, diff chờ human verification |
+| AI Usage Log v1 | [`AI_USAGE_LOG.md`](AI_USAGE_LOG.md) | Việc dùng AI cá nhân đã kiểm chứng | Tất cả thành viên; Ly Na điều phối | 8 mục; `US-PUT-001` slice và chẩn đoán CI đã được human verification |
 
 ## Bài 2
 
@@ -30,10 +30,20 @@
 | Taiga Backlog | [`04-backlog/taiga-backlog.md`](04-backlog/taiga-backlog.md) | Story ID đã review + Taiga | QA/Release — Thảo Ngân | 6 Epic, 9 User Story và 27 Task refs đã đồng bộ; quyền truy cập/người phụ trách công cụ vẫn TBD |
 | Figma + Design System | [`05-design/design-system.md`](05-design/design-system.md), [Figma prototype](https://www.figma.com/design/d5XrKKZGoeVefVGqVVTwlu/Warehouse---Smart-Inventory-Management?node-id=0-1) | Canonical stories/flow + downstream Figma artifact | UX/UI — Nghĩa | URL đã ghi nhận; quyền truy cập/frame parity chờ human verification |
 | Architecture + ADR | [`06-technical/architecture.md`](06-technical/architecture.md) | [`vault/06-technical/`](../vault/06-technical/) | Engineering — Nghi | Technical Foundation + 3 ADR đã human review; documentation only |
-| Repo Scaffold + CI Baseline | [`../apps/README.md`](../apps/README.md), [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml) | `DEC-020` và technical foundation đã duyệt | Engineering — Nghi | Scaffold + `US-PUT-001` slice đã tạo; local component/frontend checks pass; PostgreSQL/E2E local chưa chạy; chờ human review |
-| ERD / Data Model | [`06-technical/data-model.md`](06-technical/data-model.md) | [`vault/06-technical/data-model.md`](../vault/06-technical/data-model.md) | Engineering — Nghi | Conceptual MVP model + `US-PUT-001` schema/migration implemented; pending human review |
+| Repo Scaffold + CI Baseline | [`../apps/README.md`](../apps/README.md), [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml) | `DEC-020` và technical foundation đã duyệt | Engineering — Nghi | Completed; first vertical slice `US-PUT-001` completed and verified by GitHub Actions (`backend-checks`, `frontend-checks`, `putaway-e2e`) |
+| ERD / Data Model | [`06-technical/data-model.md`](06-technical/data-model.md) | [`vault/06-technical/data-model.md`](../vault/06-technical/data-model.md) | Engineering — Nghi | Conceptual MVP model + `US-PUT-001` schema/migration implemented and included in the human-reviewed vertical slice |
 | API Contract | [`06-technical/API.md`](06-technical/API.md) | [`vault/06-technical/api-contract.md`](../vault/06-technical/api-contract.md) | Engineering — Nghi | MVP route map proposed; Putaway contract documented; exact routes là technical contract |
-| Story Specs + Traceability | [`06-technical/story-specs-index.md`](06-technical/story-specs-index.md), [`TRACEABILITY.md`](TRACEABILITY.md) | Canonical stories + [`vault/06-technical/story-specs/`](../vault/06-technical/story-specs/) | Tất cả Story owner; QA điều phối | `US-PUT-001` implemented; local evidence recorded; PostgreSQL/E2E pending |
+| Story Specs + Traceability | [`06-technical/story-specs-index.md`](06-technical/story-specs-index.md), [`TRACEABILITY.md`](TRACEABILITY.md) | Canonical stories + [`vault/06-technical/story-specs/`](../vault/06-technical/story-specs/) | Tất cả Story owner; QA điều phối | `US-PUT-001` completed; backend verified on PostgreSQL 18, frontend checks passed, and React → FastAPI → PostgreSQL 18 Playwright E2E passed in GitHub Actions |
+
+## First vertical slice evidence
+
+`US-PUT-001` is the first completed vertical slice; this status does not claim that the full MVP is implemented.
+
+- Backend tests: [`../apps/backend/tests/test_putaway.py`](../apps/backend/tests/test_putaway.py)
+- Playwright E2E: [`../apps/frontend/e2e/putaway.spec.ts`](../apps/frontend/e2e/putaway.spec.ts)
+- GitHub Actions workflow: [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml)
+- Technical Story Spec: [`06-technical/story-specs/putaway.md`](06-technical/story-specs/putaway.md) and [`../vault/06-technical/story-specs/US-PUT-001.md`](../vault/06-technical/story-specs/US-PUT-001.md)
+- Traceability: [`TRACEABILITY.md`](TRACEABILITY.md)
 
 ## Taiga references
 

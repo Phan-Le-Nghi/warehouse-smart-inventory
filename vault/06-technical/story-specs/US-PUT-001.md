@@ -2,7 +2,7 @@
 
 ## Status and authority
 
-`HUMAN-REVIEWED TECHNICAL SPEC — DOCUMENTATION ONLY`
+`HUMAN-REVIEWED TECHNICAL SPEC — IMPLEMENTATION COMPLETED AND CI VERIFIED`
 
 Canonical product wording and Acceptance Criteria remain authoritative at [`../../04-product/stories/US-PUT-001.md`](../../04-product/stories/US-PUT-001.md). This spec does not modify them.
 
@@ -93,19 +93,18 @@ Expected committed result:
 
 This full-quantity fixture is only the selected slice happy path. It is not a rule that partial Putaway is forbidden, and it adds no Acceptance Criterion. `OQ-014` remains open.
 
-## Planned test cases
+## Executed test evidence
 
 | Test ID | Level | Scenario / evidence |
 |---|---|---|
-| `T-PUT-U-001` | Unit | Eligible remaining equals actual quantity minus confirmed allocations |
-| `T-PUT-U-002` | Unit | Invalid destination and non-positive quantity produce no command effect |
-| `T-PUT-I-001` | PostgreSQL integration | Fixture 16 → Backroom: allocation created, Backroom +16, Sales Shelf unchanged, derived total +16 |
-| `T-PUT-I-002` | PostgreSQL integration | Receive actual quantity remains unchanged; no Transfer/Movement side effect |
-| `T-PUT-I-003` | PostgreSQL integration | Same idempotency request is replayed without a second increment |
-| `T-PUT-I-004` | PostgreSQL concurrency | Competing requests cannot post more than eligible remaining quantity |
-| `T-PUT-E-001` | Playwright | Warehouse Staff context → `SCR-03` → select Backroom → confirm → committed success state |
+| `TEST-PUT-001` | PostgreSQL-backed API test | Allocation created; Backroom +16; Sales Shelf unchanged; derived total 16; Receive actual quantity unchanged |
+| `TEST-PUT-002` | PostgreSQL-backed API test | Invalid destination rejected with no allocation or balance effect |
+| `TEST-PUT-003` | PostgreSQL-backed API test | Same idempotency request replays without a second allocation or stock increment |
+| `TEST-PUT-004` | PostgreSQL-backed API test | Allocation above eligible remaining quantity rejected with no data effect |
+| `TEST-PUT-005` | PostgreSQL-backed API/schema assertion | No Transfer or generic Movement persistence path exists |
+| `TEST-PUT-E2E-001` | Playwright | React UI loads the fixture, selects Backroom, submits through FastAPI and shows the committed success state backed by PostgreSQL 18 |
 
-No test is claimed as executed until new command output exists in the implementation phase.
+GitHub Actions `backend-checks`, `frontend-checks`, and `putaway-e2e` passed for both push and pull-request runs. `backend-checks` includes Alembic upgrade/downgrade/upgrade and the backend suite on PostgreSQL 18; `frontend-checks` includes lint/typecheck/test/build; `putaway-e2e` covers React → FastAPI → PostgreSQL 18. The first backend CI run exposed fixture FK ordering; flushing Warehouse before InternalLocation and then the dependent fixture records corrected the test setup without changing product behavior or canonical Acceptance Criteria.
 
 ## Preserved TBD/open items
 
