@@ -15,17 +15,17 @@ Product Definition baseline: [PRD](../03-product/PRD.md), [MVP Scope](../03-prod
 
 ## Canonical backlog và ownership
 
-| Story ID | Title | Actor | Owner | Source classification |
-|---|---|---|---|---|
-| `US-REC-001` | Ghi nhận Receive theo số lượng thực nhận | Warehouse Staff | Nguyễn Thị Nghĩa | Verified evidence + HUMAN PRODUCT DECISION |
-| `US-PUT-001` | Phân bổ Putaway vào initial location | Warehouse Staff | Phan Lê Nghi | HUMAN PRODUCT DECISION |
-| `US-PICK-001` | Thực hiện Pick từ tracked locations | Warehouse Staff | Trương Huỳnh Thảo Ngân | HUMAN PRODUCT DECISION |
-| `US-TRF-001` | Xác nhận Internal Transfer | Warehouse Staff | Nguyễn Thị Ly Na | HUMAN PRODUCT DECISION |
-| `US-TRF-002` | Xem Transfer history | Manager | Nguyễn Thị Ly Na | HUMAN PRODUCT DECISION |
-| `US-AUD-001` | Thực hiện selected-scope Audit | Warehouse Staff | Phan Lê Nghi | Verified evidence + HUMAN PRODUCT DECISION |
-| `US-AUD-002` | Review và re-check Audit discrepancy | Manager | Phan Lê Nghi | Verified evidence + HUMAN PRODUCT DECISION |
-| `US-ADJ-001` | Tạo Adjust request | Warehouse Staff | Đặng Thị Thanh Ngân | Verified evidence + HUMAN PRODUCT DECISION |
-| `US-ADJ-002` | Quyết định và apply Adjust | Manager | Đặng Thị Thanh Ngân | Verified evidence + HUMAN PRODUCT DECISION |
+| Story ID | Title | Actor | Owner | Taiga ref | Taiga status | Source classification |
+|---|---|---|---|---|---|---|
+| `US-REC-001` | Ghi nhận Receive theo số lượng thực nhận | Warehouse Staff | Nguyễn Thị Nghĩa | [#7](https://tree.taiga.io/project/lenghi-group-07-project/us/7) / ID `9523822` | Ready | Verified evidence + HUMAN PRODUCT DECISION |
+| `US-PUT-001` | Phân bổ Putaway vào initial location | Warehouse Staff | Phan Lê Nghi | [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) / ID `9523823` | Ready | HUMAN PRODUCT DECISION |
+| `US-PICK-001` | Thực hiện Pick từ tracked locations | Warehouse Staff | Trương Huỳnh Thảo Ngân | [#9](https://tree.taiga.io/project/lenghi-group-07-project/us/9) / ID `9523824` | Ready | HUMAN PRODUCT DECISION |
+| `US-TRF-001` | Xác nhận Internal Transfer | Warehouse Staff | Nguyễn Thị Ly Na | [#10](https://tree.taiga.io/project/lenghi-group-07-project/us/10) / ID `9523825` | New | HUMAN PRODUCT DECISION |
+| `US-TRF-002` | Xem Transfer history | Manager | Nguyễn Thị Ly Na | [#11](https://tree.taiga.io/project/lenghi-group-07-project/us/11) / ID `9523826` | New | HUMAN PRODUCT DECISION |
+| `US-AUD-001` | Thực hiện selected-scope Audit | Warehouse Staff | Phan Lê Nghi | [#12](https://tree.taiga.io/project/lenghi-group-07-project/us/12) / ID `9523827` | Ready | Verified evidence + HUMAN PRODUCT DECISION |
+| `US-AUD-002` | Review và re-check Audit discrepancy | Manager | Phan Lê Nghi | [#13](https://tree.taiga.io/project/lenghi-group-07-project/us/13) / ID `9523828` | Ready | Verified evidence + HUMAN PRODUCT DECISION |
+| `US-ADJ-001` | Tạo Adjust request | Warehouse Staff | Đặng Thị Thanh Ngân | [#14](https://tree.taiga.io/project/lenghi-group-07-project/us/14) / ID `9523829` | Ready | Verified evidence + HUMAN PRODUCT DECISION |
+| `US-ADJ-002` | Quyết định và apply Adjust | Manager | Đặng Thị Thanh Ngân | [#15](https://tree.taiga.io/project/lenghi-group-07-project/us/15) / ID `9523830` | Ready | Verified evidence + HUMAN PRODUCT DECISION |
 
 ## US-REC-001 — Ghi nhận Receive theo số lượng thực nhận
 

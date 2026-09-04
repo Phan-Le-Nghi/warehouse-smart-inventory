@@ -68,3 +68,13 @@ Không đưa secret, dữ liệu cá nhân, Context Pack tạm thời hoặc bư
 - **Human verification:** Pending — con người cần review diff, đối chiếu 10 logical base screens với exact Figma frames và xác nhận wording/state visibility trong prototype.
 - **Human decision:** Findings và ba UX clarity decisions đầu vào đã được xác nhận là human-reviewed; không tạo Requirement/Business Rule mới và không tạo decision-log entry trùng các `DEC-012/014/015/018/019`.
 - **Artifact link:** [`05-design/usability-test-script.md`](05-design/usability-test-script.md), [`05-design/usability-findings.md`](05-design/usability-findings.md), [`05-design/screen-inventory.md`](05-design/screen-inventory.md), [`TRACEABILITY.md`](TRACEABILITY.md).
+
+### AI-USE-004 — Taiga backlog synchronization
+
+- **Task:** Taiga backlog synchronization.
+- **Context/Input:** Project metadata, write plan đã được con người phê duyệt và các nguồn repository gồm Project Index, canonical backlog, Traceability, story ownership và external-tools metadata.
+- **Tool:** Codex CLI dùng `fetch` tích hợp sẵn của Node.js với Taiga REST API, dưới sự phê duyệt rõ ràng của con người, để tạo và đọc lại các Taiga backlog items; credentials/tokens không được lưu trong repository.
+- **Output:** Tạo 6 Epics, 9 canonical User Stories và 27 Tasks trong Taiga, đọc lại để kiểm tra mapping/status, rồi đồng bộ refs/statuses vào tài liệu repository.
+- **Human verification:** Con người đã review/phê duyệt write plan và phải kiểm tra các Taiga refs/statuses cuối cùng trước khi tích hợp.
+- **Human decision:** Product scope, canonical IDs, ownership, Acceptance Criteria và business behavior là đầu vào đã được con người phê duyệt; AI không độc lập quyết định hoặc mở rộng các nội dung này.
+- **Artifact references:** [`00-project-index.md`](00-project-index.md), [`04-backlog/taiga-backlog.md`](04-backlog/taiga-backlog.md), [`04-backlog/user-stories.md`](04-backlog/user-stories.md), [`TRACEABILITY.md`](TRACEABILITY.md), [`../vault/04-product/external-tools.md`](../vault/04-product/external-tools.md).
