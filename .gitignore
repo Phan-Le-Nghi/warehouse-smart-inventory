@@ -10,3 +10,17 @@ local-secrets/
 tmp/
 .context-packs/
 context-packs-tmp/
+
+# Frontend dependencies, builds, tests, and coverage
+node_modules/
+dist/
+playwright-report/
+test-results/
+coverage/
+
+# Python environments, caches, and bytecode
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
