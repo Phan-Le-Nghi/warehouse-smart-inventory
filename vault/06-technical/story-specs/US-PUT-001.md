@@ -53,7 +53,7 @@ REQ-002/003/004 + CAND-REQ-003/007/010
   "receive_line_id": "<fixture receive line>",
   "sku_id": "<fixture SKU>",
   "quantity": 16,
-  "destination_location": "BACKROOM"
+  "destination_location_id": "<BACKROOM fixture id>"
 }
 ```
 

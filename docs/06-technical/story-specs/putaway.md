@@ -2,7 +2,7 @@
 
 ## Trạng thái
 
-`HUMAN-REVIEWED TECHNICAL SPEC — DOCUMENTATION ONLY`
+`IMPLEMENTED DOWNSTREAM — PENDING HUMAN DIFF REVIEW`
 
 Canonical technical spec: [`../../../vault/06-technical/story-specs/US-PUT-001.md`](../../../vault/06-technical/story-specs/US-PUT-001.md). Canonical product Story/AC remains [`../../../vault/04-product/stories/US-PUT-001.md`](../../../vault/04-product/stories/US-PUT-001.md) and is unchanged.
 
@@ -30,4 +30,4 @@ Expected result:
 
 This is a test fixture, not a business rule requiring full-only Putaway. `OQ-014` remains OPEN. The spec does not add or edit canonical Acceptance Criteria and does not resolve the Receive completion/handoff at `OQ-013`.
 
-No implementation or test result is claimed in this documentation phase.
+Implementation và evidence hiện tại được ghi tại [`../../TRACEABILITY.md`](../../TRACEABILITY.md). Local component/frontend tests pass; PostgreSQL integration và Playwright chưa chạy local vì Docker runtime không khả dụng.
