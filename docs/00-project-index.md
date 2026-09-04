@@ -14,7 +14,7 @@
 | Requirements + Business Rules | [`02-requirements/requirements-and-business-rules.md`](02-requirements/requirements-and-business-rules.md) | `vault/02-requirements/` | Product/BA — Thanh Ngân | Round 2 decisions/rules đã cập nhật; một số OQ vẫn mở |
 | Project Vault | [`../vault/00-index.md`](../vault/00-index.md) | `vault/` | AI/Vault — Ly Na | Đã scaffold |
 | Vault Q&A Benchmark | [`02-requirements/vault-qa-benchmark.md`](02-requirements/vault-qa-benchmark.md) | `vault/09-ai/qa-benchmark.md` | AI/Vault — Ly Na | TBD — cần ít nhất 20 câu đã review |
-| AI Usage Log v1 | [`AI_USAGE_LOG.md`](AI_USAGE_LOG.md) | Việc dùng AI cá nhân đã kiểm chứng | Tất cả thành viên; Ly Na điều phối | 8 mục; `US-PUT-001` slice và chẩn đoán CI đã được human verification |
+| AI Usage Log v1 | [`AI_USAGE_LOG.md`](AI_USAGE_LOG.md) | Việc dùng AI cá nhân đã kiểm chứng | Tất cả thành viên; Ly Na điều phối | 9 mục; `US-PUT-001` slice và chẩn đoán CI đã được human verification; documentation-only Taiga status sync dựa trên remote status do human xác nhận |
 
 ## Bài 2
 
@@ -68,7 +68,7 @@
 | Canonical Story | Taiga ref / ID | Status |
 |---|---|---|
 | `US-REC-001` | [#7](https://tree.taiga.io/project/lenghi-group-07-project/us/7) / `9523822` | Ready |
-| `US-PUT-001` | [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) / `9523823` | Ready |
+| `US-PUT-001` | [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) / `9523823` | Done |
 | `US-PICK-001` | [#9](https://tree.taiga.io/project/lenghi-group-07-project/us/9) / `9523824` | Ready |
 | `US-TRF-001` | [#10](https://tree.taiga.io/project/lenghi-group-07-project/us/10) / `9523825` | New |
 | `US-TRF-002` | [#11](https://tree.taiga.io/project/lenghi-group-07-project/us/11) / `9523826` | New |
