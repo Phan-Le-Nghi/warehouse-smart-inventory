@@ -13,12 +13,12 @@ Hiện đã xác nhận ở cấp cao:
 - `REQ-003`: các role Warehouse Staff, Manager, Purchasing và Admin;
 - `REQ-004`: các khái niệm SKU, Warehouse, Stock, Movement, Transfer, Alert và Audit.
 
-Hành vi chi tiết vẫn phụ thuộc nghiên cứu đã kiểm chứng và phê duyệt của con người.
+Round 2 đã bổ sung HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS cho per-location quantity, Putaway, Pick, Transfer, Audit, Adjust, Receive/Purchasing và permissions. Các quyết định này không phải verified research findings. Danh sách canonical và stable IDs nằm trong Vault.
 
 ## Quy tắc nghiệp vụ
 
-`TBD`: Hiện chưa có quy tắc nghiệp vụ Warehouse chi tiết nào được xác nhận. Xem [`../../vault/02-requirements/business-rules.md`](../../vault/02-requirements/business-rules.md).
+Các rule canonical đã human review gồm `CAND-BR-001` đến `CAND-BR-014`. Chúng bao phủ actual Receive quantity, re-check trước Adjust, location aggregation, Putaway/Pick/Transfer effects, Transfer recording, Audit comparison/no-auto-Adjust, Adjust control/outcome và Receive reference mismatch. Xem [`../../vault/02-requirements/business-rules.md`](../../vault/02-requirements/business-rules.md) để có wording và classification chính xác.
 
 ## Khoảng trống
 
-Giả định và câu hỏi mở là canonical trong [`../../vault/02-requirements/`](../../vault/02-requirements/).
+`OQ-013` vẫn `PARTIALLY DECIDED / OPEN`; `OQ-014`, `OQ-015`, `OQ-022` và các OQ AI chưa có quyết định vẫn mở. Xem [`../../vault/02-requirements/open-questions.md`](../../vault/02-requirements/open-questions.md).

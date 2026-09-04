@@ -21,16 +21,16 @@ Ownership của Audit đã được xác nhận và không phải câu hỏi m�
 |---|---|---|
 | OQ-009 | Nhóm có thể tiếp cận stakeholder hoặc người tham gia thực tế nào cho nghiên cứu và usability testing? | Nghiên cứu đã kiểm chứng |
 | OQ-010 | Phạm vi hệ thống gồm một Warehouse hay nhiều Warehouse? | `RESOLVED — HUMAN PRODUCT DECISION`: MVP quản lý một Warehouse duy nhất; multi-Warehouse ngoài MVP. Đây là product-scope choice, không phải research conclusion (`DEC-005`). |
-| OQ-011 | Stock on-hand, available, reserved, damaged và in-transit được định nghĩa như thế nào, nếu có áp dụng? | `PARTIALLY DECIDED / OPEN`: MVP dùng `system stock quantity`; không canonicalize các bucket đã nêu. Granularity, aggregation, workflow effect và thời điểm thay đổi vẫn OPEN (`DEC-008`). |
+| OQ-011 | Stock on-hand, available, reserved, damaged và in-transit được định nghĩa như thế nào, nếu có áp dụng? | `RESOLVED — HUMAN PRODUCT DECISION`: MVP dùng `system stock quantity` theo internal location; Warehouse total là tổng location quantities. Workflow effects được chốt tại `DEC-010` đến `DEC-015`. Không canonicalize các bucket đã nêu. |
 | OQ-012 | Lot/batch, serial number, expiry date, unit of measure hoặc unit conversion có thuộc phạm vi không? | Mô hình SKU/Stock |
-| OQ-013 | Trigger, điều kiện trước, kết quả thành công, ngoại lệ và trạng thái hoàn tất của từng khu vực quy trình bắt buộc là gì? | User Story và quy trình |
+| OQ-013 | Trigger, điều kiện trước, kết quả thành công, ngoại lệ và trạng thái hoàn tất của từng khu vực quy trình bắt buộc là gì? | `PARTIALLY DECIDED / OPEN`: Round 2 đã quyết định happy path và một số exception/completion branch. Vẫn mở: Receive trigger/completion wording cuối, Putaway exception/downstream handoff, Transfer exception, Audit mismatch completion, Adjust rejected-case closure và các handoff chưa được nêu rõ. |
 | OQ-014 | Có hỗ trợ thực hiện một phần đối với Receive, Putaway, Pick hoặc Transfer không? | Quy tắc quy trình |
 | OQ-015 | Có cho phép tồn kho âm không? | Quy tắc Stock |
 | OQ-016 | Transfer là giữa các location, giữa các Warehouse hay cả hai? | `RESOLVED — HUMAN PRODUCT DECISION`: trong MVP, Transfer chỉ là subsequent relocation giữa tracked internal locations trong cùng một Warehouse; cross-Warehouse Transfer ngoài MVP (`DEC-007`). |
-| OQ-017 | Adjust và Audit yêu cầu lý do, bằng chứng và phê duyệt nào? | Quy tắc Adjust/Audit |
-| OQ-018 | Audit là cycle count, full stocktake hay cả hai? | Quy trình Audit |
-| OQ-019 | Purchasing tham gia như thế nào và Purchase Order có thuộc phạm vi sản phẩm không? | Yêu cầu Purchasing |
-| OQ-020 | Warehouse Staff, Manager, Purchasing và Admin có những quyền nào? | Yêu cầu truy cập |
+| OQ-017 | Adjust và Audit yêu cầu lý do, bằng chứng và phê duyệt nào? | `RESOLVED — HUMAN PRODUCT DECISION`: re-check và Adjust reason bắt buộc; attachment/evidence optional; Manager approve/reject trước apply; Audit không auto Adjust (`DEC-014`, `DEC-015`). |
+| OQ-018 | Audit là cycle count, full stocktake hay cả hai? | `RESOLVED — HUMAN PRODUCT DECISION`: MVP dùng selected-scope Audit session cho nhóm SKU/location hoặc toàn Warehouse; không canonicalize `cycle count` (`DEC-014`). |
+| OQ-019 | Purchasing tham gia như thế nào và Purchase Order có thuộc phạm vi sản phẩm không? | `RESOLVED — HUMAN PRODUCT DECISION`: full Purchase Order lifecycle ngoài MVP; Purchasing cung cấp/xem external/manual expected quantity/reference; reference mismatch phải được user review trước Receive completion (`DEC-016`, `DEC-017`). |
+| OQ-020 | Warehouse Staff, Manager, Purchasing và Admin có những quyền nào? | `RESOLVED — HUMAN PRODUCT DECISION`: MVP permission model được xác định tại `DEC-017` và `roles.md`. |
 | OQ-021 | Alert nào thuộc phạm vi, điều kiện nào kích hoạt và ai nhận Alert? | Yêu cầu Alert |
 | OQ-022 | Barcode/QR, scanner, sử dụng mobile/offline hoặc tích hợp bên ngoài có thuộc phạm vi không? | Ranh giới sản phẩm |
 | OQ-023 | Yêu cầu bổ sung nào chứng minh các User Story còn lại cần có để đạt mục tiêu 8–12 và ai sẽ sở hữu chúng? | Mục tiêu backlog |
@@ -55,14 +55,23 @@ Khi câu trả lời được phê duyệt, phải dẫn nguồn, cập nhật a
 ## Human decision status cho Domain và Workflow MVP
 
 - `OQ-010` — `RESOLVED — HUMAN PRODUCT DECISION`: MVP quản lý một Warehouse duy nhất. Quyết định này giới hạn product scope và không phải kết luận từ research.
-- `OQ-011` — `PARTIALLY DECIDED / OPEN`: dùng `system stock quantity`; không canonicalize `on-hand`, `available`, `reserved`, `damaged` hoặc `in-transit`. Vẫn OPEN: quantity có được duy trì theo location hay không, Warehouse total là stored hay derived, aggregation rule, workflow nào thay đổi quantity và thời điểm quantity thay đổi.
+- `OQ-011` — `RESOLVED — HUMAN PRODUCT DECISION`: dùng `system stock quantity` theo internal location; Warehouse total bằng tổng location quantities; workflow effects được chốt tại `DEC-010` đến `DEC-015`; không canonicalize `on-hand`, `available`, `reserved`, `damaged` hoặc `in-transit`.
 - `OQ-016` — `RESOLVED — HUMAN PRODUCT DECISION`: Transfer trong MVP chỉ là subsequent relocation giữa tracked internal locations trong cùng một Warehouse. Resolution này không xác nhận system Transfer transaction, Movement system record, Stock effect hoặc automatic location update.
 - Location cardinality không có canonical OQ ID. `DEC-006` xác nhận như product modeling rằng một SKU có thể liên kết với nhiều internal locations trong cùng Warehouse; không tạo OQ ID mới.
-- `OQ-013` vẫn OPEN. Human product modeling đã xác định boundary Putaway/Transfer/Pick, nhưng trigger, precondition, success outcome, exception và completion state chi tiết vẫn chưa rõ.
+- `OQ-013` — `PARTIALLY DECIDED / OPEN`: Round 2 đã xác định nhiều trigger, precondition, action, outcome và completion branch. Các lifecycle gap còn lại được ghi tại bảng OQ và `workflow-overview.md`; không được suy diễn.
+
+## Human decision status sau Round 2
+
+- `OQ-017` — `RESOLVED — HUMAN PRODUCT DECISION` bởi `DEC-014`, `DEC-015`.
+- `OQ-018` — `RESOLVED — HUMAN PRODUCT DECISION` bởi `DEC-014`.
+- `OQ-019` — `RESOLVED — HUMAN PRODUCT DECISION` bởi `DEC-016`, `DEC-017`.
+- `OQ-020` — `RESOLVED — HUMAN PRODUCT DECISION` bởi `DEC-017`.
+- `OQ-014`, `OQ-015`, `OQ-022` và các OQ AI chưa có quyết định mới vẫn `OPEN QUESTION`.
+- Các quyết định Round 2 là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải verified research findings và không tạo `EVD-*` mới.
 
 ## Research Synthesis v1 — trạng thái được thông tin một phần
 
-Evidence P1/P2/P3 trong [`../01-sources/research-evidence.md`](../01-sources/research-evidence.md) chỉ mô tả vận hành hiện tại tại một minimart. Tại thời điểm Research Synthesis v1, evidence này không tự đóng các OQ dưới đây. Các HUMAN PRODUCT DECISIONS về sau được ghi riêng; trong đó `DEC-007` đã resolve `OQ-016` cho phạm vi MVP mà không biến quyết định đó thành research finding.
+Evidence P1/P2/P3 trong [`../01-sources/research-evidence.md`](../01-sources/research-evidence.md) chỉ mô tả vận hành hiện tại tại một minimart. Tại thời điểm Research Synthesis v1, evidence này không tự đóng các OQ dưới đây. Các HUMAN PRODUCT DECISIONS về sau được ghi riêng; `DEC-007` resolve `OQ-016`, và `DEC-010` đến `DEC-017` resolve hoặc thu hẹp các OQ Round 2 mà không biến quyết định thành research finding. Bảng dưới đây bảo tồn trạng thái lịch sử của Research Synthesis v1.
 
 | ID | Evidence đã thông tin | Nội dung vẫn `OPEN QUESTION` |
 |---|---|---|

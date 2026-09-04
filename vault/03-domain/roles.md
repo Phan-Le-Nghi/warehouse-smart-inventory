@@ -2,11 +2,11 @@
 
 ## Role tối thiểu đã xác nhận
 
-| Role | Trạng thái | Quyền hạn |
+| Role | Trạng thái | Quyền hạn MVP đã duyệt |
 |---|---|---|
-| Warehouse Staff | CONFIRMED | TBD |
-| Manager | CONFIRMED | TBD |
-| Purchasing | CONFIRMED | TBD |
-| Admin | CONFIRMED | TBD |
+| Warehouse Staff | CONFIRMED | Perform Receive, Putaway, Pick, Transfer và Audit count; create discrepancy / Adjust request. |
+| Manager | CONFIRMED | View operational records; review exceptions/discrepancy; approve/reject Adjust; view Transfer history; confirm/close sensitive exception flows. |
+| Purchasing | CONFIRMED | Provide/view expected quantity/reference cho Receive; không có warehouse adjustment permission. |
+| Admin | CONFIRMED | Manage users, role assignments và basic system configuration; không bắt buộc tham gia daily warehouse operations. |
 
-Việc một role tồn tại không cho phép suy diễn quyền hạn của role đó. Quy tắc phân quyền vẫn là `OPEN QUESTION OQ-020`.
+Permission model trên là HUMAN PRODUCT DECISION / MVP ASSUMPTION tại `DEC-017`, không phải verified research finding. Không suy diễn thêm create/edit/delete/override permission ngoài wording đã duyệt. `OQ-020` được resolve bởi human decision này.
