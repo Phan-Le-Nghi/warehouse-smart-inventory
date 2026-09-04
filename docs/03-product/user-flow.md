@@ -50,3 +50,18 @@ Compare actual quantity with expected quantity
      and record discrepancy
   ↓
 Completion state and downstream handoff: TBD / OQ-013
+Receive
+  ↓
+Putaway context
+(trigger/precondition chính xác: TBD / OQ-013)
+  ↓
+Physical placement occurs
+  ├─ Backroom
+  └─ Sales shelf
+  ↓
+Exact system interaction: TBD
+  ↓
+Putaway completion criteria: TBD / OQ-013
+  ↓
+Downstream handoff: TBD / OQ-013
+
