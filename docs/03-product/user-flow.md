@@ -10,7 +10,7 @@ Receive -> Putaway -> Pick -> Transfer -> Adjust -> Audit
 
 | Flow | Người phụ trách | Flow chi tiết |
 |---|---|---|
-| Receive | Nghĩa | TBD |
+| Receive | Nghĩa | DRAFT flow — US-REC-001 (BA CONFIRMED), AC-01 đến AC-03 |
 | Putaway | Nghi | DRAFT cautious flow; system interaction và completion criteria TBD |
 | Pick | Thảo Ngân | DRAFT — see Pick flow below |
 | Transfer | Ly Na | DRAFT cautious flow; trigger, scope, system interaction và completion criteria TBD |
@@ -21,19 +21,35 @@ Flow chi tiết đã duyệt sẽ là canonical trong vault/04-product/user-flow
 
 ---
 
-## Putaway — DRAFT cautious flow
+## Receive — DRAFT flow
 
 ### Evidence boundary
 
-- REQ-002: Putaway là khu vực quy trình bắt buộc.
-- EVD-006, EVD-007: minimart có backroom và sales shelf; sau Receive, hàng có thể được bố trí tại một trong hai khu vực.
-- EVD-008: kiến thức vị trí hiện phụ thuộc nhiều vào bố trí thực tế và kinh nghiệm nhân viên.
-- EVD-010, EVD-011: movement giữa hai khu vực tồn tại, nhưng cách hệ thống phân loại hoặc ghi nhận chưa được xác nhận.
-- EVD-019: evidence chỉ phản ánh vận hành của minimart được nghiên cứu.
+- US-REC-001 — BA CONFIRMED; AC-01, AC-02, AC-03.
+- CAND-REQ-001: ghi nhận số lượng thực nhận và đối chiếu với số lượng kỳ vọng.
+- CAND-REQ-002: ghi nhận chênh lệch giữa số lượng thực nhận và số lượng kỳ vọng.
+- CAND-BR-001: khi có chênh lệch, ghi nhận Receive dùng số lượng thực nhận, không thay bằng số lượng kỳ vọng.
+- EVD-002 đến EVD-005: check item, đếm actual quantity, đối chiếu expected quantity và ghi nhận actual quantity khi chênh lệch.
 
 ### High-level flow
 
 ```text
+Receive context
+(trigger, precondition và actor: TBD / OQ-013, OQ-020)
+  ↓
+Check received item and count actual received quantity
+  ↓
+Compare actual quantity with expected quantity
+(expected quantity source: TBD / OQ-019)
+  ├─ Quantities equal
+  │    ↓
+  │  Record Receive using actual quantity
+  └─ Quantities differ
+       ↓
+     Record Receive using actual quantity
+     and record discrepancy
+  ↓
+Completion state and downstream handoff: TBD / OQ-013
 Receive
   ↓
 Putaway context
@@ -48,3 +64,4 @@ Exact system interaction: TBD
 Putaway completion criteria: TBD / OQ-013
   ↓
 Downstream handoff: TBD / OQ-013
+
