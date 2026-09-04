@@ -6,7 +6,7 @@
 
 Thư mục này là nguồn canonical cho các technical decisions đã được human review. Product requirements, Business Rules và Acceptance Criteria vẫn do các artifact product canonical quản lý; technical documentation không được thay đổi hoặc mở rộng chúng.
 
-Chưa có application scaffold, database schema implementation, Docker implementation, CI implementation hoặc production authentication mechanism.
+Application scaffold, PostgreSQL Compose configuration và CI baseline hiện đã có tại `apps/` và `.github/workflows/ci.yml`, đang chờ human diff review. Chưa có business database schema, business feature hoặc production authentication mechanism; Docker runtime chưa được verify trên máy tạo scaffold.
 
 ## Approved foundation
 

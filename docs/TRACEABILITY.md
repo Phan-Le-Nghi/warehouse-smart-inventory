@@ -28,6 +28,12 @@ Final backlog gồm 9 canonical stories đã được human approve. PRD, MVP Sc
 | `DEC-022` / `ADR-002` | PostgreSQL transaction boundary, row locking when needed, application + DB non-negative guard | All stock-changing operations | Does not define retry/cancel or reservation semantics |
 | `DEC-023` / `ADR-003` | Receive records actual quantity; Putaway performs initial posting; no Transfer/Movement side effect | `US-REC-001`, `US-PUT-001` | Does not resolve `OQ-013` or `OQ-014` |
 
+## Repo scaffold / CI baseline
+
+| Status | Artifact path | Verification evidence | Scope boundary |
+|---|---|---|---|
+| Implemented; pending human diff review | `apps/frontend/`, `apps/backend/`, `apps/docker/`, `apps/.env.example`, `apps/README.md`, `.github/workflows/ci.yml` | `npm ci`, lint, typecheck, 1 unit test, build and 1 Playwright smoke test passed; `uv sync --locked`, Ruff lint/format check and 1 pytest passed | Technical scaffold only; Docker CLI unavailable so Compose/PostgreSQL runtime is unverified; no business schema/API/feature; `US-PUT-001` remains not started |
+
 ## Canonical story coverage
 
 | Story | Requirement | Business Rule | Decision | Evidence classification | OQ boundary |
@@ -47,7 +53,7 @@ Final backlog gồm 9 canonical stories đã được human approve. PRD, MVP Sc
 | Story | Canonical AC coverage | Downstream status |
 |---|---|---|
 | `US-REC-001` | actual entry/compare; match; quantity discrepancy; reference mismatch review | Design/spec/implementation/test not started |
-| `US-PUT-001` | destination allocation; tracked location; no automatic Movement record | Human-reviewed technical Story Spec documented; implementation/test not started |
+| `US-PUT-001` | destination allocation; tracked location; no automatic Movement record | Human-reviewed technical Story Spec documented; business implementation/test not started |
 | `US-PICK-001` | full Pick; multi-location; `PARTIAL / INSUFFICIENT`; negative-stock guard | Not started |
 | `US-TRF-001` | source/destination effects; Warehouse total; minimum record; negative-stock guard | Technical contract still TBD |
 | `US-TRF-002` | Manager history access; history fields; confirmation time | Technical contract still TBD |
@@ -63,7 +69,7 @@ Taiga references dưới đây theo dõi thực thi và không thay thế nguồ
 | Requirement | Canonical Story | Taiga Story | Taiga Tasks | Design/Prototype | Implementation/Test status |
 |---|---|---|---|---|---|
 | `REQ-001/002/003`, `CAND-REQ-001/002/009/010` | `US-REC-001` | [#7](https://tree.taiga.io/project/lenghi-group-07-project/us/7) / ID `9523822` — Ready | `T-REC-01` [#16](https://tree.taiga.io/project/lenghi-group-07-project/task/16); `T-REC-02` [#17](https://tree.taiga.io/project/lenghi-group-07-project/task/17); `T-REC-03` [#18](https://tree.taiga.io/project/lenghi-group-07-project/task/18) — New | `PF-01 — Receive → Putaway`; screen inventory/Figma parity chờ human review | Chưa bắt đầu / Chưa bắt đầu |
-| `REQ-002/003/004`, `CAND-REQ-003/007/010` | `US-PUT-001` | [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) / ID `9523823` — Ready | `T-PUT-01` [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19); `T-PUT-02` [#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20); `T-PUT-03` [#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) — New | `PF-01 — Receive → Putaway`; `SCR-03`; [`06-technical/story-specs/putaway.md`](06-technical/story-specs/putaway.md) | Technical spec documented / Tests planned, not executed |
+| `REQ-002/003/004`, `CAND-REQ-003/007/010` | `US-PUT-001` | [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) / ID `9523823` — Ready | `T-PUT-01` [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19); `T-PUT-02` [#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20); `T-PUT-03` [#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) — New | `PF-01 — Receive → Putaway`; `SCR-03`; [`06-technical/story-specs/putaway.md`](06-technical/story-specs/putaway.md) | Technical spec documented / `US-PUT-001` implementation and tests not started |
 | `REQ-002/003`, `CAND-REQ-003/006/010/011` | `US-PICK-001` | [#9](https://tree.taiga.io/project/lenghi-group-07-project/us/9) / ID `9523824` — Ready | `T-PICK-01` [#22](https://tree.taiga.io/project/lenghi-group-07-project/task/22); `T-PICK-02` [#23](https://tree.taiga.io/project/lenghi-group-07-project/task/23); `T-PICK-03` [#24](https://tree.taiga.io/project/lenghi-group-07-project/task/24) — New | `PF-02 — Pick`; screen inventory/Figma parity chờ human review | Chưa bắt đầu / Chưa bắt đầu |
 | `REQ-001/002/004`, `CAND-REQ-003/004/010/011` | `US-TRF-001` | [#10](https://tree.taiga.io/project/lenghi-group-07-project/us/10) / ID `9523825` — New | `T-TRF1-01` [#25](https://tree.taiga.io/project/lenghi-group-07-project/task/25); `T-TRF1-02` [#26](https://tree.taiga.io/project/lenghi-group-07-project/task/26); `T-TRF1-03` [#27](https://tree.taiga.io/project/lenghi-group-07-project/task/27) — New | Consolidated User Flow; technical contract vẫn TBD | Chưa bắt đầu / Chưa bắt đầu |
 | `REQ-002/003/004`, `CAND-REQ-004/010` | `US-TRF-002` | [#11](https://tree.taiga.io/project/lenghi-group-07-project/us/11) / ID `9523826` — New | `T-TRF2-01` [#28](https://tree.taiga.io/project/lenghi-group-07-project/task/28); `T-TRF2-02` [#29](https://tree.taiga.io/project/lenghi-group-07-project/task/29); `T-TRF2-03` [#30](https://tree.taiga.io/project/lenghi-group-07-project/task/30) — New | Consolidated User Flow; technical contract vẫn TBD | Chưa bắt đầu / Chưa bắt đầu |
@@ -132,4 +138,4 @@ Historical draft references are valid only when explicitly labeled as promoted, 
 | Usability artifacts | Script và 3 human-reviewed findings đã được tổng hợp; không claim AI thực hiện participant test |
 | Taiga | Project metadata và 6 Epic / 9 User Story / 27 Task references đã đồng bộ; quyền truy cập/người phụ trách công cụ vẫn TBD |
 | Architecture/Data Model/API | Technical Foundation human reviewed; 3 accepted ADR; MVP route map proposed; Putaway contract documented |
-| Implementation/Test | Chưa bắt đầu; không có scaffold/code/Docker/CI implementation; không claim test execution |
+| Implementation/Test | Repo scaffold + CI baseline đã tạo và verify local trong phạm vi nêu trên; Docker runtime chưa verify; mọi business feature và `US-PUT-001` vẫn chưa bắt đầu |

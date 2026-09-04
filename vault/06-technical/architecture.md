@@ -4,7 +4,7 @@
 
 `HUMAN APPROVED TECHNICAL FOUNDATION — DOCUMENTATION ONLY`
 
-Architecture and tooling are approved by `DEC-020`. Application code, infrastructure implementation and production authentication are not created in this phase.
+Architecture and tooling are approved by `DEC-020`. A technical application scaffold, local PostgreSQL Compose configuration and CI baseline now exist as downstream artifacts pending human diff review; no business implementation or production authentication has been created.
 
 ## System shape
 
