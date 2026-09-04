@@ -23,12 +23,12 @@ Mỗi sinh viên cuối cùng phải sở hữu ít nhất một User Story hoà
 | Flow | Story ID | Trạng thái |
 |---|---|---|
 | Receive | `US-REC-001` | BA CONFIRMED; `AC-01` đến `AC-03` |
-| Putaway | `DRAFT-US-PUT-001` | DRAFT; chưa canonical |
-| Pick | `DRAFT-US-PICK-001` | DRAFT / NEEDS HUMAN REVIEW |
-| Transfer | `DRAFT-US-TRF-001` | DRAFT / NEEDS HUMAN REVIEW |
-| Adjust | `DRAFT-US-ADJ-001` | DRAFT; chưa canonical |
-| Audit | `DRAFT-US-AUD-001` | DRAFT; chưa canonical |
+| Putaway | `DRAFT-US-PUT-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
+| Pick | `DRAFT-US-PICK-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
+| Transfer | `DRAFT-US-TRF-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
+| Adjust | `DRAFT-US-ADJ-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
+| Audit | `DRAFT-US-AUD-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
 
-Hiện có **1** User Story BA CONFIRMED và **5** User Story DRAFT. Draft ID chỉ phục vụ theo dõi và không làm cho story, Acceptance Criteria, flow hoặc behavior trở thành canonical.
+Hiện có **1** User Story BA CONFIRMED và **5** User Story DRAFT đã sẵn sàng cho human canonical review theo Round 2. Draft ID chỉ phục vụ theo dõi và không làm cho story, Acceptance Criteria, flow hoặc behavior trở thành canonical.
 
 Chỉ được đạt mục tiêu tổng cộng 8–12 User Story bằng các Story dẫn xuất từ yêu cầu đã xác nhận.
