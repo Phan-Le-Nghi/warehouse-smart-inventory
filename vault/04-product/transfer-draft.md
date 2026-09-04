@@ -25,7 +25,7 @@ This draft applies BA review feedback for Transfer. It does not create a canonic
 
 ## 2. User Story đề xuất
 
-**DRAFT-US-TRF-001 - Đánh giá hỗ trợ Transfer/Movement giữa backroom và sales shelf** *(proposed; stable ID needs human review before canonicalizing)*
+**DRAFT-US-TRF-001 - Đánh giá hỗ trợ Transfer/Movement giữa backroom và sales shelf** *(draft ID đã được human-approved để theo dõi; story vẫn DRAFT và chưa canonical)*
 
 As a **person involved in Transfer** *(role/authority is still `OQ-020`)*, I want the product team to evaluate whether movement between the **backroom storage area** and the **sales shelf area** should be supported in the product, so that the team can decide whether any recording or query behavior belongs in the Transfer flow.
 

@@ -2,7 +2,7 @@
 
 **Status:** DRAFT — Pending Product/BA review
 
-**Story ID:** `DRAFT-US-TRA-001`
+**Story ID:** `DRAFT-US-TRF-001`
 
 **Owner:** Ly Na
 
@@ -386,27 +386,27 @@ REQ-002
  └── Required workflow:
      Receive → Putaway → Pick → Transfer → Adjust → Audit
 
-         └── DRAFT-US-TRA-001
+         └── DRAFT-US-TRF-001
 
 REQ-004
 
  └── Core domain:
      SKU / Warehouse / Stock / Movement / Transfer
 
-         └── DRAFT-US-TRA-001
+         └── DRAFT-US-TRF-001
 
 CAND-REQ-004 [DRAFT]
 
  └── Đề xuất đánh giá hỗ trợ theo dõi movement
      giữa backroom và sales shelf
 
-         └── DRAFT-US-TRA-001
+         └── DRAFT-US-TRF-001
 
 EVD-010
 
  └── Physical movement giữa backroom và sales shelf
 
-         └── DRAFT-US-TRA-001
+         └── DRAFT-US-TRF-001
 
 EVD-011
 
@@ -450,7 +450,7 @@ Traceability hiện tại nối:
 
 `REQ-002 + REQ-004 + CAND-REQ-004 + EVD-010 + EVD-011 + EVD-019`
 
-tới `DRAFT-US-TRA-001`.
+tới `DRAFT-US-TRF-001`.
 
 Các `OQ` được dùng trong validation/test cũng được trace tại đây để tránh tạo hoặc sử dụng Open Question ID không canonical.
 
@@ -460,7 +460,7 @@ Các `OQ` được dùng trong validation/test cũng được trace tại đây 
 
 Story Spec này chỉ được xem là **Ready for Implementation** khi:
 
-* [ ] Product/BA review `DRAFT-US-TRA-001`.
+* [ ] Product/BA review `DRAFT-US-TRF-001`.
 * [ ] `CAND-REQ-004` được human review.
 * [ ] Trigger/precondition/outcome/exception/completion được chốt.
 * [ ] Transfer scope được chốt: location / warehouse / both.
