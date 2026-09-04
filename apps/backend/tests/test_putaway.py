@@ -49,8 +49,9 @@ def api() -> Iterator[tuple[TestClient, sessionmaker[Session], PutawayFixture]]:
     fixture = PutawayFixture(uuid4(), uuid4(), uuid4(), uuid4())
     with factory.begin() as session:
         warehouse = Warehouse(id=uuid4(), code="MAIN")
-        sku = Sku(id=fixture.sku_id, code="SKU-001")
-        receive = Receive(id=uuid4(), warehouse_id=warehouse.id)
+        session.add(warehouse)
+        session.flush()
+
         backroom = InternalLocation(
             id=fixture.backroom_id, warehouse_id=warehouse.id, code="BACKROOM"
         )
@@ -59,21 +60,33 @@ def api() -> Iterator[tuple[TestClient, sessionmaker[Session], PutawayFixture]]:
             warehouse_id=warehouse.id,
             code="SALES_SHELF",
         )
-        session.add_all([warehouse, sku, receive, backroom, sales_shelf])
-        session.add(
-            ReceiveLine(
-                id=fixture.receive_line_id,
-                receive_id=receive.id,
-                sku_id=sku.id,
-                actual_quantity=16,
-            )
+        session.add_all([backroom, sales_shelf])
+        session.flush()
+
+        sku = Sku(id=fixture.sku_id, code="SKU-001")
+        session.add(sku)
+        session.flush()
+
+        receive = Receive(id=uuid4(), warehouse_id=warehouse.id)
+        session.add(receive)
+        session.flush()
+
+        receive_line = ReceiveLine(
+            id=fixture.receive_line_id,
+            receive_id=receive.id,
+            sku_id=sku.id,
+            actual_quantity=16,
         )
+        session.add(receive_line)
+        session.flush()
+
         session.add_all(
             [
                 StockBalance(sku_id=sku.id, location_id=backroom.id, quantity=0),
                 StockBalance(sku_id=sku.id, location_id=sales_shelf.id, quantity=0),
             ]
         )
+        session.flush()
 
     def override_session() -> Iterator[Session]:
         session = factory()
