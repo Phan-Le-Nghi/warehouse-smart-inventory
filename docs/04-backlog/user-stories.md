@@ -1,22 +1,45 @@
-# User Story và Acceptance Criteria — Mục lục
+- Evidence giới hạn: `EVD-011` — chưa xác nhận movement có được ghi nhận thành transaction riêng trong KiotViet hay hệ thống mới có cần record Transfer/Movement riêng hay không.
+- Giới hạn khả năng khái quát: `EVD-019`.
+- Phạm vi Transfer: `OQ-016` — chưa xác định Transfer giữa location, Warehouse hay cả hai.
 
-## Trạng thái
+### DRAFT User Story
 
-- Mục tiêu môn học: tổng cộng 8–12 User Story
-- File User Story canonical: `vault/04-product/stories/` sau khi yêu cầu được phê duyệt
-- User Story đã review hiện tại: **0**
+> Là người thực hiện xử lý hàng *(role TBD)*, tôi muốn theo dõi việc di chuyển hàng giữa các khu vực lưu trữ, để hỗ trợ kiểm soát movement hàng trong quá trình vận hành kho.
 
-Không tạo User Story giả để đạt mục tiêu. Mỗi User Story trong tương lai phải dẫn ID yêu cầu/bằng chứng đã xác nhận và có Acceptance Criteria kiểm thử được.
+Story này phản ánh hoạt động movement đã được evidence hỗ trợ nhưng chưa xác định system capability cụ thể. Story chưa sẵn sàng canonical hóa cho đến khi phạm vi Transfer và outcome hệ thống được xác nhận.
 
-## Điểm bắt đầu ownership đã xác nhận
+### Acceptance Criteria
 
-| Flow | Người phụ trách | Story ID canonical | Trạng thái review |
-|---|---|---|---|
-| Receive | Nghĩa | TBD | Chưa soạn |
-| Putaway | Nghi | TBD | Chưa soạn |
-| Pick | Thảo Ngân | TBD | Chưa soạn |
-| Transfer | Ly Na | TBD | Chưa soạn |
-| Adjust | Thanh Ngân | TBD | Chưa soạn |
-| Audit | Nghi sở hữu/hỗ trợ | TBD | Chưa soạn |
+`TBD` — hiện chưa đủ requirement được phê duyệt để tạo Acceptance Criteria sản phẩm có thể canonical hóa.
 
-User Story bổ sung và ownership phụ thuộc vào yêu cầu đã kiểm chứng (`OQ-023`).
+Evidence checkpoint phục vụ discovery:
+
+1. Có hoạt động di chuyển hàng giữa backroom và sales shelf (`EVD-010`).
+2. Chưa xác nhận movement có phải transaction riêng hay không (`EVD-011`).
+
+Các checkpoint trên **không phải Acceptance Criteria**.
+
+### Phạm vi chưa xác nhận
+
+- Trigger, precondition, success outcome, exception và completion state: `OPEN QUESTION` / `OQ-013`.
+- Transfer giữa location, Warehouse hay cả hai: `OPEN QUESTION` / `OQ-016`.
+- Partial Transfer: `OPEN QUESTION` / `OQ-014`.
+- Role có thể thực hiện/xem Transfer: `OPEN QUESTION` / `OQ-020`.
+- Movement có được ghi nhận thành transaction riêng hay không: `TBD` / `EVD-011`.
+- Cách ghi nhận, lưu trữ và tra cứu movement: `TBD`.
+- Quantity và ảnh hưởng của Transfer tới Stock: `TBD`.
+- Barcode/QR, scanner, mobile/offline và tích hợp bên ngoài: `OPEN QUESTION` / `OQ-022`.
+
+Không giả định Transfer phải tạo Movement transaction riêng, tự động cập nhật Stock, tự động thay đổi location, hỗ trợ nhiều Warehouse, hoặc cho phép một role cụ thể thực hiện Transfer.
+
+### Scope guard
+
+Story này chỉ ghi nhận nhu cầu theo dõi movement đã được evidence hỗ trợ.
+
+Không biến hoạt động physical movement trong `EVD-010` thành một system transaction đã được xác nhận.
+
+`EVD-011` vẫn giữ trạng thái chưa rõ và `CAND-REQ-004` vẫn là `DRAFT` cho đến khi Product/BA/Vault review.
+
+**Trạng thái:** DRAFT — chờ Product/BA review.
+
+**Nguồn chính:** `REQ-002`, `REQ-004`, `CAND-REQ-004`, `EVD-010`, `EVD-011`, `EVD-019`, `OQ-013`, `OQ-014`, `OQ-016`, `OQ-020`, `OQ-022`.
