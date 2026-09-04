@@ -12,6 +12,17 @@
 
 Taiga theo dõi việc thực thi; Taiga không phải nguồn sự thật cho yêu cầu.
 
+## US-PUT-001 post-merge evidence
+
+Documentation-only intended status; no Taiga API update was performed in this phase:
+
+| Item | Documented work status | Remote Taiga status |
+|---|---|---|
+| `US-PUT-001` / [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) | Ready to mark Done after Taiga update; implementation merged and GitHub Actions passed | Ready (unchanged) |
+| `T-PUT-01` / [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19) | Completed — Technical Story Spec exists | New (unchanged) |
+| `T-PUT-02` / [#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20) | Completed — implementation exists | New (unchanged) |
+| `T-PUT-03` / [#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) | Completed — automated backend/frontend/Playwright verification and CI evidence exist | New (unchanged) |
+
 ## Quy tắc tiếp nhận
 
 Chỉ tạo Taiga item sau khi User Story canonical trong Vault và Acceptance Criteria đã được review. Giữ nguyên stable Story ID.
