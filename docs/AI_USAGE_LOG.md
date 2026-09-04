@@ -78,3 +78,13 @@ Không đưa secret, dữ liệu cá nhân, Context Pack tạm thời hoặc bư
 - **Human verification:** Con người đã review/phê duyệt write plan và phải kiểm tra các Taiga refs/statuses cuối cùng trước khi tích hợp.
 - **Human decision:** Product scope, canonical IDs, ownership, Acceptance Criteria và business behavior là đầu vào đã được con người phê duyệt; AI không độc lập quyết định hoặc mở rộng các nội dung này.
 - **Artifact references:** [`00-project-index.md`](00-project-index.md), [`04-backlog/taiga-backlog.md`](04-backlog/taiga-backlog.md), [`04-backlog/user-stories.md`](04-backlog/user-stories.md), [`TRACEABILITY.md`](TRACEABILITY.md), [`../vault/04-product/external-tools.md`](../vault/04-product/external-tools.md).
+
+### AI-USE-005 — Technical Foundation synthesis
+
+- **Task:** Tổng hợp và ghi Technical Foundation documentation; chưa scaffold hoặc implement application.
+- **Human-approved technical inputs:** React, TypeScript, Vite, npm; Python 3.13, FastAPI, uv, pytest; PostgreSQL 18, Docker; Playwright; SQLAlchemy 2, Alembic; modular monolith; authoritative stock theo SKU/location; derived Warehouse total; transactional/non-negative guards; Receive records actual quantity và Putaway performs initial posting.
+- **AI/tool:** Codex đọc các canonical product/decision artifacts, soạn Markdown và chạy read-only/diff verification commands. AI không tự quyết architecture hoặc product behavior.
+- **Output:** Canonical technical index, architecture, conceptual/vertical-slice data model, proposed API contract, 3 ADR, `US-PUT-001` technical Story Spec và report-facing/traceability updates.
+- **Human verification:** Pending — con người cần review diff, xác nhận technical contract wording, route/payload/error proposal và ranh giới conceptual model trước integration.
+- **Human decision:** Technical stack, persistence tooling, modular-monolith boundary và nội dung 3 ADR là human-approved inputs. `OQ-012`, `OQ-013`, `OQ-014`, production authentication, deployment, Adjust representation, attachment storage, advanced pagination/filtering và NFR vẫn OPEN/TBD.
+- **Artifact references:** [`../vault/06-technical/README.md`](../vault/06-technical/README.md), [`../vault/08-decisions/decision-log.md`](../vault/08-decisions/decision-log.md), [`06-technical/architecture.md`](06-technical/architecture.md), [`06-technical/data-model.md`](06-technical/data-model.md), [`06-technical/API.md`](06-technical/API.md), [`06-technical/story-specs/putaway.md`](06-technical/story-specs/putaway.md), [`TRACEABILITY.md`](TRACEABILITY.md).

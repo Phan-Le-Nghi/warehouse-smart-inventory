@@ -14,7 +14,7 @@
 | Requirements + Business Rules | [`02-requirements/requirements-and-business-rules.md`](02-requirements/requirements-and-business-rules.md) | `vault/02-requirements/` | Product/BA — Thanh Ngân | Round 2 decisions/rules đã cập nhật; một số OQ vẫn mở |
 | Project Vault | [`../vault/00-index.md`](../vault/00-index.md) | `vault/` | AI/Vault — Ly Na | Đã scaffold |
 | Vault Q&A Benchmark | [`02-requirements/vault-qa-benchmark.md`](02-requirements/vault-qa-benchmark.md) | `vault/09-ai/qa-benchmark.md` | AI/Vault — Ly Na | TBD — cần ít nhất 20 câu đã review |
-| AI Usage Log v1 | [`AI_USAGE_LOG.md`](AI_USAGE_LOG.md) | Việc dùng AI cá nhân đã kiểm chứng | Tất cả thành viên; Ly Na điều phối | 4 mục; output mới nhất chờ human verification |
+| AI Usage Log v1 | [`AI_USAGE_LOG.md`](AI_USAGE_LOG.md) | Việc dùng AI cá nhân đã kiểm chứng | Tất cả thành viên; Ly Na điều phối | 5 mục; Technical Foundation synthesis đã ghi, diff chờ human verification |
 
 ## Bài 2
 
@@ -29,10 +29,10 @@
 | User Stories + AC | [`04-backlog/user-stories.md`](04-backlog/user-stories.md) | `vault/04-product/stories/` | Product/BA + Story owner | 9 canonical User Stories — HUMAN APPROVED; đạt mục tiêu 8–12 |
 | Taiga Backlog | [`04-backlog/taiga-backlog.md`](04-backlog/taiga-backlog.md) | Story ID đã review + Taiga | QA/Release — Thảo Ngân | 6 Epic, 9 User Story và 27 Task refs đã đồng bộ; quyền truy cập/người phụ trách công cụ vẫn TBD |
 | Figma + Design System | [`05-design/design-system.md`](05-design/design-system.md), [Figma prototype](https://www.figma.com/design/d5XrKKZGoeVefVGqVVTwlu/Warehouse---Smart-Inventory-Management?node-id=0-1) | Canonical stories/flow + downstream Figma artifact | UX/UI — Nghĩa | URL đã ghi nhận; quyền truy cập/frame parity chờ human verification |
-| Architecture + ADR | [`06-technical/architecture.md`](06-technical/architecture.md) | `vault/06-technical/` trong tương lai | Engineering — Nghi | TBD; chưa chọn stack |
-| ERD / Data Model | [`06-technical/data-model.md`](06-technical/data-model.md) | Data Model canonical trong tương lai | Engineering — Nghi | TBD |
-| API Contract | [`06-technical/API.md`](06-technical/API.md) | API Contract canonical trong tương lai | Engineering — Nghi | TBD |
-| Story Specs + Traceability | [`06-technical/story-specs-index.md`](06-technical/story-specs-index.md), [`TRACEABILITY.md`](TRACEABILITY.md) | User Story/spec và bằng chứng canonical | Tất cả Story owner; QA điều phối | 9 stories đã map; technical specs/contracts vẫn TBD |
+| Architecture + ADR | [`06-technical/architecture.md`](06-technical/architecture.md) | [`vault/06-technical/`](../vault/06-technical/) | Engineering — Nghi | Technical Foundation + 3 ADR đã human review; documentation only |
+| ERD / Data Model | [`06-technical/data-model.md`](06-technical/data-model.md) | [`vault/06-technical/data-model.md`](../vault/06-technical/data-model.md) | Engineering — Nghi | Conceptual MVP model + `US-PUT-001` slice model documented; chưa implementation |
+| API Contract | [`06-technical/API.md`](06-technical/API.md) | [`vault/06-technical/api-contract.md`](../vault/06-technical/api-contract.md) | Engineering — Nghi | MVP route map proposed; Putaway contract documented; exact routes là technical contract |
+| Story Specs + Traceability | [`06-technical/story-specs-index.md`](06-technical/story-specs-index.md), [`TRACEABILITY.md`](TRACEABILITY.md) | Canonical stories + [`vault/06-technical/story-specs/`](../vault/06-technical/story-specs/) | Tất cả Story owner; QA điều phối | `US-PUT-001` technical spec documented; implementation/test chưa bắt đầu |
 
 ## Taiga references
 
