@@ -25,7 +25,7 @@ Ownership của Audit đã được xác nhận và không phải câu hỏi m�
 | OQ-012 | Lot/batch, serial number, expiry date, unit of measure hoặc unit conversion có thuộc phạm vi không? | Mô hình SKU/Stock |
 | OQ-013 | Trigger, điều kiện trước, kết quả thành công, ngoại lệ và trạng thái hoàn tất của từng khu vực quy trình bắt buộc là gì? | `PARTIALLY DECIDED / OPEN`: Round 2 đã quyết định happy path và một số exception/completion branch. Vẫn mở: Receive trigger/completion wording cuối, Putaway exception/downstream handoff, Transfer exception, Audit mismatch completion, Adjust rejected-case closure và các handoff chưa được nêu rõ. |
 | OQ-014 | Có hỗ trợ thực hiện một phần đối với Receive, Putaway, Pick hoặc Transfer không? | Quy tắc quy trình |
-| OQ-015 | Có cho phép tồn kho âm không? | Quy tắc Stock |
+| OQ-015 | Có cho phép tồn kho âm không? | `RESOLVED — HUMAN PRODUCT DECISION`: `system stock quantity` tại internal location không được âm. Pick, Transfer và Adjust không được confirm/apply nếu operation sẽ tạo quantity âm; không apply quantity change và báo operation không hợp lệ/không thể confirm (`DEC-019`, `CAND-REQ-011`, `CAND-BR-015`). Retry/cancel lifecycle và reservation semantics không được suy diễn. |
 | OQ-016 | Transfer là giữa các location, giữa các Warehouse hay cả hai? | `RESOLVED — HUMAN PRODUCT DECISION`: trong MVP, Transfer chỉ là subsequent relocation giữa tracked internal locations trong cùng một Warehouse; cross-Warehouse Transfer ngoài MVP (`DEC-007`). |
 | OQ-017 | Adjust và Audit yêu cầu lý do, bằng chứng và phê duyệt nào? | `RESOLVED — HUMAN PRODUCT DECISION`: re-check và Adjust reason bắt buộc; attachment/evidence optional; Manager approve/reject trước apply; Audit không auto Adjust (`DEC-014`, `DEC-015`). |
 | OQ-018 | Audit là cycle count, full stocktake hay cả hai? | `RESOLVED — HUMAN PRODUCT DECISION`: MVP dùng selected-scope Audit session cho nhóm SKU/location hoặc toàn Warehouse; không canonicalize `cycle count` (`DEC-014`). |
@@ -66,7 +66,8 @@ Khi câu trả lời được phê duyệt, phải dẫn nguồn, cập nhật a
 - `OQ-018` — `RESOLVED — HUMAN PRODUCT DECISION` bởi `DEC-014`.
 - `OQ-019` — `RESOLVED — HUMAN PRODUCT DECISION` bởi `DEC-016`, `DEC-017`.
 - `OQ-020` — `RESOLVED — HUMAN PRODUCT DECISION` bởi `DEC-017`.
-- `OQ-014`, `OQ-015`, `OQ-022` và các OQ AI chưa có quyết định mới vẫn `OPEN QUESTION`.
+- `OQ-015` — `RESOLVED — HUMAN PRODUCT DECISION` bởi `DEC-019`; không cho phép quantity âm tại internal location.
+- `OQ-014`, `OQ-022` và các OQ AI chưa có quyết định mới vẫn `OPEN QUESTION`.
 - Các quyết định Round 2 là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải verified research findings và không tạo `EVD-*` mới.
 
 ## Research Synthesis v1 — trạng thái được thông tin một phần

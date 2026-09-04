@@ -26,9 +26,11 @@ Các mục dưới đây là lựa chọn phạm vi do con người phê duyệt
 | `DEC-007` | Transfer trong MVP chỉ nằm trong boundary subsequent relocation giữa tracked internal locations trong cùng một Warehouse. | Functional recording/effect ban đầu để mở; được quyết định về sau tại `DEC-013`. |
 | `DEC-008` | MVP dùng thuật ngữ `system stock quantity`; không canonicalize `on-hand`, `available`, `reserved`, `damaged` hoặc `in-transit`. | Granularity/aggregation/effects ban đầu để mở; được quyết định một phần tại `DEC-010` đến `DEC-015`. |
 | `DEC-009` | Phân biệt Physical movement và Movement system record. Putaway là initial placement sau Receive; Transfer là subsequent internal relocation; Pick là lấy quantity từ source internal location cho downstream purpose. | Detailed behavior ban đầu để mở; các behavior được duyệt về sau tại `DEC-011` đến `DEC-013`. |
-| `DEC-010`–`DEC-015` | Duy trì quantity theo internal location và phê duyệt các effects cụ thể của Putaway, Pick, Transfer, Audit, Adjust. | Negative stock, các partial behavior chưa được duyệt và lifecycle gaps tại `OQ-013` vẫn OPEN. |
+| `DEC-010`–`DEC-015` | Duy trì quantity theo internal location và phê duyệt các effects cụ thể của Putaway, Pick, Transfer, Audit, Adjust. | Các partial behavior chưa được duyệt và lifecycle gaps tại `OQ-013` vẫn OPEN; negative stock được quyết định sau tại `DEC-019`. |
 | `DEC-016` | Purchase Order lifecycle ngoài MVP; Receive dùng external/manual expected quantity/reference và bắt buộc human review khi reference mismatch. | Receive completion/handoff wording cuối vẫn thuộc `OQ-013`. |
 | `DEC-017` | Phê duyệt MVP permission model cho Warehouse Staff, Manager, Purchasing và Admin. | Không suy diễn quyền ngoài wording được duyệt. |
+| `DEC-018` | Làm rõ sáu workflow tại `REQ-002` là capability list, không phải transaction bắt buộc tuần tự; Pick và Transfer là các operational path độc lập, còn Audit có thể dẫn tới Adjust qua discrepancy và re-check. | Lifecycle gaps chưa được duyệt vẫn thuộc `OQ-013` và `OQ-014`. |
+| `DEC-019` | Không cho phép `system stock quantity` tại internal location trở thành số âm; áp dụng validation guard cho Pick, Transfer và Adjust. | Retry/cancel lifecycle và reservation semantics không được quyết định bởi guard này. |
 
 ## Hướng AI đã xác nhận
 
@@ -56,10 +58,11 @@ Các mục dưới đây gồm requirements dựa trên verified evidence và HU
 | CAND-REQ-008 | Sản phẩm phải hỗ trợ Warehouse Staff tạo discrepancy/Adjust request và Manager review, approve hoặc reject request. Approved Adjust cập nhật `system stock quantity` tại internal location bị ảnh hưởng. | `DEC-015` — HUMAN PRODUCT DECISION / MVP ASSUMPTION; `EVD-012`, `EVD-013`, `EVD-017` chỉ hỗ trợ re-check/current-state handling. | APPROVED — HUMAN PRODUCT DECISION |
 | CAND-REQ-009 | Trong Receive, sản phẩm phải hỗ trợ expected quantity từ external/manual order or delivery reference do Purchasing cung cấp hoặc chuẩn bị. Full Purchase Order lifecycle nằm ngoài MVP. | `DEC-016` — HUMAN PRODUCT DECISION / MVP ASSUMPTION; không phải verified research finding. | APPROVED — HUMAN PRODUCT DECISION |
 | CAND-REQ-010 | Sản phẩm phải áp dụng MVP permission model đã duyệt cho Warehouse Staff, Manager, Purchasing và Admin, phân biệt quyền thực hiện operation, xem record, xử lý exception, approve/reject Adjust và quản trị users/role assignments/basic system configuration. | `DEC-017` — HUMAN PRODUCT DECISION / MVP ASSUMPTION; `EVD-013`, `EVD-014` chỉ là current-state context. | APPROVED — HUMAN PRODUCT DECISION |
+| CAND-REQ-011 | Sản phẩm phải ngăn Pick, Transfer hoặc Adjust được confirm/apply nếu operation sẽ làm `system stock quantity` tại internal location nhỏ hơn 0. Khi validation không đạt, không apply quantity change và operation được báo không hợp lệ/không thể confirm. | `DEC-019` — HUMAN PRODUCT DECISION / MVP ASSUMPTION; resolve `OQ-015`. Không phải verified research finding. | APPROVED — HUMAN PRODUCT DECISION |
 
 ### Scope guard cho CAND-REQ-003
 
-`CAND-REQ-003` được giới hạn bởi `DEC-010`: quantity được duy trì theo internal location và Warehouse total là tổng các location quantities. Workflow effects chỉ áp dụng theo các Business Rules được duyệt; không được suy diễn thêm Receive Stock effect, negative-stock behavior hoặc behavior ngoài các quyết định Round 2.
+`CAND-REQ-003` được giới hạn bởi `DEC-010` và `DEC-019`: quantity được duy trì theo internal location, Warehouse total là tổng các location quantities và quantity tại internal location không được âm. Workflow effects chỉ áp dụng theo các Business Rules được duyệt; không được suy diễn thêm Receive Stock effect, retry/cancel lifecycle, reservation semantics hoặc behavior ngoài các quyết định đã duyệt.
 
 ## Quy tắc tiếp nhận yêu cầu
 

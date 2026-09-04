@@ -20,8 +20,9 @@
 
 | Deliverable | Artifact phục vụ báo cáo | Nguồn/bằng chứng canonical | Người phụ trách | Trạng thái |
 |---|---|---|---|---|
-| PRD | [`03-product/PRD.md`](03-product/PRD.md) | `vault/04-product/PRD.md` trong tương lai | Product/BA — Thanh Ngân | TBD, chờ nghiên cứu/yêu cầu |
-| User Flow | [`03-product/user-flow.md`](03-product/user-flow.md) | `vault/03-domain/workflow-overview.md`; canonical stories | UX/UI — Nghĩa + Story owner | Canonical 9-story decomposition đã cập nhật; `OQ-013` còn mở |
+| PRD | [`03-product/PRD.md`](03-product/PRD.md) | `vault/02-requirements/`, `vault/03-domain/`, canonical stories và Decision Log | Product/BA — Thanh Ngân | Baseline Report Round 1 — HUMAN APPROVED PRODUCT DEFINITION; OQ được giữ rõ |
+| MVP Scope | [`03-product/mvp-scope.md`](03-product/mvp-scope.md) | Requirements, Business Rules, OQ và Decision Log canonical | Product/BA — Thanh Ngân | Baseline IN / OUT / OPEN đã tạo |
+| User Flow | [`03-product/user-flow.md`](03-product/user-flow.md) | `vault/03-domain/workflow-overview.md`; canonical stories | UX/UI — Nghĩa + Story owner | Consolidated flow đã cập nhật; Pick/Transfer độc lập; Audit mismatch → re-check → Adjust consideration |
 | Functional Prototype | [`03-product/functional-prototype.md`](03-product/functional-prototype.md) | Tham chiếu prototype/Figma đã duyệt | UX/UI — Nghĩa | TBD |
 | Usability Test | [`03-product/usability-test.md`](03-product/usability-test.md) | Bằng chứng test thật | UX/UI — Nghĩa; QA — Thảo Ngân | TBD |
 | User Stories + AC | [`04-backlog/user-stories.md`](04-backlog/user-stories.md) | `vault/04-product/stories/` | Product/BA + Story owner | 9 canonical User Stories — HUMAN APPROVED; đạt mục tiêu 8–12 |

@@ -80,7 +80,7 @@ Warehouse Staff takes quantity and confirms result
 ## Scope guards and remaining questions
 
 - FIFO, FEFO, reservation and scanning are outside the current MVP (`DEC-012`).
-- Negative-stock behavior remains `OQ-015`.
+- Historical note superseded: negative-stock behavior was later resolved by `DEC-019`; canonical behavior is in `US-PICK-001` and `CAND-BR-015`.
 - Device/integration behavior outside the approved Pick exclusions remains `OQ-022`.
 - No Transfer or generic Movement system record is inferred from Pick.
 - Exact cancellation/retry behavior beyond `PARTIAL / INSUFFICIENT` remains `TBD / OQ-013`.

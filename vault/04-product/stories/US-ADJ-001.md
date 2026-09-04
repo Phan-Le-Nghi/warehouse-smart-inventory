@@ -20,7 +20,7 @@ Story cover request preparation, mandatory re-check/reason, optional attachment 
 - Business rules: `CAND-BR-002`, `CAND-BR-011`, `CAND-BR-012`.
 - Evidence: `EVD-012`, `EVD-013`, `EVD-017` hỗ trợ current-state re-check/handling context.
 - Human decisions: `DEC-015`, `DEC-017`.
-- Open questions: `OQ-013`, `OQ-015`.
+- Open question: `OQ-013`.
 - Source classification: verified evidence + HUMAN PRODUCT DECISION.
 
 ## Acceptance Criteria
@@ -43,5 +43,5 @@ Given Adjust request đang chờ Manager decision, when request được ghi nh�
 
 ## Remaining gaps và scope guards
 
-- Negative-stock behavior vẫn `OQ-015`.
+- Negative-stock apply guard được cover bởi `US-ADJ-002`; story này không apply quantity.
 - Story không định nghĩa approval implementation hoặc technical workflow.

@@ -36,7 +36,7 @@ AI phải:
 | QA-015 | Rule      | Transfer có cập nhật `system stock quantity` không?                                                                      | Có khi Transfer được confirm: giảm source location, tăng cùng quantity tại destination và Warehouse total không đổi.                                                      | `CAND-BR-007`, `DEC-013`                                   |
 | QA-016 | Rule      | Transfer thay đổi quantity giữa internal locations như thế nào?                                                          | Confirmed Transfer chuyển cùng quantity từ source internal location sang destination internal location trong cùng Warehouse.                                              | `CAND-REQ-004`, `CAND-BR-007`                              |
 | QA-017 | Rule      | Transfer có bắt buộc thực hiện giữa hai Warehouse khác nhau không?                                                       | Không. MVP chỉ hỗ trợ subsequent relocation giữa tracked internal locations trong cùng một Warehouse; cross-Warehouse Transfer ngoài MVP.                                  | `DEC-005`, `DEC-007`, `DEC-013`                            |
-| QA-018 | Unknown   | Hệ thống có cho phép negative stock không?                                                                               | KHÔNG CÓ DỮ LIỆU. Chính sách negative stock vẫn là `OQ-015`.                                                                                                              | `OQ-015`                                                   |
+| QA-018 | Rule      | Hệ thống có cho phép negative stock không?                                                                               | Không. `system stock quantity` tại internal location không được âm; Pick, Transfer và Adjust bị chặn nếu operation sẽ tạo quantity âm. Không suy diễn retry/cancel lifecycle. | `DEC-019`, `CAND-BR-015`, resolved `OQ-015`                |
 | QA-019 | Unknown   | AI có được tự động tạo reorder recommendation thành hành động nhập hàng không?                                           | KHÔNG CÓ DỮ LIỆU. Chưa xác định recommendation chỉ mang tính advisory hay có thể tạo action.                                                                              | `OQ-029`                                                   |
 | QA-020 | Unknown   | AI có thể trả lời chính xác Inventory Q&A nếu dữ liệu nguồn chưa được xác định không?                                    | Không nên tự suy diễn. Nếu Vault không có đủ dữ liệu nguồn, AI phải trả lời `KHÔNG CÓ DỮ LIỆU`.                                                                           | `AI-DIR-001`, `OQ-027`, `vault/09-ai/ai-usage-guidance.md` |
 
@@ -57,7 +57,7 @@ Một câu trả lời được xem là **FAIL** nếu:
 * Mô tả Transfer quantity effect khác `CAND-BR-007` hoặc suy diễn behavior chưa duyệt như partial/negative stock/reversal.
 * Tự xác định quyền ngoài permission model tại `DEC-017` / `vault/03-domain/roles.md`.
 * Tự tạo API hoặc database schema chưa được phê duyệt.
-* Tự xác định negative stock được phép.
+* Mô tả behavior trái `CAND-BR-015`, hoặc tự suy diễn retry/cancel lifecycle sau negative-stock validation.
 * Tự biến Candidate/Draft thành requirement chính thức.
 * Trả lời chắc chắn khi Vault chưa có dữ liệu.
 

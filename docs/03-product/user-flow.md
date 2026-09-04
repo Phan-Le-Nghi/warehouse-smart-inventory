@@ -1,189 +1,188 @@
-# User Flow — Bản phục vụ báo cáo
+# Consolidated User Flow — Warehouse & Smart Inventory Management
 
-## Tổng quan
+## Status and interpretation
 
-`Receive -> Putaway -> Pick -> Transfer -> Adjust -> Audit`
+`BASELINE FOR REPORT ROUND 1 — HUMAN APPROVED PRODUCT DEFINITION`
 
-Đây là chuỗi các khu vực workflow bắt buộc, không khẳng định mọi item hoặc transaction luôn đi qua sáu khu vực như một flow liên tục. Chi tiết Round 2 dưới đây là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải verified research findings.
+`Receive -> Putaway -> Pick -> Transfer -> Adjust -> Audit` tại `REQ-002` là danh sách sáu workflow/capability bắt buộc, không phải một transaction bắt buộc tuần tự qua cả sáu bước. Consolidated flow tuân theo `DEC-018`:
+
+- Receive có thể dẫn tới Putaway.
+- Sau Putaway, Pick và Transfer là các operational path độc lập.
+- Audit chạy trên inventory theo selected scope và không bắt buộc xảy ra sau Pick hoặc Transfer.
+- Audit mismatch tạo discrepancy context, bắt buộc re-check và chỉ khi discrepancy vẫn còn thì Adjust mới có thể được cân nhắc.
+- Audit không auto Adjust.
 
 ## MVP boundary
 
-- Một Warehouse; cross-Warehouse operation ngoài MVP.
-- Tracked internal locations: `Backroom`, `Sales Shelf`.
-- `system stock quantity` duy trì theo internal location; Warehouse total bằng tổng location quantities.
-- Full Purchase Order lifecycle ngoài MVP.
-- FIFO/FEFO/reservation/scanning ngoài Pick MVP hiện tại.
-- `OQ-013` giữ `PARTIALLY DECIDED / OPEN`; không suy diễn lifecycle gap.
+- Một Warehouse; tracked locations là `Backroom` và `Sales Shelf`.
+- `system stock quantity` duy trì theo location; Warehouse total bằng tổng location quantities.
+- Quantity tại internal location không được âm.
+- Full Purchase Order lifecycle, multi-Warehouse và cross-Warehouse operations ngoài MVP.
+- FIFO/FEFO/reservation và Pick scanning ngoài Pick MVP hiện tại.
+- Lifecycle chưa quyết định vẫn mang marker `OPEN`.
 
-## Receive — `US-REC-001`, lifecycle partially open
+## Consolidated flow
 
 ```text
-Receive context
-  ↓
-Warehouse Staff checks item and counts actual quantity
-  ↓
-Compare actual quantity with external/manual expected quantity/reference
+PURCHASING — supporting role
+Provide/view external or manual expected quantity/reference
+  │
+  ▼
+RECEIVE — Warehouse Staff — US-REC-001
+Check item + record actual quantity + compare expected quantity/reference
+  ├─ Quantity match
+  │    └─ Record actual Receive quantity
   ├─ Quantity discrepancy
-  │    ↓
-  │  Record actual quantity and discrepancy
-  ├─ System/document reference mismatch
-  │    ↓
-  │  User reviews mismatch before completion
-  │  System does not select an authoritative source
-  └─ Match
-       ↓
-     Record actual quantity
-  ↓
-[Completion wording / exact Putaway handoff: PARTIALLY OPEN — OQ-013]
-```
+  │    └─ Record actual quantity + discrepancy
+  └─ System/document reference mismatch
+       └─ User review required before completion
+          System does not choose authoritative source
+  │
+  ▼
+[Receive final completion / exact Putaway handoff: OPEN — OQ-013]
+  │
+  ▼
+PUTAWAY — Warehouse Staff — US-PUT-001
+Confirm SKU + quantity + initial destination
+  ├─ Backroom
+  └─ Sales Shelf
+  │
+  └─ Allocate quantity to confirmed destination
+     No automatic Transfer/Movement system record
+  │
+  ▼
+[Putaway exception/downstream handoff: OPEN — OQ-013]
 
-- Purchasing provides/views expected quantity/reference.
-- Full Purchase Order lifecycle is outside MVP.
-- Reference mismatch là AC/scenario của `US-REC-001`, không phải story riêng.
-- Receive final completion và exact Putaway handoff vẫn `OQ-013`.
+After Putaway, inventory may support independent operational paths:
 
-## Putaway — `US-PUT-001`
-
-```text
-Initial placement after Receive
-  ↓
-Input: SKU + quantity + destination internal location
-  ↓
-Warehouse Staff selects Backroom or Sales Shelf
-  ↓
-Confirm quantity and destination
-  ↓
-Allocate quantity to destination internal location
-  ↓
-Putaway complete for approved happy path
-```
-
-- Putaway does not automatically create Transfer or Movement system record.
-- Exception/downstream handoff remains `OQ-013`; partial Putaway remains `OQ-014`.
-
-## Pick — `US-PICK-001`
-
-```text
+PICK OPERATIONAL PATH — Warehouse Staff — US-PICK-001
 Pick request: SKU + requested quantity
   ↓
-Warehouse Staff selects one or more tracked source internal locations
+Select one or more source locations
   ↓
-Take quantity and confirm result
-  ├─ Full requested quantity
-  │    ↓
-  │  Reduce source location quantity/quantities
-  │    ↓
-  │  Fully completed → downstream fulfilment/use
-  └─ Insufficient quantity
+Validate confirmed quantity against total quantity at selected sources
+  ├─ Would create negative source quantity
+  │    └─ Do not confirm; do not apply quantity change
+  │       Report operation invalid / unable to confirm
+  │       [Retry/cancel lifecycle: OPEN]
+  └─ Validation passes
        ↓
-     Record PARTIAL / INSUFFICIENT
+     Confirm picked quantity and reduce selected-source quantities
+       ├─ Full requested quantity
+       │    └─ Fully completed
+       │       Downstream fulfilment/use is outside MVP
+       └─ Less than requested quantity
+            └─ Record PARTIAL / INSUFFICIENT
+               Not fully completed; Manager may review
+
+TRANSFER OPERATIONAL PATH — Warehouse Staff — US-TRF-001
+Need subsequent relocation within the same Warehouse
+  ↓
+Input SKU + quantity + source + destination
+  ↓
+Validate Transfer quantity against source location quantity
+  ├─ Would create negative source quantity
+  │    └─ Do not confirm; do not apply quantity change
+  │       Report operation invalid / unable to confirm
+  │       [Retry/cancel lifecycle: OPEN]
+  └─ Validation passes
        ↓
-     Not fully completed → Manager may review exception
-```
+     Confirm Transfer
+       ├─ Reduce source quantity
+       ├─ Increase same destination quantity
+       ├─ Warehouse total remains unchanged
+       └─ Create record: SKU + quantity + source + destination
+          + confirmation timestamp
+              │
+              ▼
+        TRANSFER HISTORY — Manager — US-TRF-002
+        View source + destination + quantity + confirmation time
+        for trace/discrepancy investigation
 
-Downstream module, FIFO/FEFO/reservation/scanning are outside the current Pick MVP. Negative-stock behavior remains `OQ-015`.
-
-`PARTIAL / INSUFFICIENT` là AC/scenario trong `US-PICK-001`, không phải story riêng.
-
-## Transfer — `US-TRF-001` execution và `US-TRF-002` history
-
-```text
-Need for subsequent relocation between tracked internal locations
-  ↓
-Input: SKU + quantity + source + destination
-  ↓
-Warehouse Staff performs physical relocation and confirms Transfer
-  ↓
-Reduce source quantity + increase same destination quantity
-  ↓
-Warehouse total remains unchanged
-  ↓
-Create system Transfer record:
-SKU + quantity + source + destination + confirmation timestamp
-  ↓
-Transfer history exposes source + destination + quantity + time
-for trace/discrepancy investigation
-```
-
-- Manager may view Transfer history and review exception.
-- Cross-Warehouse Transfer ngoài MVP.
-- Partial Transfer `OQ-014`; negative stock `OQ-015`; exception/reversal `OQ-013`.
-- `US-TRF-001` kết thúc tại execution/confirmation và minimum system record; `US-TRF-002` cover Manager history lookup.
-
-## Audit — `US-AUD-001` count/compare và `US-AUD-002` discrepancy review
-
-```text
-Start selected-scope Audit session
+AUDIT — Warehouse Staff — US-AUD-001
+May start on inventory independently of Pick/Transfer order
   ↓
 Select group of SKU/location or whole Warehouse
   ↓
-Warehouse Staff records physical count
+Record physical count
   ↓
 Compare with system stock quantity at selected scope/location
   ↓
-Record comparison result
+Record result
   ├─ Match
-  │    ↓
-  │  Confirm result → Audit may complete
+  │    └─ Confirm result → Audit may complete
   └─ Mismatch
-       ↓
-     Create discrepancy/review context
-       ↓
-     Mandatory re-check
-       ↓
-     No automatic Adjust
-```
-
-Không canonicalize `cycle count`. Mismatch completion và schedule vẫn `OQ-013`.
-
-`US-AUD-001` cover selected scope, count, compare và match completion. `US-AUD-002` cover Manager review, mandatory re-check và no-auto-adjust guard; không khẳng định mismatch closure.
-
-## Adjust — `US-ADJ-001` request và `US-ADJ-002` decision/apply
-
-```text
-Warehouse Staff creates discrepancy / Adjust request
-  ↓
-Mandatory re-check + required Adjust reason
-(attachment/evidence optional)
+       └─ Create discrepancy/review context
+          │
+          ▼
+AUDIT REVIEW — Manager — US-AUD-002
+Mandatory re-check
+No automatic Adjust
   ├─ Re-check finds no discrepancy
-  │    ↓
-  │  Do not Adjust → case may close
+  │    └─ Do not Adjust; quantity unchanged; case may close
   └─ Discrepancy remains
+       └─ Adjust may be considered
+          │
+          ▼
+ADJUST REQUEST — Warehouse Staff — US-ADJ-001
+Record required reason
+Attachment/evidence optional
+Quantity remains unchanged while awaiting Manager decision
+          │
+          ▼
+MANAGER DECISION — US-ADJ-002
+  ├─ Reject
+  │    └─ Quantity unchanged
+  │       [Rejected-case final closure: OPEN — OQ-013]
+  └─ Approve
        ↓
-     Manager reviews request
-       ├─ Reject
-       │    ↓
-       │  Quantity does not change
-       └─ Approve
-            ↓
-          Apply Adjust
-            ↓
-          Update system stock quantity at affected internal location
+     Validate resulting affected-location quantity
+       ├─ Result would be negative
+       │    └─ Do not apply Adjust; quantity unchanged
+       │       Report operation invalid / unable to confirm
+       │       [Retry/cancel lifecycle: OPEN]
+       └─ Result is not negative
+            └─ Apply Adjust
+               Update affected-location system stock quantity
 ```
 
-Rejected-case closure remains `OQ-013`. Purchasing has no warehouse adjustment permission.
+## Story-to-flow mapping
 
-`US-ADJ-001` cover Warehouse Staff request/re-check/reason. `US-ADJ-002` cover Manager approve/reject và approved apply; không khẳng định rejected-case final closure.
+| Flow step / branch | Story | Acceptance Criteria |
+|---|---|---|
+| Receive input/compare | `US-REC-001` | `AC-01` |
+| Receive quantity match | `US-REC-001` | `AC-02` |
+| Receive quantity discrepancy | `US-REC-001` | `AC-03` |
+| Receive reference mismatch | `US-REC-001` | `AC-04` |
+| Putaway allocation/tracked destination | `US-PUT-001` | `AC-PUT-001/002` |
+| Putaway no automatic Movement record | `US-PUT-001` | `AC-PUT-003` |
+| Full/multi-location Pick | `US-PICK-001` | `AC-PICK-001/002` |
+| `PARTIAL / INSUFFICIENT` Pick | `US-PICK-001` | `AC-PICK-003` |
+| Pick negative-stock guard | `US-PICK-001` | `AC-PICK-004` |
+| Transfer effects/total/record | `US-TRF-001` | `AC-TRF1-001/002/003` |
+| Transfer negative-stock guard | `US-TRF-001` | `AC-TRF1-004` |
+| Transfer history | `US-TRF-002` | `AC-TRF2-001/002/003` |
+| Audit scope/count/compare/result | `US-AUD-001` | `AC-AUD1-001/002/003` |
+| Audit match completion | `US-AUD-001` | `AC-AUD1-004` |
+| Audit mismatch/re-check/no-auto-Adjust | `US-AUD-002` | `AC-AUD2-001/002/003` |
+| Adjust request/reason/re-check/attachment/no pre-decision change | `US-ADJ-001` | `AC-ADJ1-001/002/003/004` |
+| Approve/reject/no-discrepancy outcomes | `US-ADJ-002` | `AC-ADJ2-001/002/003` |
+| Adjust negative-stock guard | `US-ADJ-002` | `AC-ADJ2-004` |
 
-## Permission summary
+## Permission coverage
 
-| Role | Approved MVP participation |
+| Role | Flow participation |
 |---|---|
-| Warehouse Staff | Receive, Putaway, Pick, Transfer, Audit count, create discrepancy/Adjust request |
-| Manager | View operational records, review exceptions/discrepancy, approve/reject Adjust, view Transfer history, confirm/close sensitive exception flows |
-| Purchasing | Provide/view Receive expected quantity/reference; no warehouse adjustment permission |
-| Admin | Manage users, role assignments, basic system configuration; not required in daily warehouse operations |
+| Warehouse Staff | Receive, Putaway, Pick, Transfer, Audit count, Adjust request |
+| Manager | Operational record/exception review, Transfer history, Audit discrepancy review, Adjust decision |
+| Purchasing | Supporting role: provide/view Receive expected quantity/reference; no warehouse adjustment permission |
+| Admin | Manage users, role assignments, basic system configuration; no mandatory daily operational path |
 
-## Story status
+## Preserved open boundaries
 
-| Story | Status |
-|---|---|
-| `US-REC-001` | CANONICAL — HUMAN APPROVED |
-| `US-PUT-001` | CANONICAL — HUMAN APPROVED |
-| `US-PICK-001` | CANONICAL — HUMAN APPROVED |
-| `US-TRF-001` | CANONICAL — HUMAN APPROVED |
-| `US-TRF-002` | CANONICAL — HUMAN APPROVED |
-| `US-AUD-001` | CANONICAL — HUMAN APPROVED |
-| `US-AUD-002` | CANONICAL — HUMAN APPROVED |
-| `US-ADJ-001` | CANONICAL — HUMAN APPROVED |
-| `US-ADJ-002` | CANONICAL — HUMAN APPROVED |
+- `OQ-013`: Receive completion/handoff, Putaway exception/handoff, Transfer exception/reversal, Audit mismatch completion, Adjust rejected-case closure và other unapproved lifecycle gaps.
+- `OQ-014`: partial Receive, Putaway và Transfer.
+- `OQ-021`: Alert behavior; no Alert story.
+- `OQ-022`: device/integration behavior.
+- Retry/cancel lifecycle sau negative-stock validation không được quyết định bởi `DEC-019`.
+- AI directions remain open/future and have no canonical MVP story.

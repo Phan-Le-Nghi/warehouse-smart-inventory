@@ -4,7 +4,7 @@
 
 `Receive -> Putaway -> Pick -> Transfer -> Adjust -> Audit`
 
-Chuỗi này xác định các khu vực quy trình bắt buộc. Chuỗi chưa khẳng định mọi mặt hàng tồn kho hoặc giao dịch luôn đi qua cả sáu khu vực trong một quy trình liên tục.
+Chuỗi này xác định các khu vực quy trình/capability bắt buộc, không phải một transaction tuần tự bắt buộc. Receive có thể dẫn tới Putaway; sau Putaway, Pick và Transfer là các operational path độc lập. Audit có thể được thực hiện trên inventory theo selected scope, không bắt buộc xảy ra sau Pick hoặc Transfer. Audit mismatch tạo discrepancy context và bắt buộc re-check; chỉ khi discrepancy vẫn còn thì Adjust mới có thể được cân nhắc. Audit không auto Adjust (`DEC-018`).
 
 ## Boundary được human phê duyệt cho MVP
 
@@ -16,6 +16,7 @@ Chuỗi này xác định các khu vực quy trình bắt buộc. Chuỗi chưa 
 - Audit dùng selected scope; match có thể complete sau confirmation; mismatch tạo discrepancy/review context, bắt buộc re-check và không auto Adjust (`DEC-014`).
 - Adjust là action riêng do Warehouse Staff request và Manager approve/reject; approved Adjust cập nhật affected location quantity (`DEC-015`).
 - Full Purchase Order lifecycle ngoài MVP; Receive dùng external/manual expected quantity/reference do Purchasing cung cấp/chuẩn bị (`DEC-016`).
+- `system stock quantity` tại internal location không được âm. Pick, Transfer và Adjust không được confirm/apply nếu operation sẽ tạo quantity âm; không apply quantity change và operation được báo không hợp lệ/không thể confirm (`DEC-019`).
 
 Các mục trên là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải verified research findings.
 
@@ -45,6 +46,7 @@ Các mục trên là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải ve
 - Action/outcome: Warehouse Staff lấy và confirm quantity; confirmed quantity giảm tại source location(s).
 - Completion: chỉ full requested quantity mới fully completed.
 - Exception: thiếu quantity được ghi `PARTIAL / INSUFFICIENT`, không fully complete; Manager có thể review.
+- Guard: không confirm quantity lớn hơn tổng quantity tại các selected source locations; nếu vi phạm thì không apply quantity change và operation được báo không hợp lệ/không thể confirm.
 - Handoff: downstream fulfilment/use; downstream module ngoài MVP.
 - Guard: FIFO/FEFO/reservation/scanning ngoài MVP hiện tại.
 
@@ -55,6 +57,7 @@ Các mục trên là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải ve
 - Action/outcome: Warehouse Staff thực hiện và confirm Transfer; source giảm, destination tăng cùng quantity, Warehouse total không đổi.
 - System record: SKU, quantity, source, destination, confirmation timestamp; history/query hiển thị source, destination, quantity, time.
 - Completion: system Transfer được confirm; exception vẫn `TBD / OQ-013`.
+- Guard: không confirm Transfer quantity lớn hơn source location quantity; nếu vi phạm thì không apply quantity change và operation được báo không hợp lệ/không thể confirm.
 - Handoff: history hỗ trợ trace và discrepancy investigation.
 
 ### Audit — `US-AUD-001`, `US-AUD-002` — Phan Lê Nghi
@@ -70,6 +73,7 @@ Các mục trên là HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, không phải ve
 - Trigger/input: Warehouse Staff tạo discrepancy/Adjust request cho affected SKU/location với Adjust reason; attachment/evidence optional.
 - Precondition/action: re-check bắt buộc; Manager approve/reject trước apply.
 - Approved outcome: cập nhật `system stock quantity` tại affected internal location.
+- Guard: Adjust không được apply nếu kết quả làm affected-location quantity nhỏ hơn 0; không apply quantity change và operation được báo không hợp lệ/không thể confirm.
 - Re-check không còn discrepancy: không Adjust; case có thể close.
 - Manager reject: quantity không thay đổi; rejected-case closure vẫn `TBD / OQ-013`.
 
