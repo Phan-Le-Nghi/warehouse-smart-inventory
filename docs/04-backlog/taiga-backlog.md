@@ -14,14 +14,14 @@ Taiga theo dõi việc thực thi; Taiga không phải nguồn sự thật cho y
 
 ## US-PUT-001 post-merge evidence
 
-Documentation-only intended status; no Taiga API update was performed in this phase:
+Taiga status was updated manually by a human after the implementation and verification evidence passed; this documentation sync did not perform a Taiga API update:
 
 | Item | Documented work status | Remote Taiga status |
 |---|---|---|
-| `US-PUT-001` / [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) | Ready to mark Done after Taiga update; implementation merged and GitHub Actions passed | Ready (unchanged) |
-| `T-PUT-01` / [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19) | Completed — Technical Story Spec exists | New (unchanged) |
-| `T-PUT-02` / [#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20) | Completed — implementation exists | New (unchanged) |
-| `T-PUT-03` / [#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) | Completed — automated backend/frontend/Playwright verification and CI evidence exist | New (unchanged) |
+| `US-PUT-001` / [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) | Completed — implementation merged and GitHub Actions passed | Done |
+| `T-PUT-01` / [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19) | Completed — Technical Story Spec exists | Done |
+| `T-PUT-02` / [#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20) | Completed — implementation exists | Done |
+| `T-PUT-03` / [#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) | Completed — automated backend/frontend/Playwright verification and CI evidence exist | Done |
 
 ## Quy tắc tiếp nhận
 
@@ -43,7 +43,7 @@ Chỉ tạo Taiga item sau khi User Story canonical trong Vault và Acceptance C
 | Story ID | Taiga Story | Người được giao | Ngày đồng bộ | Trạng thái Taiga |
 |---|---|---|---|---|
 | `US-REC-001` | [#7](https://tree.taiga.io/project/lenghi-group-07-project/us/7) — ID `9523822` | Nguyễn Thị Nghĩa | 2026-09-05 | Ready |
-| `US-PUT-001` | [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) — ID `9523823` | Phan Lê Nghi | 2026-09-05 | Ready |
+| `US-PUT-001` | [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) — ID `9523823` | Phan Lê Nghi | 2026-09-05 | Done |
 | `US-PICK-001` | [#9](https://tree.taiga.io/project/lenghi-group-07-project/us/9) — ID `9523824` | Trương Huỳnh Thảo Ngân | 2026-09-05 | Ready |
 | `US-TRF-001` | [#10](https://tree.taiga.io/project/lenghi-group-07-project/us/10) — ID `9523825` | Nguyễn Thị Ly Na | 2026-09-05 | New |
 | `US-TRF-002` | [#11](https://tree.taiga.io/project/lenghi-group-07-project/us/11) — ID `9523826` | Nguyễn Thị Ly Na | 2026-09-05 | New |
@@ -54,16 +54,16 @@ Chỉ tạo Taiga item sau khi User Story canonical trong Vault và Acceptance C
 
 ## Task mapping
 
-Tất cả 27 Taiga Tasks hiện có trạng thái **New**.
+Trong 27 Taiga Tasks, 3 task của `US-PUT-001` có trạng thái **Done** và 24 task còn lại có trạng thái **New**.
 
 | Canonical Story | Canonical Task | Taiga Task | Trạng thái Taiga |
 |---|---|---|---|
 | `US-REC-001` | `T-REC-01` | [#16](https://tree.taiga.io/project/lenghi-group-07-project/task/16) | New |
 | `US-REC-001` | `T-REC-02` | [#17](https://tree.taiga.io/project/lenghi-group-07-project/task/17) | New |
 | `US-REC-001` | `T-REC-03` | [#18](https://tree.taiga.io/project/lenghi-group-07-project/task/18) | New |
-| `US-PUT-001` | `T-PUT-01` | [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19) | New |
-| `US-PUT-001` | `T-PUT-02` | [#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20) | New |
-| `US-PUT-001` | `T-PUT-03` | [#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) | New |
+| `US-PUT-001` | `T-PUT-01` | [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19) | Done |
+| `US-PUT-001` | `T-PUT-02` | [#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20) | Done |
+| `US-PUT-001` | `T-PUT-03` | [#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) | Done |
 | `US-PICK-001` | `T-PICK-01` | [#22](https://tree.taiga.io/project/lenghi-group-07-project/task/22) | New |
 | `US-PICK-001` | `T-PICK-02` | [#23](https://tree.taiga.io/project/lenghi-group-07-project/task/23) | New |
 | `US-PICK-001` | `T-PICK-03` | [#24](https://tree.taiga.io/project/lenghi-group-07-project/task/24) | New |

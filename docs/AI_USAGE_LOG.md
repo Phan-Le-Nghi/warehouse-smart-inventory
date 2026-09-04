@@ -120,3 +120,12 @@ Không đưa secret, dữ liệu cá nhân, Context Pack tạm thời hoặc bư
 - **Decision:** Accept the fixture-ordering correction and the vertical slice based on the resulting evidence. No business behavior, canonical Acceptance Criterion, production authentication, or deployment decision was changed.
 - **Evidence:** [`../apps/backend/tests/test_putaway.py`](../apps/backend/tests/test_putaway.py), [`../apps/frontend/e2e/putaway.spec.ts`](../apps/frontend/e2e/putaway.spec.ts), [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml), [`TRACEABILITY.md`](TRACEABILITY.md).
 - **Time impact:** Not measured; the diagnosis isolated the PostgreSQL-specific fixture issue and supported a focused rerun.
+
+### AI-USE-009 — Human-confirmed Taiga status documentation sync
+
+- **Task:** Đồng bộ tài liệu repository với trạng thái Taiga của `US-PUT-001` sau khi evidence đã pass.
+- **Input/context:** Human xác nhận Taiga Story [#8](https://tree.taiga.io/project/lenghi-group-07-project/us/8) và Tasks [#19](https://tree.taiga.io/project/lenghi-group-07-project/task/19), [#20](https://tree.taiga.io/project/lenghi-group-07-project/task/20), [#21](https://tree.taiga.io/project/lenghi-group-07-project/task/21) đã được cập nhật thủ công thành `Done`.
+- **AI/tool:** Codex chỉ đồng bộ các trạng thái đã được human xác nhận vào tài liệu và kiểm tra Git diff; AI không thao tác Taiga, không sửa application code, business rule hoặc canonical Acceptance Criteria.
+- **Human decision:** Human cập nhật trạng thái Taiga sau khi Technical Story Spec, implementation merge, frontend checks, backend PostgreSQL 18 checks, Playwright E2E và Traceability evidence đã pass.
+- **Scope guard:** First vertical slice được ghi nhận `Completed / Verified`; không claim toàn bộ MVP Done. `OQ-012`, `OQ-013`, `OQ-014`, production authentication và deployment giữ nguyên trạng thái.
+- **Human verification:** Chờ human review documentation diff trước khi tích hợp; không commit hoặc push trong lần đồng bộ này.
