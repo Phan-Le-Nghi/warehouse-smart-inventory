@@ -21,16 +21,16 @@
 | Deliverable | Artifact phục vụ báo cáo | Nguồn/bằng chứng canonical | Người phụ trách | Trạng thái |
 |---|---|---|---|---|
 | PRD | [`03-product/PRD.md`](03-product/PRD.md) | `vault/04-product/PRD.md` trong tương lai | Product/BA — Thanh Ngân | TBD, chờ nghiên cứu/yêu cầu |
-| User Flow | [`03-product/user-flow.md`](03-product/user-flow.md) | `vault/03-domain/workflow-overview.md`; canonical per-story flows trong tương lai | UX/UI — Nghĩa + Story owner | Round 2 lifecycle DRAFT; `OQ-013` còn mở |
+| User Flow | [`03-product/user-flow.md`](03-product/user-flow.md) | `vault/03-domain/workflow-overview.md`; canonical stories | UX/UI — Nghĩa + Story owner | Canonical 9-story decomposition đã cập nhật; `OQ-013` còn mở |
 | Functional Prototype | [`03-product/functional-prototype.md`](03-product/functional-prototype.md) | Tham chiếu prototype/Figma đã duyệt | UX/UI — Nghĩa | TBD |
 | Usability Test | [`03-product/usability-test.md`](03-product/usability-test.md) | Bằng chứng test thật | UX/UI — Nghĩa; QA — Thảo Ngân | TBD |
-| User Stories + AC | [`04-backlog/user-stories.md`](04-backlog/user-stories.md) | `vault/04-product/stories/` | Product/BA + Story owner | 1 BA CONFIRMED + 5 DRAFT ready for canonical review; mục tiêu 8–12 |
+| User Stories + AC | [`04-backlog/user-stories.md`](04-backlog/user-stories.md) | `vault/04-product/stories/` | Product/BA + Story owner | 9 canonical User Stories — HUMAN APPROVED; đạt mục tiêu 8–12 |
 | Taiga Backlog | [`04-backlog/taiga-backlog.md`](04-backlog/taiga-backlog.md) | Story ID đã review + Taiga | QA/Release — Thảo Ngân | URL/quyền truy cập TBD; chưa tạo item |
 | Figma + Design System | [`05-design/design-system.md`](05-design/design-system.md) | `vault/05-design/` trong tương lai + Figma | UX/UI — Nghĩa | URL/quyền truy cập TBD; chưa tạo thiết kế |
 | Architecture + ADR | [`06-technical/architecture.md`](06-technical/architecture.md) | `vault/06-technical/` trong tương lai | Engineering — Nghi | TBD; chưa chọn stack |
 | ERD / Data Model | [`06-technical/data-model.md`](06-technical/data-model.md) | Data Model canonical trong tương lai | Engineering — Nghi | TBD |
 | API Contract | [`06-technical/API.md`](06-technical/API.md) | API Contract canonical trong tương lai | Engineering — Nghi | TBD |
-| Story Specs + Traceability v1 | [`06-technical/story-specs-index.md`](06-technical/story-specs-index.md), [`TRACEABILITY.md`](TRACEABILITY.md) | User Story/spec và bằng chứng canonical | Tất cả Story owner; QA điều phối | Đã map ownership; spec TBD |
+| Story Specs + Traceability | [`06-technical/story-specs-index.md`](06-technical/story-specs-index.md), [`TRACEABILITY.md`](TRACEABILITY.md) | User Story/spec và bằng chứng canonical | Tất cả Story owner; QA điều phối | 9 stories đã map; technical specs/contracts vẫn TBD |
 
 ## Liên kết bên ngoài
 

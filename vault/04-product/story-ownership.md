@@ -4,13 +4,13 @@ Mỗi sinh viên cuối cùng phải sở hữu ít nhất một User Story hoà
 
 ## Ownership đã xác nhận
 
-| Thành viên | User Story/flow cá nhân chính | Ownership/hỗ trợ bắt buộc bổ sung | Role xuyên suốt |
+| Thành viên | Canonical User Story/flow | Ownership/hỗ trợ bắt buộc bổ sung | Role xuyên suốt |
 |---|---|---|---|
-| Nghĩa | Receive | — | UX/UI |
-| Nghi | Putaway | Sở hữu/hỗ trợ Audit ngoài Putaway | Engineering |
-| Thảo Ngân | Pick | — | QA/Release |
-| Ly Na | Transfer | — | AI/Vault |
-| Thanh Ngân | Adjust | — | Product/BA |
+| Nguyễn Thị Nghĩa | `US-REC-001` — Receive | — | UX/UI |
+| Phan Lê Nghi | `US-PUT-001` — Putaway | `US-AUD-001`, `US-AUD-002` — Audit | Engineering |
+| Trương Huỳnh Thảo Ngân | `US-PICK-001` — Pick | — | QA/Release |
+| Nguyễn Thị Ly Na | `US-TRF-001`, `US-TRF-002` — Transfer | — | AI/Vault |
+| Đặng Thị Thanh Ngân | `US-ADJ-001`, `US-ADJ-002` — Adjust | — | Product/BA |
 
 ## Traceability cuối cùng bắt buộc
 
@@ -18,17 +18,17 @@ Mỗi sinh viên cuối cùng phải sở hữu ít nhất một User Story hoà
 
 `Requirement -> User Story / Acceptance Criteria -> User Flow / Design / Spec -> Taiga task -> Implementation -> Test -> Evidence / Traceability`
 
-## Trạng thái Story/flow hiện tại
+## Canonical backlog hiện tại
 
 | Flow | Story ID | Trạng thái |
 |---|---|---|
-| Receive | `US-REC-001` | BA CONFIRMED; `AC-01` đến `AC-03` |
-| Putaway | `DRAFT-US-PUT-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| Pick | `DRAFT-US-PICK-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| Transfer | `DRAFT-US-TRF-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| Adjust | `DRAFT-US-ADJ-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| Audit | `DRAFT-US-AUD-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
+| Receive | `US-REC-001` | CANONICAL — HUMAN APPROVED |
+| Putaway | `US-PUT-001` | CANONICAL — HUMAN APPROVED |
+| Pick | `US-PICK-001` | CANONICAL — HUMAN APPROVED |
+| Transfer | `US-TRF-001`, `US-TRF-002` | CANONICAL — HUMAN APPROVED |
+| Audit | `US-AUD-001`, `US-AUD-002` | CANONICAL — HUMAN APPROVED |
+| Adjust | `US-ADJ-001`, `US-ADJ-002` | CANONICAL — HUMAN APPROVED |
 
-Hiện có **1** User Story BA CONFIRMED và **5** User Story DRAFT đã sẵn sàng cho human canonical review theo Round 2. Draft ID chỉ phục vụ theo dõi và không làm cho story, Acceptance Criteria, flow hoặc behavior trở thành canonical.
+Final backlog có **9 canonical User Stories** đã được human approve. Receive reference mismatch là AC/scenario trong `US-REC-001`; `PARTIAL / INSUFFICIENT` là AC/scenario trong `US-PICK-001`. Transfer, Audit và Adjust được tách theo actor/value đã duyệt.
 
-Chỉ được đạt mục tiêu tổng cộng 8–12 User Story bằng các Story dẫn xuất từ yêu cầu đã xác nhận.
+Historical draft IDs được bảo tồn trong các artifact superseded khi cần audit history; chúng không còn là active backlog items.

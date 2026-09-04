@@ -1,271 +1,126 @@
-# User Story và Acceptance Criteria — Mục lục
+# User Story và Acceptance Criteria — Canonical Backlog
 
 ## Trạng thái
 
-- Mục tiêu môn học: tổng cộng 8–12 User Story.
-- User Story BA CONFIRMED hiện tại: **1** (`US-REC-001`).
-- User Story DRAFT hiện tại: **5** (`DRAFT-US-PUT-001`, `DRAFT-US-PICK-001`, `DRAFT-US-TRF-001`, `DRAFT-US-ADJ-001`, `DRAFT-US-AUD-001`).
-- Năm draft story đã được cập nhật theo HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS Round 2 và ở trạng thái `READY FOR HUMAN CANONICAL REVIEW`; chúng chưa canonical hoặc implementation-ready.
+Final backlog có **9 canonical User Stories**, nằm trong mục tiêu môn học 8–12 stories. Backlog được human approve sau Round 2.
 
-Không tạo User Story chỉ để đạt mục tiêu. Mỗi story mới phải trace tới Requirement/Business Rule đã duyệt và có Acceptance Criteria kiểm thử được.
+- Receive reference mismatch là AC/scenario trong `US-REC-001`.
+- `PARTIAL / INSUFFICIENT` Pick là AC/scenario trong `US-PICK-001`.
+- Transfer, Audit và Adjust được tách theo actor/value.
+- `OQ-013` vẫn `PARTIALLY DECIDED / OPEN`; các lifecycle gap không được suy diễn.
 
-## Ownership và trạng thái review
+Canonical source cho từng story nằm tại [`../../vault/04-product/stories/`](../../vault/04-product/stories/).
 
-| Flow | Người phụ trách | Story ID | Trạng thái review |
-|---|---|---|---|
-| Receive | Nghĩa | `US-REC-001` | BA CONFIRMED; giữ canonical; proposed Round 2 additions chờ story review |
-| Putaway | Nghi | `DRAFT-US-PUT-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| Pick | Thảo Ngân | `DRAFT-US-PICK-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| Transfer | Ly Na | `DRAFT-US-TRF-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| Adjust | Thanh Ngân | `DRAFT-US-ADJ-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| Audit | Nghi sở hữu/hỗ trợ | `DRAFT-US-AUD-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
+## Canonical backlog và ownership
+
+| Story ID | Title | Actor | Owner | Source classification |
+|---|---|---|---|---|
+| `US-REC-001` | Ghi nhận Receive theo số lượng thực nhận | Warehouse Staff | Nguyễn Thị Nghĩa | Verified evidence + HUMAN PRODUCT DECISION |
+| `US-PUT-001` | Phân bổ Putaway vào initial location | Warehouse Staff | Phan Lê Nghi | HUMAN PRODUCT DECISION |
+| `US-PICK-001` | Thực hiện Pick từ tracked locations | Warehouse Staff | Trương Huỳnh Thảo Ngân | HUMAN PRODUCT DECISION |
+| `US-TRF-001` | Xác nhận Internal Transfer | Warehouse Staff | Nguyễn Thị Ly Na | HUMAN PRODUCT DECISION |
+| `US-TRF-002` | Xem Transfer history | Manager | Nguyễn Thị Ly Na | HUMAN PRODUCT DECISION |
+| `US-AUD-001` | Thực hiện selected-scope Audit | Warehouse Staff | Phan Lê Nghi | Verified evidence + HUMAN PRODUCT DECISION |
+| `US-AUD-002` | Review và re-check Audit discrepancy | Manager | Phan Lê Nghi | Verified evidence + HUMAN PRODUCT DECISION |
+| `US-ADJ-001` | Tạo Adjust request | Warehouse Staff | Đặng Thị Thanh Ngân | Verified evidence + HUMAN PRODUCT DECISION |
+| `US-ADJ-002` | Quyết định và apply Adjust | Manager | Đặng Thị Thanh Ngân | Verified evidence + HUMAN PRODUCT DECISION |
 
 ## US-REC-001 — Ghi nhận Receive theo số lượng thực nhận
 
-**Trạng thái:** `BA CONFIRMED`. `AC-01` đến `AC-03` được bảo tồn.
+> Là Warehouse Staff, tôi muốn kiểm tra item, ghi nhận actual quantity và đối chiếu với expected quantity/reference, để Receive phản ánh hàng thực tế và các mismatch được nhận biết trước khi completion được cân nhắc.
 
-### User Story canonical hiện tại
+- Given Receive context có item và expected quantity, when Warehouse Staff nhập actual quantity, then system ghi actual quantity và compare với expected quantity.
+- Given actual quantity bằng expected quantity, when Receive được ghi nhận, then Receive quantity bằng actual quantity.
+- Given actual quantity khác expected quantity, when Receive được ghi nhận, then Receive quantity vẫn bằng actual quantity và discrepancy được ghi nhận.
+- Given system reference khác document reference, when Receive được xử lý, then mismatch phải được user review trước completion và system không tự chọn authoritative reference.
 
-> Là người thực hiện Receive, tôi muốn kiểm tra mặt hàng, ghi nhận số lượng thực nhận và đối chiếu với số lượng kỳ vọng, để số lượng Receive phản ánh hàng thực tế và chênh lệch được ghi nhận.
+Trace: `CAND-REQ-001/002/009/010`, `CAND-BR-001/014`, `EVD-002–005`, `DEC-016/017`, `OQ-013/014/022`.
 
-### Acceptance Criteria đã BA CONFIRMED
-
-#### AC-01 — Ghi nhận và đối chiếu
-
-Given một ngữ cảnh Receive có mặt hàng và số lượng kỳ vọng, when người thực hiện kiểm tra mặt hàng và nhập số lượng thực nhận, then hệ thống ghi nhận số lượng thực nhận và đối chiếu với số lượng kỳ vọng.
-
-#### AC-02 — Nhận đủ
-
-Given số lượng thực nhận bằng số lượng kỳ vọng, when Receive được ghi nhận, then số lượng Receive được ghi nhận bằng số lượng thực nhận.
-
-#### AC-03 — Có chênh lệch
-
-Given số lượng thực nhận khác số lượng kỳ vọng, when Receive được ghi nhận, then số lượng Receive được ghi nhận bằng số lượng thực nhận, không thay thế bằng số lượng kỳ vọng, và chênh lệch giữa hai số lượng được ghi nhận.
-
-### Round 2 additions — proposed, chưa thay đổi canonical story
-
-- Warehouse Staff thực hiện Receive (`DEC-017`).
-- Expected quantity đến từ external/manual order or delivery reference do Purchasing cung cấp/chuẩn bị; full Purchase Order lifecycle ngoài MVP (`CAND-REQ-009`, `DEC-016`).
-- Nếu system reference và document reference khác nhau, user phải review mismatch trước completion; system không tự chọn authoritative source (`CAND-BR-014`).
-- Receive completion/handoff wording cuối vẫn `OQ-013 — PARTIALLY DECIDED / OPEN`.
-
-## DRAFT-US-PUT-001 — Initial placement sau Receive
-
-### DRAFT User Story
+## US-PUT-001 — Phân bổ Putaway vào initial location
 
 > Là Warehouse Staff, tôi muốn xác nhận SKU, quantity và destination internal location cho initial placement sau Receive, để quantity được phân bổ vào `Backroom` hoặc `Sales Shelf`.
 
-### DRAFT Acceptance Criteria
+- Given SKU và quantity cần initial placement sau Receive, when Warehouse Staff confirm destination là `Backroom` hoặc `Sales Shelf`, then quantity được phân bổ vào destination đã confirm.
+- Given một MVP Putaway destination được chọn, when Putaway được confirm, then destination được ghi nhận ở mức tracked internal location `Backroom` hoặc `Sales Shelf`.
+- Given Putaway được confirm, when quantity được phân bổ, then Putaway không tự tạo Transfer hoặc Movement system record.
 
-#### AC-PUT-001 — Confirm destination allocation
+Trace: `CAND-REQ-003/007/010`, `CAND-BR-003/004`, `DEC-006/010/011/017`, `OQ-013/014/022`.
 
-```gherkin
-Given SKU và quantity cần initial placement sau Receive
-And destination là Backroom hoặc Sales Shelf
-When Warehouse Staff confirm quantity và destination internal location
-Then quantity được phân bổ vào destination internal location
-```
+## US-PICK-001 — Thực hiện Pick từ tracked locations
 
-#### AC-PUT-002 — Không tự tạo Transfer/Movement record
+> Là Warehouse Staff, tôi muốn thực hiện Pick từ một Pick request bằng một hoặc nhiều tracked internal locations, để cung cấp confirmed quantity cho downstream use và ghi nhận trung thực trường hợp không đủ.
 
-```gherkin
-Given Putaway được confirm
-When quantity được phân bổ vào destination internal location
-Then Putaway không tự tạo Transfer hoặc Movement system record
-```
+- Given Pick request có SKU/requested quantity, when Warehouse Staff confirm full requested quantity từ một hoặc nhiều source locations, then Pick là fully completed và confirmed quantity được giảm tại các source tương ứng.
+- Given một location không đủ nhưng location khác có quantity cho cùng SKU, when Pick được thực hiện, then requested quantity có thể được lấy từ nhiều tracked internal locations.
+- Given tổng quantity được lấy nhỏ hơn requested quantity, when result được ghi nhận, then Pick là `PARTIAL / INSUFFICIENT` và không fully completed.
 
-Trace: `CAND-REQ-003`, `CAND-REQ-007`, `CAND-BR-003`, `CAND-BR-004`, `DEC-010`, `DEC-011`, `DEC-017`.
+Trace: `CAND-REQ-003/006/010`, `CAND-BR-003/005/006`, `DEC-010/012/017`, `OQ-013/015/022`.
 
-Remaining: exception/downstream handoff `OQ-013`; partial Putaway `OQ-014`; device behavior `OQ-022`.
+## US-TRF-001 — Xác nhận Internal Transfer
 
-**Trạng thái:** DRAFT / READY FOR HUMAN CANONICAL REVIEW.
+> Là Warehouse Staff, tôi muốn xác nhận Internal Transfer giữa tracked internal locations, để source và destination quantities được cập nhật nhất quán mà không đổi Warehouse total.
 
-## DRAFT-US-PICK-001 — Pick từ tracked internal locations
+- Given SKU, quantity, source và destination tracked locations trong cùng Warehouse, when Warehouse Staff confirm Transfer, then source giảm Transfer quantity và destination tăng cùng quantity.
+- Given Internal Transfer được confirm, when quantity effects được ghi nhận, then Warehouse total quantity không thay đổi.
+- Given Transfer được confirm, when system record được tạo, then record chứa SKU, quantity, source, destination và confirmation timestamp.
 
-### DRAFT User Story
+Trace: `CAND-REQ-003/004/010`, `CAND-BR-003/007/008`, `DEC-005/007/009/010/013/017`, `OQ-013/014/015/022`.
 
-> Là Warehouse Staff, tôi muốn thực hiện Pick từ một Pick request có SKU và requested quantity, sử dụng một hoặc nhiều tracked internal locations khi cần, để cung cấp hàng cho downstream fulfilment/use và ghi nhận rõ trường hợp không đủ quantity.
+## US-TRF-002 — Xem Transfer history
 
-### DRAFT Acceptance Criteria
+> Là Manager, tôi muốn xem Transfer history, để trace relocation và hỗ trợ discrepancy investigation.
 
-#### AC-PICK-001 — Full Pick confirmation
+- Given confirmed Transfer records tồn tại, when Manager mở Transfer history, then Manager có thể xem history.
+- Given một confirmed Transfer xuất hiện trong history, when Manager xem record, then source, destination, quantity và time được hiển thị.
+- Given một Transfer có confirmation timestamp, when record được xem trong history, then displayed time phản ánh confirmation time của record.
 
-```gherkin
-Given một Pick request có SKU và requested quantity
-And quantity được lấy từ một hoặc nhiều tracked source internal locations
-When Warehouse Staff confirm full requested quantity
-Then Pick được xem là fully completed
-And confirmed quantity được giảm tại source internal location hoặc các source internal locations tương ứng
-```
+Trace: `CAND-REQ-004/010`, `CAND-BR-008`, `DEC-013/017`, `OQ-013/022`.
 
-#### AC-PICK-002 — Multi-location Pick
+## US-AUD-001 — Thực hiện selected-scope Audit
 
-```gherkin
-Given một source internal location không có đủ requested quantity
-And tracked internal location khác có quantity cho cùng SKU
-When Warehouse Staff thực hiện Pick
-Then requested quantity có thể được lấy từ nhiều tracked internal locations
-```
+> Là Warehouse Staff, tôi muốn thực hiện selected-scope Audit và so sánh physical count với `system stock quantity`, để ghi nhận kết quả match hoặc mismatch.
 
-#### AC-PICK-003 — Insufficient quantity
+- Given Audit session được bắt đầu, when Warehouse Staff chọn scope, then scope là nhóm SKU/location hoặc toàn Warehouse.
+- Given selected scope, when Warehouse Staff ghi physical count, then count được compare với `system stock quantity` tại scope/location tương ứng.
+- Given comparison đã thực hiện, when result được ghi nhận, then Audit lưu kết quả match hoặc mismatch.
+- Given result là match, when result được confirm, then Audit có thể complete.
 
-```gherkin
-Given tổng quantity được lấy nhỏ hơn requested quantity
-When Pick result được ghi nhận
-Then Pick được ghi PARTIAL / INSUFFICIENT
-And Pick không được xem là fully completed
-And Manager có thể review exception
-```
+Trace: `CAND-REQ-003/005/010`, `CAND-BR-003/009`, `EVD-015/016`, `DEC-010/014/017`, `OQ-013/022`.
 
-Trace: `CAND-REQ-003`, `CAND-REQ-006`, `CAND-BR-003`, `CAND-BR-005`, `CAND-BR-006`, `DEC-010`, `DEC-012`, `DEC-017`.
+## US-AUD-002 — Review và re-check Audit discrepancy
 
-FIFO/FEFO/reservation/scanning ngoài MVP hiện tại. Negative-stock behavior vẫn `OQ-015`; cancellation/retry ngoài approved exception vẫn `OQ-013`.
+> Là Manager, tôi muốn review Audit discrepancy và bảo đảm discrepancy được re-check, để Adjust không được áp dụng tự động từ một mismatch chưa kiểm tra lại.
 
-**Trạng thái:** DRAFT / READY FOR HUMAN CANONICAL REVIEW.
+- Given Audit result là mismatch, when result được ghi nhận, then discrepancy/review context được tạo.
+- Given discrepancy/review context tồn tại, when discrepancy được xử lý tiếp, then re-check là bắt buộc trước khi Adjust được cân nhắc.
+- Given Audit mismatch được ghi nhận, when Audit result được xử lý, then Audit không tự động apply Adjust.
 
-## DRAFT-US-TRF-001 — Internal Transfer recording
+Trace: `CAND-REQ-005/010`, `CAND-BR-002/010`, `EVD-012/017`, `DEC-014/017`, `OQ-013`.
 
-### DRAFT User Story
+## US-ADJ-001 — Tạo Adjust request
 
-> Là Warehouse Staff, tôi muốn ghi nhận Transfer của một SKU từ source internal location sang destination internal location, để location quantities được cập nhật nhất quán và Transfer history có thể được dùng cho trace và discrepancy investigation.
+> Là Warehouse Staff, tôi muốn tạo Adjust request cho discrepancy đã re-check và ghi reason, để Manager có đủ context quyết định trước khi quantity thay đổi.
 
-### DRAFT Acceptance Criteria
+- Given discrepancy tại affected SKU/location đã được re-check và vẫn còn, when Warehouse Staff tạo Adjust request, then Adjust reason được ghi nhận.
+- Given discrepancy chưa được re-check, when Adjust được cân nhắc, then điều kiện bắt buộc về re-check chưa được đáp ứng.
+- Given re-check và reason đã có nhưng không có attachment, when request được tạo, then attachment không phải điều kiện bắt buộc trong MVP.
+- Given Adjust request đang chờ Manager decision, when request được ghi nhận, then `system stock quantity` chưa được thay đổi bởi Adjust đó.
 
-#### AC-TRF-001 — Confirm internal Transfer
+Trace: `CAND-REQ-008/010`, `CAND-BR-002/011/012`, `EVD-012/013/017`, `DEC-015/017`, `OQ-013/015`.
 
-```gherkin
-Given SKU, quantity, source internal location và destination internal location trong cùng Warehouse
-When Warehouse Staff confirm Transfer
-Then source quantity được giảm theo Transfer quantity
-And destination quantity được tăng cùng quantity
-And Warehouse total quantity không thay đổi
-```
+## US-ADJ-002 — Quyết định và apply Adjust
 
-#### AC-TRF-002 — Minimum Transfer record
+> Là Manager, tôi muốn approve hoặc reject Adjust request, để chỉ approved Adjust mới cập nhật `system stock quantity` tại affected location.
 
-```gherkin
-Given một Transfer được confirm
-When system Transfer record được ghi nhận
-Then record chứa SKU, quantity, source internal location, destination internal location và confirmation timestamp
-```
+- Given discrepancy đã re-check, reason đã ghi và Manager approves request, when Adjust được apply, then `system stock quantity` tại affected internal location được cập nhật.
+- Given Manager rejects request, when rejection được ghi nhận, then `system stock quantity` không thay đổi.
+- Given re-check không còn discrepancy, when case được xử lý, then Adjust không được apply và quantity không thay đổi.
 
-#### AC-TRF-003 — Transfer history
+Trace: `CAND-REQ-003/008/010`, `CAND-BR-002/011/013`, `EVD-012/013/017`, `DEC-010/015/017`, `OQ-013/015`.
 
-```gherkin
-Given confirmed Transfer records tồn tại
-When Manager xem Transfer history
-Then history cho phép xem source, destination, quantity và time
-```
+## Preserved open boundaries
 
-Trace: `CAND-REQ-003`, `CAND-REQ-004`, `CAND-BR-003`, `CAND-BR-007`, `CAND-BR-008`, `DEC-007`, `DEC-013`, `DEC-017`.
-
-Cross-Warehouse Transfer ngoài MVP. Partial Transfer `OQ-014`; negative stock `OQ-015`; exception/reversal `OQ-013`.
-
-**Trạng thái:** DRAFT / READY FOR HUMAN CANONICAL REVIEW.
-
-## DRAFT-US-ADJ-001 — Adjust request và approval
-
-### DRAFT User Story
-
-> Là Warehouse Staff, tôi muốn tạo Adjust request cho discrepancy đã được re-check và cung cấp reason, để Manager có thể approve hoặc reject trước khi bất kỳ thay đổi quantity nào được apply.
-
-### DRAFT Acceptance Criteria
-
-#### AC-ADJ-001 — Re-check và reason
-
-```gherkin
-Given một discrepancy/Adjust request
-When Adjust được cân nhắc
-Then discrepancy phải được re-check
-And Adjust reason phải được ghi
-```
-
-#### AC-ADJ-002 — Approved Adjust
-
-```gherkin
-Given discrepancy đã được re-check
-And Manager approve Adjust request
-When Adjust được apply
-Then system stock quantity tại affected internal location được cập nhật
-```
-
-#### AC-ADJ-003 — Không còn discrepancy
-
-```gherkin
-Given re-check không còn discrepancy
-When case được xử lý
-Then Adjust không được apply
-And discrepancy case có thể close
-```
-
-#### AC-ADJ-004 — Manager reject
-
-```gherkin
-Given Manager reject Adjust request
-When rejection được ghi nhận
-Then system stock quantity không thay đổi
-```
-
-Attachment/evidence là optional trong MVP. Purchasing không có warehouse adjustment permission.
-
-Trace: `CAND-REQ-008`, `CAND-REQ-010`, `CAND-BR-002`, `CAND-BR-011`, `CAND-BR-012`, `CAND-BR-013`, `DEC-015`, `DEC-017`.
-
-Rejected-case closure vẫn `OQ-013`; negative-stock behavior vẫn `OQ-015`.
-
-**Trạng thái:** DRAFT / READY FOR HUMAN CANONICAL REVIEW.
-
-## DRAFT-US-AUD-001 — Selected-scope Audit
-
-### DRAFT User Story
-
-> Là Warehouse Staff, tôi muốn thực hiện selected-scope Audit bằng cách ghi physical count và so sánh với `system stock quantity`, để xác định kết quả match hoặc tạo discrepancy/review context khi mismatch.
-
-### DRAFT Acceptance Criteria
-
-#### AC-AUD-001 — Count và compare
-
-```gherkin
-Given selected Audit scope là một nhóm SKU/location hoặc toàn Warehouse
-When Warehouse Staff ghi physical count
-Then physical count được so sánh với system stock quantity tại scope/location tương ứng
-And comparison result được ghi nhận
-```
-
-#### AC-AUD-002 — Match completion
-
-```gherkin
-Given Audit comparison result là match
-When result được confirm
-Then Audit có thể complete
-```
-
-#### AC-AUD-003 — Mismatch handling
-
-```gherkin
-Given Audit comparison result là mismatch
-When result được ghi nhận
-Then discrepancy/review context được tạo
-And discrepancy phải được re-check
-And Audit không tự động apply Adjust
-```
-
-Trace: `CAND-REQ-005`, `CAND-BR-002`, `CAND-BR-009`, `CAND-BR-010`, `DEC-010`, `DEC-014`, `DEC-017`.
-
-Không canonicalize `cycle count`. Mismatch completion/schedule vẫn `OQ-013`; device behavior vẫn `OQ-022`.
-
-**Trạng thái:** DRAFT / READY FOR HUMAN CANONICAL REVIEW.
-
-## Candidate decomposition để đạt 8–12 stories
-
-Các candidate sau chưa phải canonical backlog và cần review independent user value/testability:
-
-1. Receive actual quantity và comparison.
-2. Receive reference mismatch review.
-3. Putaway initial location allocation.
-4. Full Pick execution.
-5. `PARTIAL / INSUFFICIENT` Pick review.
-6. Internal Transfer execution/confirmation.
-7. Transfer history lookup.
-8. Selected-scope Audit count/compare.
-9. Audit discrepancy/re-check context.
-10. Adjust request, approval/rejection và apply.
+- `OQ-013` remains `PARTIALLY DECIDED / OPEN`.
+- `OQ-014`, `OQ-015`, `OQ-022` remain open.
+- Không có AC về Receive final completion, automatic Putaway handoff, Putaway exception, Transfer failure/cancel/reversal, Audit mismatch closure, Adjust rejected-case closure hoặc negative-stock behavior.
+- Không có barcode, mobile/offline, FIFO/FEFO, reservation, multi-Warehouse hoặc Purchase Order lifecycle behavior.

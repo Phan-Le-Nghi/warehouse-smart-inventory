@@ -1,10 +1,10 @@
 # Story Spec — Transfer / Movement Tracking
 
-**Status:** DRAFT — product behavior approved; canonical story and technical contract review pending
+**Status:** HISTORICAL DRAFT — product stories canonicalized; technical contract review pending
 
-**Story ID:** `DRAFT-US-TRF-001`
+**Canonical Story IDs:** `US-TRF-001`, `US-TRF-002`
 
-**Owner:** Ly Na
+**Owner:** Nguyễn Thị Ly Na
 
 This spec records approved functional outcomes only. It does not choose architecture, data model, API, persistence technology, validation design or implementation. Round 2 decisions are HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS, not verified research findings.
 
@@ -24,11 +24,17 @@ Support subsequent relocation of a SKU between tracked internal locations in the
 
 Cross-Warehouse Transfer is outside MVP.
 
-## 3. DRAFT User Story
+## 3. Canonical User Stories
 
-> Là Warehouse Staff, tôi muốn ghi nhận Transfer của một SKU từ source internal location sang destination internal location, để location quantities được cập nhật nhất quán và Transfer history có thể được dùng cho trace và discrepancy investigation.
+### US-TRF-001 — Execution/confirmation
 
-The story remains DRAFT until explicit human canonical review.
+> Là Warehouse Staff, tôi muốn xác nhận Internal Transfer giữa tracked internal locations, để source và destination quantities được cập nhật nhất quán mà không đổi Warehouse total.
+
+### US-TRF-002 — History lookup
+
+> Là Manager, tôi muốn xem Transfer history, để trace relocation và hỗ trợ discrepancy investigation.
+
+Canonical wording and AC are maintained in `vault/04-product/stories/US-TRF-001.md` and `US-TRF-002.md`. This technical draft does not override them.
 
 ## 4. Approved functional inputs and outputs
 
@@ -64,19 +70,26 @@ Manager may view Transfer history. The approved purpose is trace and discrepancy
 7. The system records SKU, quantity, source, destination and confirmation timestamp.
 8. The record is available through Transfer history/query.
 
-## 6. DRAFT Acceptance Criteria
+## 6. Canonical Acceptance Criteria reference
 
-### AC-TRF-001 — Quantity conservation
+### US-TRF-001 / AC-TRF1-001 — Confirm quantity effects
 
 ```gherkin
 Given SKU, quantity, source internal location và destination internal location trong cùng Warehouse
 When Warehouse Staff confirm Transfer
 Then source quantity được giảm theo Transfer quantity
 And destination quantity được tăng cùng quantity
-And Warehouse total quantity không thay đổi
 ```
 
-### AC-TRF-002 — Minimum Transfer record
+### US-TRF-001 / AC-TRF1-002 — Preserve Warehouse total
+
+```gherkin
+Given Internal Transfer được confirm
+When quantity effects được ghi nhận
+Then Warehouse total quantity không thay đổi
+```
+
+### US-TRF-001 / AC-TRF1-003 — Minimum Transfer record
 
 ```gherkin
 Given một Transfer được confirm
@@ -84,15 +97,16 @@ When system Transfer record được ghi nhận
 Then record chứa SKU, quantity, source internal location, destination internal location và confirmation timestamp
 ```
 
-### AC-TRF-003 — Transfer history
+### US-TRF-002 / AC-TRF2-001 to AC-TRF2-003 — Transfer history
 
 ```gherkin
 Given confirmed Transfer records tồn tại
-When Manager xem Transfer history
-Then history cho phép xem source, destination, quantity và time
+When Manager mở Transfer history
+Then Manager có thể xem history
+And confirmed records expose source, destination, quantity và confirmation time
 ```
 
-AC IDs remain DRAFT until canonical story review.
+The canonical story files are authoritative if this historical technical draft becomes stale.
 
 ## 7. Unresolved behavior
 
@@ -112,4 +126,4 @@ No unresolved behavior above may be inferred during implementation.
 - Authentication/authorization implementation: TBD; only the product permission outcome is approved.
 - Implementation and tests: not started.
 
-This spec is not implementation-ready until the story, AC and technical contract receive their required reviews.
+This spec is not implementation-ready until the technical contract receives its required review.

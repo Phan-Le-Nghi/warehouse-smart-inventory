@@ -15,7 +15,7 @@
 - FIFO/FEFO/reservation/scanning ngoài Pick MVP hiện tại.
 - `OQ-013` giữ `PARTIALLY DECIDED / OPEN`; không suy diễn lifecycle gap.
 
-## Receive — BA CONFIRMED story, lifecycle partially open
+## Receive — `US-REC-001`, lifecycle partially open
 
 ```text
 Receive context
@@ -39,9 +39,10 @@ Compare actual quantity with external/manual expected quantity/reference
 
 - Purchasing provides/views expected quantity/reference.
 - Full Purchase Order lifecycle is outside MVP.
-- `US-REC-001` remains BA CONFIRMED with `AC-01` to `AC-03`; Round 2 additions await explicit story review.
+- Reference mismatch là AC/scenario của `US-REC-001`, không phải story riêng.
+- Receive final completion và exact Putaway handoff vẫn `OQ-013`.
 
-## Putaway — DRAFT
+## Putaway — `US-PUT-001`
 
 ```text
 Initial placement after Receive
@@ -60,7 +61,7 @@ Putaway complete for approved happy path
 - Putaway does not automatically create Transfer or Movement system record.
 - Exception/downstream handoff remains `OQ-013`; partial Putaway remains `OQ-014`.
 
-## Pick — DRAFT
+## Pick — `US-PICK-001`
 
 ```text
 Pick request: SKU + requested quantity
@@ -82,7 +83,9 @@ Take quantity and confirm result
 
 Downstream module, FIFO/FEFO/reservation/scanning are outside the current Pick MVP. Negative-stock behavior remains `OQ-015`.
 
-## Transfer — DRAFT
+`PARTIAL / INSUFFICIENT` là AC/scenario trong `US-PICK-001`, không phải story riêng.
+
+## Transfer — `US-TRF-001` execution và `US-TRF-002` history
 
 ```text
 Need for subsequent relocation between tracked internal locations
@@ -105,8 +108,9 @@ for trace/discrepancy investigation
 - Manager may view Transfer history and review exception.
 - Cross-Warehouse Transfer ngoài MVP.
 - Partial Transfer `OQ-014`; negative stock `OQ-015`; exception/reversal `OQ-013`.
+- `US-TRF-001` kết thúc tại execution/confirmation và minimum system record; `US-TRF-002` cover Manager history lookup.
 
-## Audit — DRAFT
+## Audit — `US-AUD-001` count/compare và `US-AUD-002` discrepancy review
 
 ```text
 Start selected-scope Audit session
@@ -132,7 +136,9 @@ Record comparison result
 
 Không canonicalize `cycle count`. Mismatch completion và schedule vẫn `OQ-013`.
 
-## Adjust — DRAFT
+`US-AUD-001` cover selected scope, count, compare và match completion. `US-AUD-002` cover Manager review, mandatory re-check và no-auto-adjust guard; không khẳng định mismatch closure.
+
+## Adjust — `US-ADJ-001` request và `US-ADJ-002` decision/apply
 
 ```text
 Warehouse Staff creates discrepancy / Adjust request
@@ -157,6 +163,8 @@ Mandatory re-check + required Adjust reason
 
 Rejected-case closure remains `OQ-013`. Purchasing has no warehouse adjustment permission.
 
+`US-ADJ-001` cover Warehouse Staff request/re-check/reason. `US-ADJ-002` cover Manager approve/reject và approved apply; không khẳng định rejected-case final closure.
+
 ## Permission summary
 
 | Role | Approved MVP participation |
@@ -170,9 +178,12 @@ Rejected-case closure remains `OQ-013`. Purchasing has no warehouse adjustment p
 
 | Story | Status |
 |---|---|
-| `US-REC-001` | BA CONFIRMED; canonical wording preserved |
-| `DRAFT-US-PUT-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| `DRAFT-US-PICK-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| `DRAFT-US-TRF-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| `DRAFT-US-ADJ-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
-| `DRAFT-US-AUD-001` | DRAFT / READY FOR HUMAN CANONICAL REVIEW |
+| `US-REC-001` | CANONICAL — HUMAN APPROVED |
+| `US-PUT-001` | CANONICAL — HUMAN APPROVED |
+| `US-PICK-001` | CANONICAL — HUMAN APPROVED |
+| `US-TRF-001` | CANONICAL — HUMAN APPROVED |
+| `US-TRF-002` | CANONICAL — HUMAN APPROVED |
+| `US-AUD-001` | CANONICAL — HUMAN APPROVED |
+| `US-AUD-002` | CANONICAL — HUMAN APPROVED |
+| `US-ADJ-001` | CANONICAL — HUMAN APPROVED |
+| `US-ADJ-002` | CANONICAL — HUMAN APPROVED |

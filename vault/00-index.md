@@ -16,6 +16,7 @@ Vault là nguồn sự thật canonical. Các giá trị trạng thái dùng t�
 | Role | [`03-domain/roles.md`](03-domain/roles.md) | MVP permission model đã human approve | Product/BA — Thanh Ngân |
 | Quy trình | [`03-domain/workflow-overview.md`](03-domain/workflow-overview.md) | Lifecycle đã quyết định một phần; `OQ-013` còn mở | Product/BA — Thanh Ngân |
 | Quyền sở hữu User Story | [`04-product/story-ownership.md`](04-product/story-ownership.md) | CONFIRMED | Nhóm |
+| Canonical User Stories | [`04-product/stories/`](04-product/stories/) | 9 stories — HUMAN APPROVED | Product/BA + Story owners |
 | Công cụ sản phẩm bên ngoài | [`04-product/external-tools.md`](04-product/external-tools.md) | URL/quyền truy cập TBD | Người phụ trách công cụ liên quan |
 | Quyết định | [`08-decisions/decision-log.md`](08-decisions/decision-log.md) | Đang hoạt động | Nhóm / người phê duyệt |
 | Hướng dẫn AI | [`09-ai/ai-usage-guidance.md`](09-ai/ai-usage-guidance.md) | CONFIRMED | AI/Vault — Ly Na |
