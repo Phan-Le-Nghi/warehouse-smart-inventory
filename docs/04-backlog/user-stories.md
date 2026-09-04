@@ -69,13 +69,14 @@ Given số lượng thực nhận khác số lượng kỳ vọng, when Receive 
 - Evidence trực tiếp: `EVD-006`, `EVD-007`, `EVD-008`.
 - Evidence về ranh giới Putaway/Transfer: `EVD-010`, `EVD-011`.
 - Giới hạn khả năng khái quát: `EVD-019`.
-- `CAND-REQ-003` vẫn là `DRAFT`; story không giả định record/lookup location là product behavior đã duyệt.
+- `CAND-REQ-003` — `APPROVED — HUMAN PRODUCT DECISION`: area-level internal-location recording/lookup với `Backroom` và `Sales Shelf`; một SKU có thể được ghi nhận tại nhiều internal locations trong cùng Warehouse.
+- `DEC-005`, `DEC-006`, `DEC-007`, `DEC-009`: one-Warehouse MVP và boundary Putaway/Transfer/Pick đã được human phê duyệt như product modeling, không phải research findings.
 
 ### DRAFT User Story
 
-> Là người thực hiện Putaway *(role TBD)*, tôi muốn xử lý hàng sau Receive bằng cách bố trí hàng tại backroom hoặc sales shelf, để phản ánh hoạt động sắp xếp hàng vật lý đang diễn ra tại minimart.
+> Là người thực hiện Putaway *(role TBD)*, tôi muốn ghi nhận area-level internal location ban đầu của inventory sau Receive là `Backroom` hoặc `Sales Shelf`, để location-related inventory information có thể được tra cứu trong hệ thống.
 
-Story mô tả workflow vật lý hiện tại, chưa xác định system capability. Story chưa sẵn sàng canonical hóa cho đến khi outcome hệ thống và completion state được xác nhận.
+Story phản ánh capability của `CAND-REQ-003` và boundary Putaway là initial placement theo `DEC-009`. Story vẫn chưa sẵn sàng canonical hóa cho đến khi trigger/handoff, ý nghĩa thông tin được ghi nhận, Stock/location effect và completion state được xác nhận.
 
 ### Acceptance Criteria
 
@@ -85,20 +86,21 @@ Các evidence checkpoint sau chỉ phục vụ discovery, không phải Acceptan
 
 1. Physical Putaway được quan sát sau Receive (`EVD-007`).
 2. Hàng có thể được bố trí tại backroom hoặc sales shelf (`EVD-006`, `EVD-007`).
+3. Area-level location capability, multiple-location cardinality và Putaway modeling boundary là HUMAN PRODUCT DECISIONS (`CAND-REQ-003`, `DEC-006`, `DEC-009`), không phải research checkpoints.
 
 ### Phạm vi chưa xác nhận
 
 - Trigger, precondition, completion state và downstream handoff: `OQ-013`.
 - Partial Putaway: `OQ-014`.
-- Một SKU có thể tồn tại tại nhiều physical location: `OPEN QUESTION`; chưa có canonical ID.
-- Ranh giới Putaway và Transfer: `OQ-016`.
+- Quantity có được duy trì theo internal location và Warehouse total được xác định thế nào: `OQ-011`.
+- `OQ-016` đã được resolve bởi `DEC-007`; system Transfer transaction, Stock effect, Movement system record và automatic location update vẫn TBD.
 - Role thực hiện/xem Putaway: `OQ-020`.
 - Ảnh hưởng tới Stock/Movement: `TBD`.
 - Barcode/QR/scanner/mobile/offline: `OQ-022`.
 
 ### Scope guard
 
-Không giả định automatic location assignment, bin/capacity, multiple-location splitting, quantity update, Movement transaction, thiết bị hoặc permission behavior.
+Không giả định automatic location assignment/update, bin/capacity, quantity per location, quantity update, Movement system record, thiết bị hoặc permission behavior.
 
 **Trạng thái:** DRAFT — chưa canonical.
 
@@ -108,15 +110,15 @@ Không giả định automatic location assignment, bin/capacity, multiple-locat
 
 - Requirement phạm vi: `REQ-002`.
 - Evidence current-state liên quan: `EVD-006`, `EVD-007`, `EVD-008`, `EVD-009`.
-- `CAND-REQ-003` liên quan location support nhưng vẫn là `DRAFT`.
+- `CAND-REQ-003` — `APPROVED — HUMAN PRODUCT DECISION`; Pick được model là lấy quantity từ source internal location theo `DEC-009`.
 - Không có Business Rule đã duyệt trực tiếp xác định Pick behavior.
 - Source artifact: `vault/04-product/pick-draft.md`.
 
 ### DRAFT User Story
 
-> As a person performing Pick, I need Pick to be included in the required inventory workflow, so that Pick is within the defined process scope.
+> As a person performing Pick, I need to take quantity from a source internal location for a downstream purpose, so that Pick is represented within the required inventory workflow.
 
-Wording này chỉ phản ánh `REQ-002`. Nó không xác nhận location support, system action, role permission, source-location rule, stock effect hoặc inventory outcome.
+Wording này phản ánh `REQ-002`, `CAND-REQ-003` và HUMAN PRODUCT MODELING tại `DEC-009`. Nó không xác nhận Pick trigger, downstream purpose, source-location selection rule, system action, role permission, Stock effect, completion hoặc exception.
 
 ### DRAFT Acceptance Criteria
 
@@ -135,18 +137,18 @@ Wording này chỉ phản ánh `REQ-002`. Nó không xác nhận location suppor
 
 ### Phạm vi chưa xác nhận
 
-- Stock quantity definitions: `OQ-011`.
+- `system stock quantity` granularity, aggregation, workflow effect và change timing: `OQ-011` (`PARTIALLY DECIDED / OPEN`).
 - Lot/batch, serial, expiry và UOM: `OQ-012`.
 - Trigger, preconditions, outcome, exception và completion: `OQ-013`.
 - Partial Pick: `OQ-014`.
 - Negative stock: `OQ-015`.
-- Pick/Transfer/Movement boundary: `OQ-016`.
+- System behavior tại boundary Pick/Transfer/Movement vẫn TBD; `OQ-016` đã được resolve cho scope bởi `DEC-007`.
 - Role/permission: `OQ-020`.
 - Barcode/QR/scanner/mobile/offline/integration: `OQ-022`.
 
 ### Scope guard
 
-Không giả định barcode/scanner, FIFO/FEFO, reservation, stock reduction, Movement creation, Transfer behavior, một location cho mỗi SKU hoặc quyền của role.
+Không giả định barcode/scanner, FIFO/FEFO, reservation, stock reduction, Movement system record creation, Transfer system behavior hoặc quyền của role. Một SKU có thể được ghi nhận tại nhiều internal locations theo `DEC-006`, nhưng source-selection behavior vẫn TBD.
 
 **Trạng thái:** DRAFT / NEEDS HUMAN REVIEW.
 
@@ -156,15 +158,16 @@ Không giả định barcode/scanner, FIFO/FEFO, reservation, stock reduction, M
 
 - Requirement phạm vi: `REQ-002`.
 - Core domain: `REQ-004`.
+- Internal location capability: `CAND-REQ-003` — `APPROVED — HUMAN PRODUCT DECISION`.
 - Candidate Requirement: `CAND-REQ-004` — vẫn `DRAFT`.
 - Evidence: `EVD-010`, `EVD-011`.
 - Giới hạn khả năng khái quát: `EVD-019`.
-- Transfer scope: `OQ-016`.
+- Transfer scope: `OQ-016` — `RESOLVED — HUMAN PRODUCT DECISION` bởi `DEC-007`; functional behavior vẫn chưa được duyệt.
 - Source artifact: `vault/04-product/transfer-draft.md`.
 
 ### DRAFT User Story
 
-> As a person involved in Transfer *(role/authority is still `OQ-020`)*, I want the product team to evaluate whether movement between the backroom storage area and the sales shelf area should be supported in the product, so that the team can decide whether any recording or query behavior belongs in the Transfer flow.
+> As a person involved in Transfer *(role/authority is still `OQ-020`)*, I want the product team to evaluate what system behavior, if any, should support subsequent relocation between the tracked `Backroom` and `Sales Shelf` internal locations, so that the team can decide whether recording or query behavior belongs in the Transfer flow.
 
 Story chỉ phản ánh nhu cầu đánh giá product scope. Nó không xác nhận system capability cụ thể.
 
@@ -184,14 +187,14 @@ Các checkpoint trên không phải functional Acceptance Criteria.
 - Trigger, precondition, success outcome, exception và completion: `OQ-013`.
 - Partial Transfer: `OQ-014`.
 - Negative stock: `OQ-015`.
-- Transfer giữa location, Warehouse hay cả hai: `OQ-016`.
+- Transfer scope đã được quyết định là internal-only trong một Warehouse (`OQ-016`, `DEC-007`); system Transfer transaction vẫn chưa được duyệt.
 - Role có thể thực hiện/xem Transfer: `OQ-020`.
 - Movement record, source/destination, query behavior và Stock/location effect: `TBD`.
 - Barcode/QR, scanner, mobile/offline và integration: `OQ-022`.
 
 ### Scope guard
 
-Không biến physical movement thành system transaction đã xác nhận. Không giả định Transfer tự động cập nhật Stock/location, hỗ trợ nhiều Warehouse hoặc cho phép một role cụ thể thực hiện.
+Không biến physical movement thành system transaction đã xác nhận. Không giả định Transfer tự động cập nhật Stock/location, tạo Movement system record hoặc cho phép một role cụ thể thực hiện. Multi-Warehouse và cross-Warehouse Transfer ngoài MVP theo `DEC-005`, `DEC-007`.
 
 **Trạng thái:** DRAFT / NEEDS HUMAN REVIEW.
 
@@ -207,7 +210,7 @@ Không biến physical movement thành system transaction đã xác nhận. Khô
 
 ### DRAFT User Story
 
-> As a person handling stock discrepancies, I want to recheck the discrepancy between physical stock and system stock before performing a stock adjustment.
+> As a person handling stock discrepancies, I want to recheck the discrepancy between physical stock and `system stock quantity` before performing a stock adjustment.
 
 Actor là nhãn trung tính. Role, authority và permission là `TBD` / `OQ-020`.
 
@@ -240,7 +243,7 @@ Hai AC chỉ thể hiện thứ tự nghiệp vụ trong `CAND-BR-002`; không x
 - Nguồn/trigger xác định discrepancy: `TBD`.
 - Detailed recheck, completion, exception và adjustment mechanism: `OQ-013` / `TBD`.
 - Reason, evidence và approval: `OQ-017`.
-- Stock definitions và negative stock: `OQ-011`, `OQ-015`.
+- `system stock quantity` granularity/aggregation/effect và negative stock: `OQ-011`, `OQ-015`.
 - Role/permission: `OQ-020`.
 - Anomaly/discrepancy definition: `OQ-028`.
 - Quan hệ Audit–Adjust: `TBD`.
@@ -265,7 +268,7 @@ Không giả định Audit là trigger bắt buộc, role/permission, approval, 
 
 ### DRAFT User Story
 
-> Là người tham gia thực hiện Audit *(role và authority TBD)*, tôi muốn đối chiếu số lượng đếm thực tế với dữ liệu tồn trong hệ thống, để phát hiện chênh lệch cần được kiểm tra lại trước khi thực hiện bất kỳ điều chỉnh tồn nào.
+> Là người tham gia thực hiện Audit *(role và authority TBD)*, tôi muốn đối chiếu số lượng đếm thực tế với `system stock quantity`, để phát hiện chênh lệch cần được kiểm tra lại trước khi thực hiện bất kỳ điều chỉnh tồn nào.
 
 Story không xác định loại Audit, phạm vi đếm, lịch thực hiện, quyền hạn, completion state hoặc cơ chế chuyển sang Adjust.
 
@@ -302,7 +305,7 @@ Hai AC là DRAFT ở mức outcome được evidence/rule hỗ trợ. Chúng kh�
 - Role/permission: `OQ-020`.
 - Device/integration: `OQ-022`.
 - Count scope, lịch/tần suất sản phẩm và Audit–Adjust relationship: `TBD`.
-- Stock quantity dùng để đối chiếu: `OQ-011`.
+- Granularity/aggregation của `system stock quantity` dùng để đối chiếu: `OQ-011`.
 
 ### Scope guard
 
