@@ -16,6 +16,16 @@ Traceability sử dụng stable ID canonical. Artifact downstream còn thiếu p
 | AI-DIR-002 | TBD | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Hướng được giảng viên xác nhận |
 | AI-DIR-003 | TBD | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Hướng được giảng viên xác nhận |
 
+## Receive — BA confirmed
+
+| Requirement/Hướng | User Story/AC | Flow/Design/Spec | Taiga | Implementation | Test | Bằng chứng |
+|---|---|---|---|---|---|---|
+| `CAND-REQ-001` | `US-REC-001`: AC-01, AC-02 | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | `EVD-002`, `EVD-003` |
+| `CAND-REQ-002` | `US-REC-001`: AC-03 | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | `EVD-004`, `EVD-005` |
+| `CAND-BR-001` | `US-REC-001`: AC-03 | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | `EVD-002`, `EVD-003`, `EVD-004` |
+
+`OQ-019` (nguồn số lượng kỳ vọng) và `OQ-020` (role/authority Receive) vẫn mở. Không có AC-04 vì evidence hiện có chưa xác nhận hành vi tra cứu/xem lại Receive.
+
 Deliverable môn học/báo cáo được theo dõi trong [`00-project-index.md`](00-project-index.md), không được gán ID yêu cầu sản phẩm tại đây.
 
 ## Putaway DRAFT trace
@@ -30,8 +40,7 @@ REQ-002
     -> Putaway cautious flow: DRAFT
     -> Taiga / Implementation / Test: Chưa bắt đầu
 ```
-
-`CAND-REQ-003` vẫn là `DRAFT` và không được sử dụng tại đây như approval cho hành vi record/lookup location. Trigger, completion, partial Putaway, location cardinality (`OQ-034` chỉ là stable ID đề xuất, chưa canonical), Putaway/Transfer classification, role permission, Stock/Movement effect và device interaction tiếp tục là `TBD` / `OPEN QUESTION`.
+`CAND-REQ-003` vẫn là `DRAFT` và không được sử dụng tại đây như approval cho hành vi record/lookup location. Trigger, completion, partial Putaway, location cardinality, Putaway/Transfer classification, role permission, Stock/Movement effect và device interaction tiếp tục là `TBD` / `OPEN QUESTION`.
 
 ## Audit DRAFT trace
 
@@ -66,3 +75,34 @@ REQ-002 (Adjust là khu vực quy trình bắt buộc)
 ```
 
 Nguồn/trigger chênh lệch, detailed recheck, completion state, exception handling, adjustment mechanism, reason/evidence/approval, role/permission, quantity definition, negative-stock handling và anomaly/discrepancy definition vẫn là `TBD` / `OPEN QUESTION`. Trace này không xác nhận Audit là trigger/dependency bắt buộc, automatic stock update, hoặc behavior ngoài `CAND-BR-002`.
+
+**## Transfer DRAFT trace**
+
+```text
+REQ-002 (Transfer là khu vực quy trình bắt buộc)
+
+  + REQ-004 (Movement và Transfer thuộc core domain; hành vi chi tiết TBD)
+
+  + CAND-REQ-004 (DRAFT — đề xuất đánh giá hỗ trợ theo dõi movement)
+
+  + EVD-010 (có physical movement giữa backroom và sales shelf)
+
+  + EVD-011 (chưa xác nhận movement có phải transaction riêng hay không)
+
+  + EVD-019 (research limitation)
+
+    -> DRAFT-US-TRA-001
+
+    -> Acceptance Criteria: TBD
+
+    -> Transfer user flow: TBD
+
+    -> Taiga / Implementation / Test: Chưa bắt đầu
+```
+
+`CAND-REQ-004` vẫn là `DRAFT` và không được sử dụng như approval cho system Transfer behavior. `EVD-010` chỉ xác nhận physical movement giữa backroom và sales shelf; `EVD-011` chưa xác nhận movement có được ghi nhận thành transaction riêng hay không.
+
+Phạm vi Transfer giữa location, Warehouse hay cả hai tiếp tục là `OPEN QUESTION` / `OQ-016`. Trigger, precondition, completion state, partial Transfer, role permission, Stock effect và device interaction tiếp tục là `TBD` / `OPEN QUESTION`.
+
+Trace này không xác nhận hệ thống phải tạo Transfer/Movement transaction riêng, tự động cập nhật Stock, tự động thay đổi location hoặc cho phép một role cụ thể thực hiện Transfer.
+
