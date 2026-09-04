@@ -1,4 +1,4 @@
-# Traceability v4 — PRD / MVP / Consolidated Flow Baseline
+# Traceability v5 — Product / Prototype / Usability Baseline
 
 Final backlog gồm 9 canonical stories đã được human approve. PRD, MVP Scope và Consolidated User Flow đã được baseline cho Report Round 1. Human Product Decisions / MVP Assumptions không được ghi như verified evidence và không tạo `EVD-*` mới.
 
@@ -70,6 +70,19 @@ AI-related OQs remain unchanged and are future/open directions, not canonical MV
 | [`03-product/mvp-scope.md`](03-product/mvp-scope.md) | IN MVP / OUT OF MVP / OPEN with ID-level trace | Requirements, Decisions, OQs |
 | [`03-product/user-flow.md`](03-product/user-flow.md) | Independent Pick/Transfer paths; selected-scope Audit; discrepancy/re-check/Adjust relationship; negative-stock guards | `DEC-018/019`, canonical stories and AC |
 | [`04-backlog/user-stories.md`](04-backlog/user-stories.md) | Report-facing summary of 9 canonical stories | `vault/04-product/stories/` |
+| [`05-design/screen-inventory.md`](05-design/screen-inventory.md) | 10 base screens and 3 critical prototype flows | Canonical stories, consolidated flow and human-reviewed usability decisions |
+| [`05-design/usability-test-script.md`](05-design/usability-test-script.md) | Task script for `P1`/`P2`/`P3` | Canonical stories and approved flow boundaries |
+| [`05-design/usability-findings.md`](05-design/usability-findings.md) | Human-reviewed Observation → Issue → Decision findings | Findings supplied by human reviewer; no new Requirement/BR |
+
+## Prototype → usability traceability
+
+Các “Usability Decision” dưới đây là decision cục bộ của artifact về wording, state visibility hoặc prototype transition. Chúng không phải Requirement/Business Rule mới và không được gán `DEC-*` mới vì không thay đổi product behavior canonical.
+
+| Prototype Flow | Story | Usability Finding | Usability Decision | Existing canonical decision |
+|---|---|---|---|---|
+| `PF-01 — Receive → Putaway` | `US-REC-001`, `US-PUT-001` | `P1`: expected/actual và discrepancy rõ; completion sau reference review và boundary sang Putaway chưa rõ | Giữ hai flow tách biệt; không production CTA tự động; prototype chỉ dùng facilitator transition | `DEC-016`, `DEC-018`; `OQ-013` vẫn mở |
+| `PF-02 — Pick` | `US-PICK-001` | `P2`: multi-location/full/blocked rõ; partial có thể bị hiểu là fully completed | Giữ partial hợp lệ; thêm copy “Pick is not fully completed. 4 units remain unfulfilled.”; giữ blocked/no-change guard | `DEC-012`, `DEC-019` |
+| `PF-03 — Audit → Adjust` | `US-AUD-001`, `US-AUD-002`, `US-ADJ-001`, `US-ADJ-002` | `P3`: mismatch và re-check rõ; thời điểm quantity đổi qua actor handoff chưa rõ | Hiển thị no-change sau mismatch/re-check/waiting/reject; chỉ approved/applied mới cập nhật quantity | `DEC-014`, `DEC-015`, `DEC-018`, `DEC-019` |
 
 ## Decomposition record
 
@@ -90,7 +103,8 @@ Historical draft references are valid only when explicitly labeled as promoted, 
 | Historical drafts | Superseded; not active backlog items |
 | PRD / MVP Scope | Baseline for Report Round 1; open questions preserved |
 | Report user flow | Consolidated flow updated; independent operational paths and lifecycle gaps preserved |
-| Design/Figma/Prototype | Chưa tạo |
+| Design/Figma/Prototype | Figma URL đã được cung cấp; screen inventory ghi 10 base screens/3 flows; quyền truy cập và frame parity cần human review |
+| Usability artifacts | Script và 3 human-reviewed findings đã được tổng hợp; không claim AI thực hiện participant test |
 | Taiga | Chưa tạo item; URL/access TBD |
 | Architecture/Data Model/API | Still subject to separate human approval |
 | Implementation/Test | Chưa bắt đầu |
