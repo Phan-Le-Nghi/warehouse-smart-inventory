@@ -19,7 +19,18 @@
 * `REQ-001` — Business problem: kiểm soát nhập, xuất, chuyển kho và tồn kho.
 * `REQ-002` — Required workflow: `Receive → Putaway → Pick → Transfer → Adjust → Audit`.
 * `REQ-004` — Core domain gồm `SKU`, `Warehouse`, `Stock`, `Movement`, `Transfer`, `Alert`, `Audit`; quan hệ và hành vi chi tiết còn TBD.
+* `CAND-REQ-003` — Area-level internal-location recording/lookup với `Backroom` và `Sales Shelf`; một SKU có thể được ghi nhận tại nhiều internal locations trong cùng Warehouse; **APPROVED — HUMAN PRODUCT DECISION**.
 * `CAND-REQ-004` — Đề xuất đánh giá việc hỗ trợ theo dõi movement giữa backroom và sales shelf; **DRAFT**.
+
+### Human Product Decisions
+
+* `DEC-005` — MVP quản lý một Warehouse duy nhất; multi-Warehouse ngoài MVP.
+* `DEC-006` — MVP dùng area-level internal locations `Backroom` và `Sales Shelf`; một SKU có thể liên kết với nhiều internal locations.
+* `DEC-007` — Transfer trong MVP chỉ nằm trong boundary subsequent relocation giữa tracked internal locations trong cùng Warehouse; cross-Warehouse Transfer ngoài MVP.
+* `DEC-008` — Thuật ngữ Stock tối thiểu là `system stock quantity`; granularity, aggregation và effects vẫn OPEN.
+* `DEC-009` — Phân biệt Physical movement với Movement system record; Transfer là subsequent internal relocation.
+
+Các quyết định trên là product scope/modeling, không phải research findings. Chúng không duyệt functional Transfer transaction, Movement system record, Stock effect hoặc automatic location update.
 
 ### Evidence
 
@@ -32,15 +43,16 @@
 * `OQ-013` — Trigger, precondition, success outcome, exception và completion state.
 * `OQ-014` — Partial execution của các process.
 * `OQ-015` — Negative stock.
-* `OQ-016` — Transfer giữa location, warehouse hay cả hai.
 * `OQ-020` — Quyền của Warehouse Staff / Manager / Purchasing / Admin.
 * `OQ-022` — Barcode/QR/scanner/mobile/offline/external integration.
+
+`OQ-011` là `PARTIALLY DECIDED / OPEN`. `OQ-016` là `RESOLVED — HUMAN PRODUCT DECISION`; system behavior vẫn chưa được duyệt.
 
 ---
 
 ## 2. Goal
 
-Hỗ trợ người thực hiện xử lý hàng **theo dõi việc di chuyển hàng giữa các khu vực lưu trữ**, dựa trên movement thực tế đã được quan sát trong evidence.
+Đánh giá system behavior, nếu có, để hỗ trợ subsequent relocation giữa tracked internal locations trong one-Warehouse MVP. Physical movement được quan sát trong evidence chỉ là current-state context.
 
 Story này **không xác nhận** rằng hệ thống bắt buộc phải tạo một Transfer transaction riêng, tự động cập nhật Stock hoặc tự động thay đổi Location.
 
@@ -48,7 +60,7 @@ Story này **không xác nhận** rằng hệ thống bắt buộc phải tạo 
 
 ## 3. User Story
 
-> Là người thực hiện xử lý hàng *(role cụ thể TBD)*, tôi muốn theo dõi việc di chuyển hàng giữa các khu vực lưu trữ, để hỗ trợ kiểm soát movement hàng trong quá trình vận hành kho.
+> Là người thực hiện xử lý hàng *(role cụ thể TBD)*, tôi muốn Product/BA đánh giá system behavior cho subsequent relocation giữa tracked internal locations, để quyết định recording hoặc query behavior nào thuộc Transfer flow.
 
 ---
 
@@ -59,15 +71,15 @@ Các điều kiện dưới đây hiện chưa được chốt hoàn toàn:
 * SKU cần theo dõi phải tồn tại trong phạm vi dữ liệu của hệ thống — **TBD**.
 * Khu vực nguồn và khu vực đích phải được xác định — **TBD**.
 * Actor thực hiện Transfer và quyền truy cập — **TBD / OQ-020**.
-* Transfer giữa location hay warehouse — **TBD / OQ-016**.
+* Boundary Transfer là subsequent relocation giữa tracked internal locations trong cùng một Warehouse — **HUMAN PRODUCT DECISION / DEC-007**; system fields và validation vẫn **TBD**.
 * Điều kiện bắt đầu Transfer — **TBD / OQ-013**.
 
 **Không giả định** rằng:
 
-* một SKU chỉ có một location;
+* `system stock quantity` được duy trì theo location;
 * movement luôn là một transaction riêng;
 * Transfer luôn làm thay đổi Stock;
-* Transfer luôn được thực hiện giữa hai warehouse.
+* Transfer tự động thay đổi location information.
 
 ---
 
@@ -91,7 +103,7 @@ Các điều kiện dưới đây hiện chưa được chốt hoàn toàn:
 
 * Không được tự suy đoán location.
 * Hệ thống cần xử lý theo behavior được BA xác nhận.
-* **Validation/error behavior: TBD — OQ-013/OQ-016.**
+* **Validation/error behavior: TBD — OQ-013.**
 
 ### 6.2 SKU không xác định được
 
@@ -102,8 +114,8 @@ Các điều kiện dưới đây hiện chưa được chốt hoàn toàn:
 
 Ví dụ: nguồn và đích không phù hợp với phạm vi Transfer được phê duyệt.
 
-* Không tự động quyết định đây là lỗi location hay warehouse.
-* Rule cụ thể: **TBD — OQ-016.**
+* Không tự động quyết định validation/error behavior.
+* Rule cụ thể: **TBD — OQ-013.**
 
 ### 6.4 Người dùng không có quyền
 
@@ -125,6 +137,13 @@ Ví dụ: nguồn và đích không phù hợp với phạm vi Transfer được
 * Movement là một phần của chuỗi nghiệp vụ có `Transfer` (`REQ-002`).
 * `Movement` và `Transfer` thuộc core domain (`REQ-004`).
 
+### Human-approved product scope/modeling
+
+* MVP có một Warehouse và area-level internal locations `Backroom` / `Sales Shelf` (`DEC-005`, `DEC-006`).
+* Một SKU có thể liên kết với nhiều internal locations trong cùng Warehouse (`DEC-006`).
+* Transfer là subsequent relocation giữa tracked internal locations trong cùng Warehouse; cross-Warehouse Transfer ngoài MVP (`DEC-007`, `DEC-009`).
+* Physical movement không mặc định tạo Movement system record (`DEC-009`).
+
 ### Proposed
 
 * Sản phẩm nên hỗ trợ theo dõi movement để giảm sự phụ thuộc vào việc biết vị trí hàng thông qua bố trí thực tế và kinh nghiệm người vận hành.
@@ -135,7 +154,6 @@ Ví dụ: nguồn và đích không phù hợp với phạm vi Transfer được
 * Transfer có tạo record hay không.
 * Transfer có cập nhật Stock hay không.
 * Transfer có cập nhật Location hay không.
-* Transfer giữa location, warehouse hay cả hai.
 * Transfer có trạng thái hay không.
 * Có cho phép partial Transfer hay không.
 * Quy tắc xử lý negative stock khi Transfer được thực hiện.
@@ -149,10 +167,10 @@ Ví dụ: nguồn và đích không phù hợp với phạm vi Transfer được
 | Input                     | Status | Ghi chú                               |
 | ------------------------- | ------ | ------------------------------------- |
 | SKU                       | TBD    | Core domain                           |
-| Source location/area      | TBD    | Evidence hiện có backroom/sales shelf |
-| Destination location/area | TBD    | Evidence hiện có backroom/sales shelf |
+| Source location/area      | TBD    | Boundary dùng tracked `Backroom`/`Sales Shelf`; system field/validation TBD |
+| Destination location/area | TBD    | Boundary dùng tracked `Backroom`/`Sales Shelf`; system field/validation TBD |
 | Quantity                  | TBD    | Chưa có requirement xác nhận behavior |
-| Warehouse                 | TBD    | `OQ-016`                              |
+| Warehouse                 | Scope decided | Một Warehouse trong MVP (`DEC-005`); system field TBD |
 | Actor/user                | TBD    | `OQ-020`                              |
 | Movement time             | TBD    | Chưa có requirement                   |
 | Reason                    | TBD    | Chưa có requirement                   |
@@ -276,7 +294,7 @@ Chưa có validation rule cụ thể nào được phê duyệt trực tiếp ch
 * Quantity có được vượt Stock không?
 * Có cho phép partial Transfer không?
 * Có cho phép negative stock không?
-* Transfer giữa warehouse có được phép không?
+* System xử lý input ngoài one-Warehouse/internal-location scope như thế nào?
 * Actor có quyền thực hiện không?
 
 Các vấn đề này liên quan đến:
@@ -284,7 +302,7 @@ Các vấn đề này liên quan đến:
 * `OQ-013` — Trigger/precondition/outcome/exception/completion.
 * `OQ-014` — Partial execution.
 * `OQ-015` — Negative stock.
-* `OQ-016` — Location/Warehouse scope.
+* `DEC-005`, `DEC-007` — One-Warehouse và internal-location Transfer scope; validation behavior vẫn cần duyệt.
 * `OQ-020` — Role/permission.
 
 ---
@@ -325,7 +343,7 @@ Nếu sau này Transfer được xác nhận là transaction nghiệp vụ, các
 
 **Expected validation message:** TBD.
 
-**Related OQ:** `OQ-013`, `OQ-016`.
+**Related OQ:** `OQ-013`.
 
 ### Test Case 03 — User không có quyền
 
@@ -349,15 +367,15 @@ Nếu sau này Transfer được xác nhận là transaction nghiệp vụ, các
 
 **Status:** OPEN — `OQ-014`.
 
-### Test Case 05 — Transfer giữa warehouse
+### Test Case 05 — Cross-Warehouse request ngoài MVP
 
 **Given:** Source và destination thuộc hai warehouse khác nhau.
 
 **When:** User thực hiện Transfer.
 
-**Then:** Kết quả phụ thuộc scope Transfer được xác nhận.
+**Then:** Không có functional behavior được quy định trong Story Spec này vì cross-Warehouse Transfer ngoài MVP; handling/validation vẫn TBD.
 
-**Status:** OPEN — `OQ-016`.
+**Status:** SCOPE EXCLUDED by `DEC-005`, `DEC-007`; handling chưa được duyệt.
 
 ### Test Case 06 — Stock effect
 
@@ -394,6 +412,13 @@ REQ-004
      SKU / Warehouse / Stock / Movement / Transfer
 
          └── DRAFT-US-TRF-001
+
+CAND-REQ-003 [APPROVED — HUMAN PRODUCT DECISION]
+
+ └── Area-level internal-location capability
+     + multiple internal locations per SKU
+
+         └── Scope context for DRAFT-US-TRF-001
 
 CAND-REQ-004 [DRAFT]
 
@@ -432,9 +457,10 @@ OQ-015
 
  └── Negative stock handling
 
-OQ-016
+DEC-005 / DEC-006 / DEC-007 / DEC-008 / DEC-009
 
- └── Location vs Warehouse scope
+ └── One Warehouse / area-level locations / internal Transfer boundary
+     / system stock quantity terminology / Physical movement distinction
 
 OQ-020
 
@@ -448,7 +474,7 @@ OQ-022
 
 Traceability hiện tại nối:
 
-`REQ-002 + REQ-004 + CAND-REQ-004 + EVD-010 + EVD-011 + EVD-019`
+`REQ-002 + REQ-004 + CAND-REQ-003 + CAND-REQ-004 + DEC-005 + DEC-006 + DEC-007 + DEC-008 + DEC-009 + EVD-010 + EVD-011 + EVD-019`
 
 tới `DRAFT-US-TRF-001`.
 
@@ -461,9 +487,9 @@ Các `OQ` được dùng trong validation/test cũng được trace tại đây 
 Story Spec này chỉ được xem là **Ready for Implementation** khi:
 
 * [ ] Product/BA review `DRAFT-US-TRF-001`.
-* [ ] `CAND-REQ-004` được human review.
+* [x] `CAND-REQ-004` được human review và giữ `DRAFT`; functional behavior chưa được duyệt.
 * [ ] Trigger/precondition/outcome/exception/completion được chốt.
-* [ ] Transfer scope được chốt: location / warehouse / both.
+* [x] Transfer scope được chốt: subsequent relocation giữa tracked internal locations trong cùng Warehouse; cross-Warehouse ngoài MVP.
 * [ ] Role & permission được chốt.
 * [ ] Partial Transfer được chốt.
 * [ ] Stock effect được chốt.
@@ -484,8 +510,7 @@ Story Spec này **không xác nhận** các behavior sau:
 * ❌ Tạo Transfer transaction riêng.
 * ❌ Tự động cập nhật Stock.
 * ❌ Tự động thay đổi Location.
-* ❌ Transfer bắt buộc giữa hai Warehouse.
-* ❌ Một SKU chỉ có một Location.
+* ❌ Cross-Warehouse Transfer trong MVP.
 * ❌ User/role cụ thể được quyền Transfer.
 * ❌ Barcode/QR/scanner/mobile/offline.
 * ❌ Partial Transfer.
@@ -517,7 +542,7 @@ Story Spec này **không xác nhận** các behavior sau:
 
 **Then** hệ thống không xử lý movement như một movement hợp lệ.
 
-**Status:** DRAFT — phụ thuộc `OQ-013` / `OQ-016`.
+**Status:** DRAFT — phụ thuộc `OQ-013` và validation behavior chưa được duyệt.
 
 ### AC-03 — Authorization
 

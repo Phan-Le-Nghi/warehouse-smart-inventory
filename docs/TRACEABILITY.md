@@ -13,6 +13,10 @@ Traceability sử dụng stable ID canonical và các draft ID đã được hum
 | `AI-DIR-001` | TBD | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Hướng được giảng viên xác nhận |
 | `AI-DIR-002` | TBD | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Hướng được giảng viên xác nhận |
 | `AI-DIR-003` | TBD | TBD | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | Hướng được giảng viên xác nhận |
+| `DEC-005` | Giới hạn tất cả workflow stories trong một Warehouse | User Flow phản ánh one-Warehouse MVP | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | HUMAN PRODUCT DECISION; không phải research conclusion |
+| `DEC-006`, `CAND-REQ-003` | Liên quan Putaway/Pick/Transfer drafts; stories vẫn DRAFT | Area-level `Backroom`/`Sales Shelf`; multiple internal locations per SKU | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | HUMAN PRODUCT DECISION / PRODUCT MODELING; `EVD-006..009` chỉ là current-state context |
+| `DEC-007`, `DEC-009` | Liên quan Pick/Transfer drafts; functional Transfer requirement chưa có | Putaway = initial placement; Transfer = subsequent internal relocation; Pick = lấy quantity từ source location | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | HUMAN PRODUCT DECISION; không xác nhận transaction, Stock effect hoặc record creation |
+| `DEC-008` | Receive/Putaway/Pick/Transfer/Adjust/Audit Stock effects vẫn TBD | Dùng thuật ngữ `system stock quantity`; `OQ-011` vẫn PARTIALLY DECIDED / OPEN | Chưa tạo | Chưa bắt đầu | Chưa bắt đầu | HUMAN PRODUCT DECISION; không canonicalize Stock buckets |
 
 Deliverable môn học/báo cáo được theo dõi trong `docs/00-project-index.md`, không được gán ID yêu cầu sản phẩm tại đây.
 
@@ -24,23 +28,24 @@ Deliverable môn học/báo cáo được theo dõi trong `docs/00-project-index
 | `CAND-REQ-002` — APPROVED | `US-REC-001`: `AC-03` | Receive flow DRAFT | Taiga/Design/Spec/Implementation/Test: chưa bắt đầu | `EVD-004`, `EVD-005` |
 | `CAND-BR-001` — APPROVED | `US-REC-001`: `AC-03` | Receive flow DRAFT | Taiga/Design/Spec/Implementation/Test: chưa bắt đầu | `EVD-002`, `EVD-003`, `EVD-004` |
 
-`OQ-013`, `OQ-019` và `OQ-020` vẫn mở. Không có `AC-04`; evidence hiện có chưa xác nhận hành vi tra cứu/xem lại Receive.
+`OQ-013`, `OQ-019` và `OQ-020` vẫn mở. Không có `AC-04`; evidence hiện có chưa xác nhận hành vi tra cứu/xem lại Receive. `US-REC-001` không xác nhận automatic Stock effect.
 
 ## Putaway — DRAFT trace
 
 ```text
 REQ-002
   + EVD-006 / EVD-007 / EVD-008
-  + EVD-010 / EVD-011 (Putaway/Transfer boundary remains OPEN)
+  + EVD-010 / EVD-011 (physical movement context; transaction remains unconfirmed)
   + EVD-019 (research limitation)
-  + CAND-REQ-003 (DRAFT)
+  + CAND-REQ-003 (APPROVED — HUMAN PRODUCT DECISION)
+  + DEC-005 / DEC-006 / DEC-007 / DEC-009
     -> DRAFT-US-PUT-001
     -> Product Acceptance Criteria: TBD
     -> Putaway cautious flow: DRAFT
     -> Taiga / Design / Spec / Implementation / Test: Chưa bắt đầu
 ```
 
-`CAND-REQ-003` không được sử dụng như approval cho record/lookup location. Trigger, completion, partial Putaway, location cardinality, Putaway/Transfer classification, role permission, Stock/Movement effect và device interaction vẫn là `TBD` / `OPEN QUESTION`. Câu hỏi location cardinality chưa có canonical OQ ID.
+`CAND-REQ-003` phê duyệt record/lookup area-level internal-location information và multiple internal locations per SKU. Putaway là initial placement theo `DEC-009`. Trigger, completion, partial Putaway, quantity per location, role permission, Stock effect, automatic location update, Movement system record và device interaction vẫn là `TBD` / `OPEN QUESTION`.
 
 ## Pick — DRAFT trace
 
@@ -49,7 +54,8 @@ REQ-002
   + REQ-004 (domain concepts only; behavior TBD)
   + EVD-006 / EVD-007 / EVD-008 / EVD-009
     (current-state context; not confirmed Pick behavior)
-  + CAND-REQ-003 (related, DRAFT)
+  + CAND-REQ-003 (APPROVED — HUMAN PRODUCT DECISION)
+  + DEC-006 / DEC-009 (multiple internal locations per SKU; Pick takes quantity from a source location)
     -> DRAFT-US-PICK-001
     -> AC-PICK-001: scope-level / non-functional
     -> Functional Acceptance Criteria: TBD
@@ -57,14 +63,16 @@ REQ-002
     -> Taiga / Design / Spec / Implementation / Test: Chưa bắt đầu
 ```
 
-`OQ-011`, `OQ-012`, `OQ-013`, `OQ-014`, `OQ-015`, `OQ-016`, `OQ-020` và `OQ-022` vẫn mở. Trace không xác nhận location support, reservation, stock deduction, Movement, Transfer, FIFO/FEFO, device behavior hoặc permission.
+`OQ-011` là `PARTIALLY DECIDED / OPEN`; `OQ-012`, `OQ-013`, `OQ-014`, `OQ-015`, `OQ-020` và `OQ-022` vẫn mở. `OQ-016` đã resolved cho Transfer scope bởi `DEC-007`. Trace xác nhận area-level location capability nhưng không xác nhận source-selection rule, reservation, stock deduction, Movement system record, Transfer system behavior, FIFO/FEFO, device behavior hoặc permission.
 
 ## Transfer — DRAFT trace
 
 ```text
 REQ-002
   + REQ-004 (Movement and Transfer are core concepts; behavior TBD)
+  + CAND-REQ-003 (APPROVED — area-level internal-location capability)
   + CAND-REQ-004 (DRAFT)
+  + DEC-005 / DEC-007 / DEC-009 (one Warehouse; subsequent relocation between tracked internal locations)
   + EVD-010 (physical movement exists)
   + EVD-011 (separate transaction is not confirmed)
   + EVD-019 (research limitation)
@@ -76,7 +84,7 @@ REQ-002
     -> Taiga / Design / Implementation / Test: Chưa bắt đầu
 ```
 
-`CAND-REQ-004` không được sử dụng như approval cho system Transfer behavior. `OQ-013`, `OQ-014`, `OQ-015`, `OQ-016`, `OQ-020` và `OQ-022` vẫn mở. Trace không xác nhận transaction, source/destination fields, Stock/location update, multi-Warehouse behavior hoặc permission.
+`CAND-REQ-004` không được sử dụng như approval cho system Transfer behavior và vẫn `DRAFT`. `OQ-016` đã `RESOLVED — HUMAN PRODUCT DECISION`; `OQ-013`, `OQ-014`, `OQ-015`, `OQ-020` và `OQ-022` vẫn mở. Trace không xác nhận transaction, stored source/destination fields, Stock/location update, Movement system record hoặc permission. Multi-Warehouse và cross-Warehouse Transfer nằm ngoài MVP.
 
 ## Adjust — DRAFT trace
 
@@ -92,7 +100,7 @@ REQ-002
     -> Taiga / Design / Spec / Implementation / Test: Chưa bắt đầu
 ```
 
-Nguồn/trigger discrepancy, detailed recheck, completion, exception, adjustment mechanism, reason/evidence/approval, role/permission, Stock definition, negative-stock handling, anomaly definition và resulting Stock state vẫn là `TBD` / `OPEN QUESTION`. Trace không xác nhận Audit là trigger bắt buộc hoặc automatic Stock update.
+Nguồn/trigger discrepancy, detailed recheck, completion, exception, adjustment mechanism, reason/evidence/approval, role/permission, `system stock quantity` granularity/aggregation/effect, negative-stock handling, anomaly definition và resulting Stock state vẫn là `TBD` / `OPEN QUESTION`. Trace không xác nhận Audit là trigger bắt buộc hoặc automatic Stock update.
 
 ## Audit — DRAFT trace
 
@@ -110,7 +118,7 @@ REQ-002
     -> Taiga / Design / Spec / Implementation / Test: Chưa bắt đầu
 ```
 
-Audit type, trigger, precondition, completion, count scope, product schedule, role permission, reason/evidence/approval, device interaction, relationship to Adjust và result after re-check vẫn là `TBD` / `OPEN QUESTION`. Trace không xác nhận Audit tự động thay đổi Stock, tự động tạo Adjust hoặc áp dụng daily Audit cho mọi Warehouse.
+Audit type, trigger, precondition, completion, count scope, product schedule, role permission, reason/evidence/approval, device interaction, `system stock quantity` granularity/aggregation, relationship to Adjust và result after re-check vẫn là `TBD` / `OPEN QUESTION`. Trace không xác nhận Audit tự động thay đổi Stock, tự động tạo Adjust hoặc áp dụng daily Audit cho mọi Warehouse.
 
 ## Downstream status
 

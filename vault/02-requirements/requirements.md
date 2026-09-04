@@ -15,6 +15,18 @@ Các mục dưới đây chỉ bảo tồn phát biểu phạm vi đã được 
 
 `SRC-01` được xác định trong [`../01-sources/assignment-brief.md`](../01-sources/assignment-brief.md) là bối cảnh dự án Nhóm 10 được giảng viên xác nhận từ `MIS3032_1_Aug2026_Plan_Master / De_Tai / Group 10`. Các đoạn nguyên văn phía trên là phát biểu do con người cung cấp và xác nhận để dùng cho scaffold này.
 
+## Phạm vi MVP từ Human Product Decisions
+
+Các mục dưới đây là lựa chọn phạm vi do con người phê duyệt. Chúng không phải research findings và không được dùng để khái quát vận hành ngoài phạm vi MVP.
+
+| Decision | Phạm vi đã duyệt | Phần vẫn TBD / OPEN |
+|---|---|---|
+| `DEC-005` | MVP quản lý một Warehouse duy nhất; multi-Warehouse và cross-Warehouse operation ngoài MVP. | Không suy rộng thành kết luận rằng mọi hệ thống thực tế chỉ cần một Warehouse. |
+| `DEC-006` | MVP hỗ trợ internal location ở mức area-level với `Backroom` và `Sales Shelf`; không gồm aisle, rack, bin hoặc detailed shelf. Một SKU có thể liên kết với nhiều internal locations trong cùng Warehouse. | `system stock quantity` có được duy trì theo location hay không và quantity aggregation vẫn OPEN. |
+| `DEC-007` | Transfer trong MVP chỉ nằm trong boundary subsequent relocation giữa tracked internal locations trong cùng một Warehouse. | System Transfer transaction, Movement system record, Stock effect và automatic location update chưa được duyệt. |
+| `DEC-008` | MVP dùng thuật ngữ `system stock quantity`; không canonicalize `on-hand`, `available`, `reserved`, `damaged` hoặc `in-transit`. | Granularity, aggregation, workflow làm thay đổi quantity và thời điểm thay đổi vẫn OPEN. |
+| `DEC-009` | Phân biệt Physical movement và Movement system record. Putaway là initial placement sau Receive; Transfer là subsequent internal relocation; Pick là lấy quantity từ source internal location cho downstream purpose. | Detailed Pick behavior và mọi Stock/record effect vẫn TBD. |
+
 ## Hướng AI đã xác nhận
 
 Các mục này được giữ riêng khỏi yêu cầu sản phẩm đã cam kết vì giảng viên mô tả chúng là hướng tính năng AI. Chúng chưa phải yêu cầu tính năng chi tiết hoặc đã có Acceptance Criteria.
@@ -33,9 +45,13 @@ Các mục dưới đây được dẫn xuất từ evidence nghiên cứu đã 
 |---|---|---|---|
 | CAND-REQ-001 | Sản phẩm nên hỗ trợ ghi nhận số lượng thực nhận và đối chiếu với số lượng kỳ vọng trong khu vực Receive. | `EVD-002`, `EVD-003` -> Kiểm nhận dựa trên số lượng thực tế -> Vận hành hiện tại đếm thực nhận và so với kỳ vọng. | APPROVED — human reviewed |
 | CAND-REQ-002 | Sản phẩm nên hỗ trợ ghi nhận chênh lệch giữa số lượng thực nhận và số lượng kỳ vọng để phục vụ việc xử lý tiếp theo. | `EVD-004`, `EVD-005` -> Kiểm nhận dựa trên số lượng thực tế -> Có chênh lệch khi nhận hàng cần được xử lý với bên giao; nguyên nhân, bằng chứng và phê duyệt TBD. | APPROVED — human reviewed |
-| CAND-REQ-003 | Sản phẩm nên hỗ trợ ghi nhận hoặc tra cứu khu vực lưu trữ thực tế của hàng giữa backroom và sales shelf. | `EVD-006` đến `EVD-009` -> Khả năng biết vị trí hàng đang phụ thuộc con người -> Vị trí hiện phụ thuộc bố trí và kinh nghiệm; mức chi tiết location TBD. | DRAFT — chờ human review |
-| CAND-REQ-004 | Nhóm nên đánh giá việc hỗ trợ theo dõi movement giữa backroom và sales shelf trong phạm vi sản phẩm. | `EVD-010`, `EVD-011` -> Khả năng biết vị trí hàng đang phụ thuộc con người -> Có movement thực tế, nhưng việc ghi nhận thành transaction riêng và phạm vi Transfer vẫn OPEN QUESTION. | DRAFT — chờ human review |
+| CAND-REQ-003 | Trong MVP một Warehouse, sản phẩm phải hỗ trợ ghi nhận và tra cứu thông tin inventory liên quan đến internal location của SKU ở mức area-level. Các internal location ban đầu là `Backroom` và `Sales Shelf`. Một SKU có thể được ghi nhận tại nhiều internal locations trong cùng Warehouse. MVP không bao gồm aisle, rack, bin hoặc detailed shelf. | `EVD-006` đến `EVD-009` cung cấp current-state context; capability và cardinality là HUMAN PRODUCT DECISION tại `DEC-006`, không phải research-confirmed fact. | APPROVED — HUMAN PRODUCT DECISION |
+| CAND-REQ-004 | Nhóm nên đánh giá việc hỗ trợ theo dõi movement giữa backroom và sales shelf trong phạm vi sản phẩm. | `EVD-010`, `EVD-011` -> Có physical movement thực tế nhưng separate transaction chưa được xác nhận. `DEC-007` đã giới hạn Transfer scope trong MVP; functional recording/tracking behavior vẫn chưa được duyệt. | DRAFT — chờ human review |
 | CAND-REQ-005 | Sản phẩm nên hỗ trợ đối chiếu số lượng đếm thực tế với dữ liệu tồn trong hệ thống trong khu vực Audit. | `EVD-015`, `EVD-016` -> Đối soát tồn và xử lý chênh lệch có bước kiểm tra lại -> Đếm và đối chiếu là một phần của vận hành hiện tại; loại Audit và tần suất áp dụng cho sản phẩm TBD. | APPROVED — human reviewed |
+
+### Scope guard cho CAND-REQ-003
+
+`CAND-REQ-003` không quyết định `system stock quantity` có được lưu theo location hay không, quantity aggregation, Stock effect của Receive/Putaway/Pick/Transfer/Adjust, Movement system record hoặc automatic location update. Các behavior đó cần human approval riêng.
 
 ## Quy tắc tiếp nhận yêu cầu
 
