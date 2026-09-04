@@ -2,7 +2,7 @@
 
 ## Trạng thái hiện tại
 
-`TBD`: Chưa ghi mục sử dụng AI cá nhân nào trong scaffold này.
+Log đã có các mục sử dụng AI; mỗi output vẫn cần human verification trước khi được tích hợp hoặc canonical hóa.
 
 Mỗi sinh viên phải cung cấp ít nhất một mục có ý nghĩa và đã được kiểm chứng cho Report Round 1. Mục ghi nhận việc AI hỗ trợ và cách kiểm chứng; mục này không làm cho output AI trở thành nguồn có thẩm quyền.
 
@@ -58,3 +58,13 @@ Không đưa secret, dữ liệu cá nhân, Context Pack tạm thời hoặc bư
 * **Consistency decision:** Giữ `CAND-REQ-004` ở trạng thái `DRAFT`; không biến `EVD-010` thành bằng chứng cho việc hệ thống bắt buộc có Transfer/Movement transaction riêng.
 * **Scope guard:** Không xác nhận automatic Stock update, Movement transaction, location change, warehouse scope hoặc role permission khi chưa có requirement được phê duyệt.
 * **Verification status:** AI output không phải nguồn authoritative; Product/BA review vẫn cần thiết trước khi canonical hóa Story.
+
+### AI-USE-003 — Prototype / usability artifact synthesis
+
+- **Task:** Tổng hợp prototype/usability artifacts cho 3 critical flows.
+- **Context/Input:** PRD, MVP Scope, consolidated User Flow, canonical User Stories, Traceability, Decision Log, Figma URL và 3 bộ human-reviewed findings cho `P1`/`P2`/`P3`.
+- **AI/tool:** Codex hỗ trợ đọc repository, soạn/cập nhật Markdown và kiểm tra diff; không đóng vai participant và không thực hiện usability session.
+- **Output:** Usability Test Script, Usability Findings, Screen Inventory; cập nhật Project Index, Traceability và các landing/status links liên quan.
+- **Human verification:** Pending — con người cần review diff, đối chiếu 10 logical base screens với exact Figma frames và xác nhận wording/state visibility trong prototype.
+- **Human decision:** Findings và ba UX clarity decisions đầu vào đã được xác nhận là human-reviewed; không tạo Requirement/Business Rule mới và không tạo decision-log entry trùng các `DEC-012/014/015/018/019`.
+- **Artifact link:** [`05-design/usability-test-script.md`](05-design/usability-test-script.md), [`05-design/usability-findings.md`](05-design/usability-findings.md), [`05-design/screen-inventory.md`](05-design/screen-inventory.md), [`TRACEABILITY.md`](TRACEABILITY.md).

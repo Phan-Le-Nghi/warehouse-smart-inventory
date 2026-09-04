@@ -5,7 +5,7 @@ Taiga và Figma là bắt buộc cho Bài 2, nhưng không công cụ nào là n
 | Công cụ | Mục đích | URL | Quyền truy cập/người phụ trách | Trạng thái |
 |---|---|---|---|---|
 | Taiga | Theo dõi backlog và thực thi | TBD | TBD | Chưa điền dữ liệu |
-| Figma | Thiết kế trực quan, prototype và Design System | TBD | TBD | Chưa tạo thiết kế |
+| Figma | Thiết kế trực quan, prototype và Design System | [Warehouse — Smart Inventory Management](https://www.figma.com/design/d5XrKKZGoeVefVGqVVTwlu/Warehouse---Smart-Inventory-Management?node-id=0-1) | TBD | URL do con người cung cấp; quyền truy cập/frame parity cần human verification |
 
 ## Quy tắc đồng bộ
 
