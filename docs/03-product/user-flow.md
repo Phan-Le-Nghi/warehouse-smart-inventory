@@ -2,22 +2,22 @@
 
 ## Tổng quan quy trình đã xác nhận
 
-Receive -> Putaway -> Pick -> Transfer -> Adjust -> Audit
+`Receive -> Putaway -> Pick -> Transfer -> Adjust -> Audit`
 
-Đây là chuỗi các khu vực bắt buộc đã được giảng viên xác nhận, chưa phải interaction flow chi tiết.
+Đây là chuỗi các khu vực bắt buộc đã được giảng viên xác nhận, chưa phải interaction flow chi tiết và không xác nhận mọi mặt hàng hoặc giao dịch phải đi qua cả sáu khu vực trong một quy trình liên tục.
 
-## Người phụ trách User Story/flow
+## Người phụ trách và trạng thái User Story/flow
 
-| Flow | Người phụ trách | Flow chi tiết |
+| Flow | Người phụ trách | Story/flow hiện tại |
 |---|---|---|
-| Receive | Nghĩa | DRAFT flow — US-REC-001 (BA CONFIRMED), AC-01 đến AC-03 |
-| Putaway | Nghi | DRAFT cautious flow; system interaction và completion criteria TBD |
-| Pick | Thảo Ngân | DRAFT — see Pick flow below |
-| Transfer | Ly Na | DRAFT cautious flow; trigger, scope, system interaction và completion criteria TBD |
-| Adjust | Thanh Ngân | DRAFT cautious flow; trigger và detailed behavior TBD |
-| Audit | Nghi sở hữu/hỗ trợ | DRAFT cautious flow; trigger, scope, role và completion criteria TBD |
+| Receive | Nghĩa | `US-REC-001` — BA CONFIRMED; `AC-01` đến `AC-03`; flow DRAFT |
+| Putaway | Nghi | `DRAFT-US-PUT-001`; cautious flow DRAFT |
+| Pick | Thảo Ngân | `DRAFT-US-PICK-001`; flow DRAFT |
+| Transfer | Ly Na | `DRAFT-US-TRF-001`; cautious flow DRAFT |
+| Adjust | Thanh Ngân | `DRAFT-US-ADJ-001`; cautious flow DRAFT |
+| Audit | Nghi sở hữu/hỗ trợ | `DRAFT-US-AUD-001`; cautious flow DRAFT |
 
-Flow chi tiết đã duyệt sẽ là canonical trong vault/04-product/user-flows/ và được liên kết tại đây.
+Flow chi tiết đã duyệt trong tương lai sẽ là canonical trong `vault/04-product/user-flows/` và được liên kết tại đây. Các mục `DRAFT`, `TBD` và `OPEN QUESTION` bên dưới không phải hành vi sản phẩm đã được xác nhận.
 
 ---
 
@@ -25,11 +25,11 @@ Flow chi tiết đã duyệt sẽ là canonical trong vault/04-product/user-flow
 
 ### Evidence boundary
 
-- US-REC-001 — BA CONFIRMED; AC-01, AC-02, AC-03.
-- CAND-REQ-001: ghi nhận số lượng thực nhận và đối chiếu với số lượng kỳ vọng.
-- CAND-REQ-002: ghi nhận chênh lệch giữa số lượng thực nhận và số lượng kỳ vọng.
-- CAND-BR-001: khi có chênh lệch, ghi nhận Receive dùng số lượng thực nhận, không thay bằng số lượng kỳ vọng.
-- EVD-002 đến EVD-005: check item, đếm actual quantity, đối chiếu expected quantity và ghi nhận actual quantity khi chênh lệch.
+- `US-REC-001` — BA CONFIRMED; `AC-01`, `AC-02`, `AC-03`.
+- `CAND-REQ-001`: ghi nhận số lượng thực nhận và đối chiếu với số lượng kỳ vọng.
+- `CAND-REQ-002`: ghi nhận chênh lệch giữa số lượng thực nhận và số lượng kỳ vọng.
+- `CAND-BR-001`: khi có chênh lệch, ghi nhận Receive dùng số lượng thực nhận, không thay bằng số lượng kỳ vọng.
+- `EVD-002` đến `EVD-005`: check item, đếm actual quantity, đối chiếu expected quantity và ghi nhận actual quantity khi chênh lệch.
 
 ### High-level flow
 
@@ -50,6 +50,32 @@ Compare actual quantity with expected quantity
      and record discrepancy
   ↓
 Completion state and downstream handoff: TBD / OQ-013
+```
+
+### Scope guard
+
+Flow này không xác nhận tra cứu lại Receive, approval, discrepancy reason, attachment, delivery-party handling UI, damaged goods, over-receive, cancellation, automatic stock update, barcode/scanner/mobile/offline, role permission hoặc auto-handoff sang Putaway.
+
+### Open Questions được bảo tồn
+
+- Receive trigger, precondition, success outcome, exception, completion state và downstream handoff: `OQ-013`.
+- Nguồn số lượng kỳ vọng và vai trò Purchasing/Purchase Order: `OQ-019`.
+- Role/authority có thể thực hiện hoặc ghi nhận Receive: `OQ-020`.
+
+## Putaway — DRAFT cautious flow
+
+### Evidence boundary
+
+- `REQ-002`: Putaway là khu vực quy trình bắt buộc.
+- `EVD-006`, `EVD-007`: minimart có backroom và sales shelf; sau Receive, hàng có thể được bố trí tại một trong hai khu vực.
+- `EVD-008`: kiến thức vị trí hiện phụ thuộc nhiều vào bố trí thực tế và kinh nghiệm nhân viên.
+- `EVD-010`, `EVD-011`: movement giữa hai khu vực tồn tại, nhưng cách hệ thống phân loại hoặc ghi nhận chưa được xác nhận.
+- `EVD-019`: evidence chỉ phản ánh vận hành của minimart được nghiên cứu.
+- `CAND-REQ-003` vẫn là `DRAFT` và không xác nhận record/lookup location là product behavior.
+
+### High-level flow
+
+```text
 Receive
   ↓
 Putaway context
@@ -64,4 +90,222 @@ Exact system interaction: TBD
 Putaway completion criteria: TBD / OQ-013
   ↓
 Downstream handoff: TBD / OQ-013
+```
 
+### Putaway/Transfer boundary
+
+```text
+Physical movement between backroom and sales shelf exists
+  ↓
+Classification as Putaway or Transfer: OPEN QUESTION / OQ-016
+  ↓
+System recording/tracking behavior: TBD
+```
+
+### Scope guard
+
+Flow này không xác nhận record/lookup location, automatic assignment, quantity update, Movement transaction, partial/multiple-location behavior, barcode/scanner/mobile interaction hoặc permission behavior.
+
+### Open Questions được bảo tồn
+
+- Putaway trigger, precondition, completion state và downstream handoff: `OQ-013`.
+- Partial Putaway: `OQ-014`.
+- Một SKU có thể tồn tại tại nhiều physical location: `OPEN QUESTION`; chưa có canonical Open Question ID được xác nhận.
+- Putaway hay Transfer đối với movement giữa backroom và sales shelf: `OQ-016`.
+- Role có thể thực hiện/xem Putaway: `OQ-020`.
+- Putaway có ảnh hưởng Stock/Movement hay không: `TBD`.
+- Barcode/QR/scanner/mobile/offline có thuộc phạm vi không: `OQ-022`.
+
+## Pick — DRAFT flow
+
+**Status:** `DRAFT / NEEDS HUMAN REVIEW`
+
+**Owner:** Thảo Ngân
+
+**Story:** `DRAFT-US-PICK-001`
+
+**Source:** `vault/04-product/pick-draft.md`
+
+### Evidence boundary
+
+- `REQ-002`: Pick là khu vực quy trình bắt buộc.
+- `EVD-006` đến `EVD-009`: backroom/sales shelf và kiến thức vị trí phụ thuộc bố trí thực tế/kinh nghiệm là current-state context, không phải Pick system behavior.
+- Không có Business Rule đã duyệt trực tiếp xác định hành vi Pick.
+- `CAND-REQ-003` vẫn là `DRAFT` và không được dùng như requirement đã xác nhận cho Pick.
+
+### Directed flow
+
+```text
+[TBD: Pick trigger — OQ-013]
+        ↓
+[Pick workflow area — CONFIRMED: REQ-002]
+        ↓
+[TBD: Identify item / quantity — OQ-011, OQ-013]
+        ↓
+[TBD: Select / confirm source location]
+        ↓
+[TBD: Complete / record Pick — OQ-013]
+        ↓
+[TBD: Downstream impact / boundary — OQ-011, OQ-016]
+```
+
+### Scope guard
+
+Flow không giả định barcode/scanner, FIFO/FEFO, reservation, stock reduction, Movement creation, Transfer behavior, partial Pick, một SKU chỉ có một location hoặc quyền của role. `AC-PICK-001` trong Pick draft chỉ là scope-level và không phải functional Pick Acceptance Criterion.
+
+### Open Questions được bảo tồn
+
+- Stock quantity definitions: `OQ-011`.
+- Lot/batch, serial, expiry, UOM/conversion: `OQ-012`.
+- Trigger, preconditions, outcome, exception và completion: `OQ-013`.
+- Partial Pick: `OQ-014`.
+- Negative stock: `OQ-015`.
+- Pick/Transfer/Movement boundary: `OQ-016`.
+- Role/permission: `OQ-020`.
+- Barcode/QR/scanner/mobile/offline/integration: `OQ-022`.
+
+## Transfer — DRAFT cautious flow
+
+**Status:** `DRAFT / NEEDS HUMAN REVIEW`
+
+**Owner:** Ly Na
+
+**Story:** `DRAFT-US-TRF-001`
+
+**Source:** `vault/04-product/transfer-draft.md`
+
+### Evidence boundary
+
+- `REQ-002`: Transfer là khu vực quy trình bắt buộc.
+- `REQ-004`: Movement và Transfer thuộc core domain; định nghĩa, quan hệ và behavior chi tiết vẫn TBD.
+- `CAND-REQ-004`: đề xuất đánh giá hỗ trợ theo dõi movement giữa backroom và sales shelf; trạng thái vẫn `DRAFT`.
+- `EVD-010`: có physical movement giữa backroom và sales shelf trong vận hành hiện tại.
+- `EVD-011`: chưa xác nhận movement có được ghi nhận thành transaction riêng hay không.
+- `EVD-019`: evidence chỉ phản ánh minimart được nghiên cứu.
+
+### High-level flow
+
+```text
+[TBD: Transfer trigger and actor — OQ-013, OQ-020]
+        ↓
+[Transfer workflow area — CONFIRMED: REQ-002]
+        ↓
+[Evidence context: physical movement exists — EVD-010]
+        ↓
+[OPEN QUESTION: location / Warehouse scope — OQ-016]
+        ↓
+[PROPOSED / TBD: system interaction or movement recording]
+        ↓
+[TBD: completion state, Stock effect, Movement behavior and handoff]
+```
+
+### Putaway/Transfer boundary
+
+Physical movement giữa backroom và sales shelf đã được evidence xác nhận, nhưng chưa đủ căn cứ để xác định mọi movement như vậy thuộc Transfer thay vì Putaway.
+
+### Scope guard
+
+Flow không xác nhận source/destination fields, Transfer/Movement transaction riêng, automatic Stock update, automatic location change, approval, rollback, partial Transfer, negative-stock behavior, device interaction hoặc permission.
+
+### Open Questions được bảo tồn
+
+- Transfer trigger, precondition, success outcome, exception và completion state: `OQ-013`.
+- Partial Transfer: `OQ-014`.
+- Negative stock handling: `OQ-015`.
+- Transfer giữa location, Warehouse hay cả hai: `OQ-016`.
+- Role có thể thực hiện/xem/sửa/xác nhận Transfer: `OQ-020`.
+- Barcode/QR, scanner, mobile/offline và tích hợp bên ngoài: `OQ-022`.
+- Transfer có tạo record hoặc ảnh hưởng Stock/location hay không: `TBD`.
+
+## Adjust — DRAFT cautious flow
+
+### Evidence boundary
+
+- `REQ-002`: Adjust là khu vực quy trình bắt buộc; trigger, trạng thái và hành vi chi tiết vẫn TBD.
+- `CAND-BR-002`: chênh lệch giữa tồn thực tế và tồn hệ thống phải được kiểm tra lại trước khi thực hiện điều chỉnh tồn.
+- `EVD-012`, `EVD-017`: evidence trực tiếp cho nghĩa vụ re-check trước Adjust.
+- `CAND-REQ-005` liên quan đến đối chiếu tồn trong Audit nhưng không xác nhận Audit là trigger hoặc dependency bắt buộc của Adjust.
+- `EVD-013` là current-state evidence; không xác nhận role, permission, authority hoặc approval behavior của sản phẩm.
+
+### High-level flow
+
+```text
+[TBD: source/trigger that identifies the discrepancy]
+  ↓
+Discrepancy between physical stock and system stock is identified
+  ↓
+Recheck discrepancy
+  ↓
+Perform stock adjustment
+```
+
+### Scope guard
+
+Flow không xác nhận Audit tự động tạo Adjust, system behavior sau re-check, role/permission cụ thể, approval, reason, attachment/evidence, quantity validation, negative-stock handling, automatic Stock update hoặc edge case ngoài evidence hiện có.
+
+### Open Questions được bảo tồn
+
+- Nguồn/trigger xác định chênh lệch: `TBD`.
+- Detailed recheck, completion, exception và adjustment mechanism: `OQ-013` / `TBD`.
+- Reason, evidence và approval: `OQ-017`.
+- Role/authority/permission: `OQ-020`.
+- Stock quantity definitions: `OQ-011`.
+- Negative-stock handling: `OQ-015`.
+- Anomaly/discrepancy definition và proof: `OQ-028`.
+
+## Audit — DRAFT cautious flow
+
+### Evidence boundary
+
+- `REQ-002`: Audit là khu vực quy trình bắt buộc; ý nghĩa trình tự và quan hệ với các flow khác vẫn TBD.
+- `REQ-004`: Audit thuộc core domain; định nghĩa, quan hệ, thuộc tính và hành vi vẫn TBD.
+- `CAND-REQ-005`: sản phẩm nên hỗ trợ đối chiếu số lượng đếm thực tế với dữ liệu tồn trong hệ thống trong khu vực Audit; đã human reviewed.
+- `EVD-015`, `EVD-016`: minimart được nghiên cứu kiểm kê hằng ngày bằng cách đếm/kiểm tra hàng thực tế và đối chiếu dữ liệu tồn.
+- `CAND-BR-002`, `EVD-012`, `EVD-017`: chênh lệch phải được kiểm tra lại trước khi thực hiện điều chỉnh tồn.
+- `EVD-013`, `EVD-014`: manager involvement/staff escalation là current-state evidence, không phải permission model.
+- `EVD-019`: evidence không tạo quy tắc Audit hằng ngày cho mọi Warehouse.
+
+### High-level flow
+
+```text
+Audit context begins
+(trigger, actor, schedule và precondition: TBD / OQ-013, OQ-020)
+  ↓
+Physical inventory is checked/counted
+(count scope và interaction: TBD)
+  ↓
+Physical count is compared with system inventory data
+  ├─ Quantities match
+  │    └─ Audit completion / next step: TBD / OQ-013
+  └─ Discrepancy detected
+       ↓
+     Discrepancy must be re-checked before any inventory adjustment
+       ↓
+     Result after re-check / further handling / relationship to Adjust: TBD
+```
+
+### Evidence-supported discrepancy path
+
+```text
+Physical count differs from system inventory data
+  ↓
+Re-check is required
+  ↓
+Any later inventory adjustment may occur only after that re-check
+  ↓
+Exact handling, reason, evidence, approval, actor and outcome: TBD / OPEN QUESTION
+```
+
+### Scope guard
+
+Flow không xác nhận Audit tự động thay đổi Stock, tự động tạo Adjust, tự động chuyển sang Adjust, hoặc áp dụng lịch hằng ngày cho mọi Warehouse.
+
+### Open Questions được bảo tồn
+
+- Trigger, precondition, success outcome, exception và completion state: `OQ-013`.
+- Reason, evidence và approval cho Adjust/Audit: `OQ-017`.
+- Audit là cycle count, full stocktake hay cả hai: `OQ-018`.
+- Role permissions: `OQ-020`.
+- Barcode/QR, scanner, mobile/offline và integration: `OQ-022`.
+- Stock quantities dùng để đối chiếu: `OQ-011`.
+- Count scope, lịch/tần suất sản phẩm, quan hệ Audit–Adjust và kết quả sau re-check: `TBD`.

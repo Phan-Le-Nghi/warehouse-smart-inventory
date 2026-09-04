@@ -18,4 +18,17 @@ Mỗi sinh viên cuối cùng phải sở hữu ít nhất một User Story hoà
 
 `Requirement -> User Story / Acceptance Criteria -> User Flow / Design / Spec -> Taiga task -> Implementation -> Test -> Evidence / Traceability`
 
-Chưa có User Story nào được tạo trong scaffold này. Chỉ được đạt mục tiêu tổng cộng 8–12 User Story bằng các Story dẫn xuất từ yêu cầu đã xác nhận.
+## Trạng thái Story/flow hiện tại
+
+| Flow | Story ID | Trạng thái |
+|---|---|---|
+| Receive | `US-REC-001` | BA CONFIRMED; `AC-01` đến `AC-03` |
+| Putaway | `DRAFT-US-PUT-001` | DRAFT; chưa canonical |
+| Pick | `DRAFT-US-PICK-001` | DRAFT / NEEDS HUMAN REVIEW |
+| Transfer | `DRAFT-US-TRF-001` | DRAFT / NEEDS HUMAN REVIEW |
+| Adjust | `DRAFT-US-ADJ-001` | DRAFT; chưa canonical |
+| Audit | `DRAFT-US-AUD-001` | DRAFT; chưa canonical |
+
+Hiện có **1** User Story BA CONFIRMED và **5** User Story DRAFT. Draft ID chỉ phục vụ theo dõi và không làm cho story, Acceptance Criteria, flow hoặc behavior trở thành canonical.
+
+Chỉ được đạt mục tiêu tổng cộng 8–12 User Story bằng các Story dẫn xuất từ yêu cầu đã xác nhận.

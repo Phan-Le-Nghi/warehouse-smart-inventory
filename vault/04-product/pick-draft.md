@@ -32,7 +32,7 @@ This is a Pick-only product-artifact draft. It is not an approved User Story, a 
 
 ## DRAFT User Story
 
-### US-PICK-001
+### DRAFT-US-PICK-001
 
 - **Status:** `DRAFT / NEEDS HUMAN REVIEW`
 - **Classification:** `DRAFT / INTERPRETATION`
