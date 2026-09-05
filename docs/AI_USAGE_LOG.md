@@ -65,7 +65,7 @@ Không đưa secret, dữ liệu cá nhân, Context Pack tạm thời hoặc bư
 - **Context/Input:** PRD, MVP Scope, consolidated User Flow, canonical User Stories, Traceability, Decision Log, Figma URL và 3 bộ human-reviewed findings cho `P1`/`P2`/`P3`.
 - **AI/tool:** Codex hỗ trợ đọc repository, soạn/cập nhật Markdown và kiểm tra diff; không đóng vai participant và không thực hiện usability session.
 - **Output:** Usability Test Script, Usability Findings, Screen Inventory; cập nhật Project Index, Traceability và các landing/status links liên quan.
-- **Human verification:** Pending — con người cần review diff, đối chiếu 10 logical base screens với exact Figma frames và xác nhận wording/state visibility trong prototype.
+- **Human verification:** Hoàn tất cho inventory-level evidence: con người mở Figma trực tiếp, xác minh 8 pages, 31 wireframe states, 31 prototype counterparts, 3 critical flows và 6 `FACILITATOR ONLY` items. Exact hotspot total/full wiring vẫn chưa independently verified.
 - **Human decision:** Findings và ba UX clarity decisions đầu vào đã được xác nhận là human-reviewed; không tạo Requirement/Business Rule mới và không tạo decision-log entry trùng các `DEC-012/014/015/018/019`.
 - **Artifact link:** [`05-design/usability-test-script.md`](05-design/usability-test-script.md), [`05-design/usability-findings.md`](05-design/usability-findings.md), [`05-design/screen-inventory.md`](05-design/screen-inventory.md), [`TRACEABILITY.md`](TRACEABILITY.md).
 
@@ -171,3 +171,14 @@ Không đưa secret, dữ liệu cá nhân, Context Pack tạm thời hoặc bư
 - **Verification boundary:** Trạng thái Taiga, Figma và GitHub Actions trong report dựa trên repository-recorded/API read-back evidence; không claim live external-system verification trong phiên tổng hợp này. Report không claim full MVP implemented, production-ready hoặc deployed.
 - **Artifact references:** [`report-round1/group-round1-report.md`](report-round1/group-round1-report.md), [`00-project-index.md`](00-project-index.md), [`TRACEABILITY.md`](TRACEABILITY.md).
 - **Human verification:** Report được tạo theo Human Decision Pack đã phê duyệt; chờ human review documentation diff trước khi commit hoặc push.
+
+### AI-USE-014 — Figma evidence reconciliation and human verification
+
+- **Task:** Reconcile Figma/design evidence và đồng bộ trạng thái cuối vào tài liệu Round 1.
+- **AI support:** AI audit design evidence trong repository, attempted MCP verification, nhận diện MCP result không đầy đủ và tổng hợp evidence status có giới hạn.
+- **Human verification:** Human mở Figma trực tiếp trên browser; xác minh đủ 8 pages, Design System foundations, reusable components hiện diện, 31 wireframe states, 31 prototype counterparts, 3 critical flows và 6 layer/group bắt đầu bằng `FACILITATOR ONLY`; đồng thời xác nhận `05 - High Fidelity` và `07 - Dev Handoff` đang trống.
+- **Decision:** Dùng human visual verification làm nguồn cho Figma evidence; MCP page inventory chỉ trả `00 - Cover` được coi là **INCOMPLETE / NON-AUTHORITATIVE**.
+- **Limitations retained:** Không claim exact component count, radius/shadow/variables/text-style counts, exact hotspot total hoặc full interaction-level wiring. High Fidelity là **DEFERRED / NOT COMPLETED FOR ROUND 1**; Dev Handoff là **PARTIAL / NOT COMPLETED**.
+- **Authority guard:** Không thay đổi product behavior, canonical Acceptance Criteria, Figma hoặc application code.
+- **Artifact references:** [`05-design/design-system.md`](05-design/design-system.md), [`05-design/screen-inventory.md`](05-design/screen-inventory.md), [`03-product/functional-prototype.md`](03-product/functional-prototype.md), [`TRACEABILITY.md`](TRACEABILITY.md), [`00-project-index.md`](00-project-index.md), [`../vault/04-product/external-tools.md`](../vault/04-product/external-tools.md), [`report-round1/group-round1-report.md`](report-round1/group-round1-report.md).
+- **Human review:** Chờ human review documentation diff; không commit hoặc push.

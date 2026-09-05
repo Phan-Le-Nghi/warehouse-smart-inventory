@@ -16,7 +16,7 @@ Round 1 hiện bao phủ product baseline, design/prototype artifacts, Technical
 | `H-04` | Q&A Benchmark đạt **20/20 Correct, 100%**, đã được human review. | [Q&A Benchmark](../../vault/09-ai/qa-benchmark.md). |
 | `H-05` | Backlog có **9 canonical User Stories**, kèm ownership và traceability. | [User Stories](../04-backlog/user-stories.md), [Story Ownership](../../vault/04-product/story-ownership.md), [Traceability](../TRACEABILITY.md); chỉ `US-PUT-001` đã được implement. |
 | `H-06` | Taiga ghi nhận **6 Epics, 9 Stories và 27 Tasks**. | [Taiga Backlog](../04-backlog/taiga-backlog.md), [External Tools](../../vault/04-product/external-tools.md); đây là repository-recorded/API read-back evidence, không phải live verification trong phiên lập report. |
-| `H-07` | Prototype được mô tả bằng **10 base screens, 3 critical flows và 3 participant findings**. | [Screen Inventory](../05-design/screen-inventory.md), [Usability Findings](../05-design/usability-findings.md); exact Figma frame parity và raw usability provenance vẫn là limitation. |
+| `H-07` | Prototype có **10 logical base screens, 31 wireframe states, 31 prototype counterparts, 3 critical flows và 3 participant findings**. | [Screen Inventory](../05-design/screen-inventory.md), [Usability Findings](../05-design/usability-findings.md); state inventory/flow existence đã được human verify trực tiếp, còn exact hotspot total/full wiring và raw usability provenance là limitation. |
 | `H-08` | Technical Foundation dùng modular monolith, React/FastAPI/PostgreSQL và có ba ADR. | [Architecture](../06-technical/architecture.md), [canonical technical foundation](../../vault/06-technical/README.md); phần ngoài Putaway chủ yếu vẫn là foundation/conceptual contract. |
 | `H-09` | First vertical slice `US-PUT-001` đi qua React → FastAPI → PostgreSQL 18, Alembic migration, automated tests, Playwright và recorded CI evidence. | [Putaway Story Spec](../06-technical/story-specs/putaway.md), [Traceability](../TRACEABILITY.md), [CI workflow](../../.github/workflows/ci.yml); đây chỉ là first slice, không phải full MVP implementation. |
 | `H-10` | Traceability và AI Usage Log duy trì provenance, human verification và scope guards. | [Traceability](../TRACEABILITY.md), [AI Usage Log](../AI_USAGE_LOG.md). |
@@ -37,11 +37,11 @@ Round 1 hiện bao phủ product baseline, design/prototype artifacts, Technical
 | Artifact | Status | Evidence | Remaining action |
 |---|---|---|---|
 | PRD / MVP Scope | **PASS** | [PRD](../03-product/PRD.md), [MVP Scope](../03-product/mvp-scope.md) | Giữ ranh giới `IN`, `OPEN/TBD` và `OUT/DEFERRED`. |
-| Prototype | **PARTIAL** | [Functional Prototype](../03-product/functional-prototype.md), [Screen Inventory](../05-design/screen-inventory.md) | Đối chiếu 10 logical screens với exact Figma frames. |
+| Prototype | **PASS** | [Functional Prototype](../03-product/functional-prototype.md), [Screen Inventory](../05-design/screen-inventory.md); 31 counterparts và 3 critical flows human verified | Exact hotspot total và full interaction-level wiring chưa independently verified. |
 | Usability | **PARTIAL** | [Usability Test](../03-product/usability-test.md), [Findings](../05-design/usability-findings.md) | Raw notes/recording/consent hiện không có; chỉ dùng human-reviewed findings. |
 | User Stories | **PASS** | [9 canonical stories](../04-backlog/user-stories.md) | Baseline đạt; tám story ngoài `US-PUT-001` chưa được implement. |
 | Taiga | **PARTIAL** | [Taiga Backlog](../04-backlog/taiga-backlog.md) | Live-verify refs/status/access nếu cần cho trình bày. |
-| Figma / Design System | **PARTIAL** | [Design System](../05-design/design-system.md) | Xác minh access, version và exact frame parity. |
+| Figma / Design System | **PARTIAL overall** | [Design System](../05-design/design-system.md); browser access, 8 pages và foundations human verified; reusable components hiện diện | High Fidelity và Dev Handoff trống; exact component/metadata/hotspot counts chưa verify. |
 | Technical Foundation | **PASS** | [Architecture](../06-technical/architecture.md), [Data Model](../06-technical/data-model.md), [API](../06-technical/API.md) | Thực hiện story-specific technical review cho các slice sau. |
 | Repo / CI baseline | **PASS** | [Apps README](../../apps/README.md), [CI workflow](../../.github/workflows/ci.yml) | PASS theo recorded evidence; không suy rộng thành full-MVP verification. |
 | Vertical Slice | **PASS** | [Putaway Story Spec](../06-technical/story-specs/putaway.md), [Traceability](../TRACEABILITY.md) | Chỉ `US-PUT-001`; production auth/deployment vẫn TBD. |
@@ -64,7 +64,7 @@ Recorded evidence cho biết `backend-checks` đã chạy với PostgreSQL 18, `
 | `R-03` | Partial Receive, Putaway và Transfer chưa quyết định. | Có thể gây hiểu sai status, validation hoặc stock effect. | Full 16-unit Putaway chỉ được ghi là fixture scope, không phải business rule. | TBD | `OQ-014`; [Putaway Story Spec](../06-technical/story-specs/putaway.md) |
 | `R-04` | Production authentication và deployment target còn TBD. | Chưa thể claim production-ready hoặc deployed. | Architecture có actor/auth boundary; test actor chỉ dùng trong controlled tests. | TBD | `OQ-032`; [Architecture](../06-technical/architecture.md) |
 | `R-05` | Research chỉ có ba participant tại cùng một minimart. | Khả năng tổng quát hóa sang mọi Warehouse bị giới hạn. | Giới hạn claim vào context đã nghiên cứu và dẫn `EVD-001–019`. | TBD | [User Research](../01-discovery/user-research.md) |
-| `R-06` | Figma access, version và frame parity chưa được independently verified đầy đủ. | Chưa thể bảo đảm visual frames khớp logical screen inventory. | Lưu Figma URL và 10-screen inventory để human đối chiếu. | TBD | [Design System](../05-design/design-system.md); [External Tools](../../vault/04-product/external-tools.md) |
+| `R-06` | Exact Figma hotspot wiring, component/metadata counts và version identifier chưa được independently verified đầy đủ; High Fidelity và Dev Handoff đang trống. | Không thể claim full interaction verification hoặc complete visual/handoff package. | Giữ human-verified inventory (8 pages, 31 + 31 states/counterparts, 3 flows, 6 facilitator-only items) và ghi rõ phần chưa verify/chưa hoàn thành. | TBD | [Design System](../05-design/design-system.md); [External Tools](../../vault/04-product/external-tools.md) |
 | `R-07` | Repository không có raw usability recording hoặc consent artifact. | Findings không thể được independently audited từ raw session evidence. | Chỉ trình bày human-reviewed findings; không tạo quote hoặc session evidence. | TBD | [Usability Test Script](../05-design/usability-test-script.md); [Findings](../05-design/usability-findings.md) |
 | `R-08` | Tám trong chín canonical stories chưa được implement. | Full MVP hiện chưa hoàn thành. | Traceability ghi rõ status từng story; chỉ claim first Putaway slice. | TBD | [Traceability](../TRACEABILITY.md) |
 | `R-09` | Quantitative production NFR cho performance, uptime và load chưa quyết định. | Chưa đủ target để đánh giá production readiness định lượng. | Duy trì năm NFR đã duyệt và theo dõi phần định lượng còn mở. | TBD | `OQ-033`; [PRD](../03-product/PRD.md) |
@@ -94,7 +94,7 @@ Các mục `OPEN/TBD` không được xem là permanently out of scope.
 
 | Thành viên | Evidence-backed contribution |
 |---|---|
-| **Nguyễn Thị Nghĩa** | Phụ trách UX/UI và Receive; đóng góp research synthesis, user flow, prototype và usability artifacts. Figma parity còn chờ xác minh. |
+| **Nguyễn Thị Nghĩa** | Phụ trách UX/UI và Receive; đóng góp research synthesis, user flow, prototype và usability artifacts. Figma inventory/flow parity đã được human verify; exact hotspot wiring và các phần High Fidelity/Dev Handoff còn giới hạn. |
 | **Phan Lê Nghi** | Phụ trách Engineering và Putaway, hỗ trợ Audit; xây dựng Technical Foundation và first Putaway vertical slice có recorded CI evidence. |
 | **Trương Huỳnh Thảo Ngân** | Phụ trách QA/Release và Pick; tham gia usability artifacts và điều phối backlog Taiga. |
 | **Nguyễn Thị Ly Na** | Phụ trách AI/Vault và Transfer; duy trì Vault, Q&A Benchmark, AI Usage Log và consistency/traceability. |
@@ -102,8 +102,8 @@ Các mục `OPEN/TBD` không được xem là permanently out of scope.
 
 ## 9. Next Steps
 
-1. Xác minh phần Figma/design evidence còn lại, gồm access, version và exact frame parity.
-2. Xác minh evidence trên Taiga, Figma và GitHub Actions nếu cần dùng trực tiếp khi trình bày.
+1. Hoàn thiện High Fidelity và Dev Handoff trong phase được duyệt; xác minh version, exact component/metadata counts và hotspot wiring nếu cần claim các nội dung đó.
+2. Live-verify evidence trên Taiga và GitHub Actions nếu cần dùng trực tiếp khi trình bày; Figma inventory-level evidence đã được human verify.
 3. Hoàn thiện individual Round 1 evidence và AI Usage Log attribution cho đủ năm thành viên.
 4. Đóng các Open Question ưu tiên khi có human/business evidence phù hợp.
 5. Triển khai các canonical story còn lại trong phase sau; đây không phải điều kiện được suy diễn thêm để hoàn tất Bài 2 Round 1.

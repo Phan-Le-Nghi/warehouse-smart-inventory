@@ -3,8 +3,22 @@
 ## Phạm vi
 
 - Prototype: [Warehouse — Smart Inventory Management (Figma)](https://www.figma.com/design/d5XrKKZGoeVefVGqVVTwlu/Warehouse---Smart-Inventory-Management?node-id=0-1)
-- Tổng cộng: **10 base screens**, tổ chức thành **3 prototype flows**.
+- Logical inventory: **10 base screens**, tổ chức thành **3 critical flows**.
+- Figma evidence: **31 wireframe state frames** trên `02 - Wireframe` và **31 prototype counterparts** trên `06 - Prototype`, được con người xác minh trực tiếp.
 - Inventory này mô tả logical screen/state cần có theo canonical stories và human-reviewed findings. Figma là downstream design artifact, không phải nguồn Requirement/Business Rule.
+
+## Human-verified Figma state inventory
+
+| Flow | Wireframe states | Prototype counterparts | Verification |
+|---|---:|---:|---|
+| `PF-01 — Receive → Putaway` | 10 | 10 | HUMAN VERIFIED |
+| `PF-02 — Pick` | 7 | 7 | HUMAN VERIFIED |
+| `PF-03 — Audit → Adjust` | 14 | 14 | HUMAN VERIFIED |
+| **Total** | **31** | **31** | **HUMAN VERIFIED** |
+
+Trạng thái Wireframe: **PASS — 31 states human verified**. Trạng thái Prototype: **PASS — 31 counterparts and 3 critical flows human verified**.
+
+Ba critical flows tồn tại trong cả Wireframe và Prototype. Có đúng **6 facilitator-only transitions/groups**, là các layer/group bắt đầu bằng `FACILITATOR ONLY`, đã được human visually verified. Exact hotspot total và full interaction-level wiring chưa được independently verified nên không được suy diễn từ số state/counterpart.
 
 ## 10 base screens
 
