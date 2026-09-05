@@ -161,3 +161,13 @@ Không đưa secret, dữ liệu cá nhân, Context Pack tạm thời hoặc bư
 - **First-slice boundary:** `US-PUT-001` được giữ là first completed and verified vertical slice. `SC-09` là quality/delivery criterion cho slice này và không chứng minh full MVP đã được implemented.
 - **Artifact references:** [`01-discovery/project-charter.md`](01-discovery/project-charter.md), [`01-discovery/user-research.md`](01-discovery/user-research.md), [`00-project-index.md`](00-project-index.md), [`../vault/08-decisions/decision-log.md`](../vault/08-decisions/decision-log.md), [`TRACEABILITY.md`](TRACEABILITY.md).
 - **Human verification:** Chờ human review documentation diff; không commit hoặc push.
+
+### AI-USE-013 — Group Round 1 Report synthesis
+
+- **Task:** Tổng hợp báo cáo nhóm ngắn cho Round 1 từ các artifact hiện có của Bài 1 và Bài 2.
+- **AI support:** AI audit các artifact hiện có, đề xuất report structure có evidence, tổng hợp 10 highlights và 9 open risks, đồng thời giữ rõ verification limitation và scope boundary.
+- **Human decisions:** Human approve toàn bộ report structure; approve 10 highlights; approve risks `R-01` đến `R-09`; approve wording đóng góp của năm thành viên; và cho phép tạo report cùng liên kết trong Project Index.
+- **Authority guard:** AI không tự quyết contribution, không tự chấp nhận risk, không tạo evidence mới và không thay đổi business behavior hoặc canonical Acceptance Criteria.
+- **Verification boundary:** Trạng thái Taiga, Figma và GitHub Actions trong report dựa trên repository-recorded/API read-back evidence; không claim live external-system verification trong phiên tổng hợp này. Report không claim full MVP implemented, production-ready hoặc deployed.
+- **Artifact references:** [`report-round1/group-round1-report.md`](report-round1/group-round1-report.md), [`00-project-index.md`](00-project-index.md), [`TRACEABILITY.md`](TRACEABILITY.md).
+- **Human verification:** Report được tạo theo Human Decision Pack đã phê duyệt; chờ human review documentation diff trước khi commit hoặc push.
