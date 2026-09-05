@@ -9,12 +9,12 @@
 
 | Deliverable | Artifact phục vụ báo cáo | Nguồn/bằng chứng canonical | Người phụ trách | Trạng thái |
 |---|---|---|---|---|
-| Project Charter | [`01-discovery/project-charter.md`](01-discovery/project-charter.md) | Nguồn giảng viên + tri thức Vault đã duyệt | Product/BA — Thanh Ngân | Đang thực hiện |
-| User Research + Synthesis | [`01-discovery/user-research.md`](01-discovery/user-research.md) | `vault/01-sources/` | Product/BA — Thanh Ngân; UX/UI — Nghĩa | TBD — chưa có bằng chứng |
+| Project Charter | [`01-discovery/project-charter.md`](01-discovery/project-charter.md) | Nguồn giảng viên + tri thức Vault và `DEC-027–029` đã duyệt | Product/BA — Thanh Ngân | Baseline Report Round 1 đã cập nhật từ human-approved objectives, success criteria và scope/constraint decisions; chờ human review documentation diff |
+| User Research + Synthesis | [`01-discovery/user-research.md`](01-discovery/user-research.md) | `vault/01-sources/interview-notes.md`; `vault/01-sources/research-evidence.md` (`EVD-001–019`) | Product/BA — Thanh Ngân; UX/UI — Nghĩa | Report-facing summary đã đồng bộ với human-confirmed evidence từ P1/P2/P3; giới hạn một minimart và các OQ được giữ rõ |
 | Requirements + Business Rules | [`02-requirements/requirements-and-business-rules.md`](02-requirements/requirements-and-business-rules.md) | `vault/02-requirements/` | Product/BA — Thanh Ngân | Requirements + NFR Round 1 human approved: 12 active FR, 5 NFR, 15 BR; active priority coverage 100%; `OQ-012/014` và phần unresolved của `OQ-013/032/033` vẫn mở |
 | Project Vault | [`../vault/00-index.md`](../vault/00-index.md) | `vault/` | AI/Vault — Ly Na | Đã scaffold |
 | Vault Q&A Benchmark | [`02-requirements/vault-qa-benchmark.md`](02-requirements/vault-qa-benchmark.md) | `vault/09-ai/qa-benchmark.md` | AI/Vault — Ly Na | Completed — 20 questions — Human reviewed — Accuracy: 100% |
-| AI Usage Log v1 | [`AI_USAGE_LOG.md`](AI_USAGE_LOG.md) | Việc dùng AI cá nhân đã kiểm chứng | Tất cả thành viên; Ly Na điều phối | 10 mục; Q&A Benchmark Round 1 đã được human review và chấp nhận; `US-PUT-001` slice và chẩn đoán CI đã được human verification |
+| AI Usage Log v1 | [`AI_USAGE_LOG.md`](AI_USAGE_LOG.md) | Việc dùng AI cá nhân đã kiểm chứng | Tất cả thành viên; Ly Na điều phối | 12 mục; Project Charter finalization ghi rõ AI support và human-approved decisions; Q&A Benchmark và `US-PUT-001` evidence được bảo tồn |
 
 ## Bài 2
 
