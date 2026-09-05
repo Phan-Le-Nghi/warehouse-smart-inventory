@@ -5,7 +5,7 @@ Taiga và Figma là bắt buộc cho Bài 2, nhưng không công cụ nào là n
 | Công cụ | Project metadata | Mục đích | URL | Quyền truy cập/người phụ trách | Trạng thái |
 |---|---|---|---|---|---|
 | Taiga | Name: `group-07-project`; slug: `lenghi-group-07-project`; project ID: `1805021` | Theo dõi backlog và thực thi | [group-07-project](https://tree.taiga.io/project/lenghi-group-07-project/) | TBD | 6 Epic, 9 canonical User Stories và 27 Tasks được tạo/đọc lại qua Taiga REST API dưới sự phê duyệt của con người; repository references được đồng bộ từ API read-back đã kiểm tra ngày 2026-09-05 |
-| Figma | — | Thiết kế trực quan, prototype và Design System | [Warehouse — Smart Inventory Management](https://www.figma.com/design/d5XrKKZGoeVefVGqVVTwlu/Warehouse---Smart-Inventory-Management?node-id=0-1) | TBD | URL do con người cung cấp; quyền truy cập/frame parity cần human verification |
+| Figma | 8 pages: `00 - Cover` đến `07 - Dev Handoff` | Thiết kế trực quan, prototype và Design System | [Warehouse — Smart Inventory Management](https://www.figma.com/design/d5XrKKZGoeVefVGqVVTwlu/Warehouse---Smart-Inventory-Management?node-id=0-1) | Browser access HUMAN VERIFIED; owner TBD | Human visual verification ngày 2026-09-05: foundations và reusable components hiện diện; 31 wireframe states; 31 prototype counterparts; 3 critical flows; 6 `FACILITATOR ONLY` items. Overall PARTIAL vì High Fidelity và Dev Handoff trống, exact hotspot count chưa verify. MCP page inventory chỉ trả Cover nên INCOMPLETE / NON-AUTHORITATIVE. |
 
 ## Quy tắc đồng bộ
 
