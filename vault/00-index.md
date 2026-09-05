@@ -20,6 +20,6 @@ Vault là nguồn sự thật canonical. Các giá trị trạng thái dùng t�
 | Công cụ sản phẩm bên ngoài | [`04-product/external-tools.md`](04-product/external-tools.md) | URL/quyền truy cập TBD | Người phụ trách công cụ liên quan |
 | Quyết định | [`08-decisions/decision-log.md`](08-decisions/decision-log.md) | Đang hoạt động | Nhóm / người phê duyệt |
 | Hướng dẫn AI | [`09-ai/ai-usage-guidance.md`](09-ai/ai-usage-guidance.md) | CONFIRMED | AI/Vault — Ly Na |
-| Vault Q&A Benchmark | [`09-ai/qa-benchmark.md`](09-ai/qa-benchmark.md) | Đã tạo cấu trúc; câu hỏi/kết quả TBD | AI/Vault — Ly Na |
+| Vault Q&A Benchmark | [`09-ai/qa-benchmark.md`](09-ai/qa-benchmark.md) | Completed — 20 questions — Human reviewed — Accuracy: 100% | AI/Vault — Ly Na |
 
 Tiến độ artifact môn học/báo cáo được theo dõi riêng trong [`docs/00-project-index.md`](../docs/00-project-index.md).
