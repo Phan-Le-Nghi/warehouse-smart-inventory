@@ -150,3 +150,14 @@ Không đưa secret, dữ liệu cá nhân, Context Pack tạm thời hoặc bư
 - **Result:** Active canonical inventory được ghi nhận là 12 FR, 5 NFR và 15 Business Rules; priority coverage đầy đủ cho active requirements. Canonical Acceptance Criteria và application code không thay đổi.
 - **Artifact references:** [`../vault/02-requirements/requirements.md`](../vault/02-requirements/requirements.md), [`../vault/02-requirements/business-rules.md`](../vault/02-requirements/business-rules.md), [`../vault/02-requirements/open-questions.md`](../vault/02-requirements/open-questions.md), [`../vault/08-decisions/decision-log.md`](../vault/08-decisions/decision-log.md), [`02-requirements/requirements-and-business-rules.md`](02-requirements/requirements-and-business-rules.md), [`03-product/PRD.md`](03-product/PRD.md), [`TRACEABILITY.md`](TRACEABILITY.md).
 - **Human verification:** Chờ human review documentation diff; không commit hoặc push.
+
+### AI-USE-012 — Project Charter Round 1 finalization
+
+- **Task:** Audit Project Charter completeness và đồng bộ documentation từ Human Decision Pack đã được phê duyệt.
+- **AI support:** AI đọc Project Charter, research evidence, requirements/business rules, domain roles/workflow, PRD, MVP Scope, Traceability và Decision Log; đề xuất evidence-backed wording/options; kiểm tra consistency; cập nhật documentation sau khi có human approval. AI không tự quyết business objective, KPI, scope hoặc Open Question.
+- **Human decisions:** Human approve `OBJ-A` và `OBJ-B`; giữ `OBJ-C` ở trạng thái `HOLD`; approve `SC-01` đến `SC-09`; approve việc tách `IN MVP`, `OUT / DEFERRED`, `OPEN / TBD`; approve risk và constraint wording được ghi tại `DEC-027–029`.
+- **Scope and authority guard:** Không thêm quantitative business KPI; không resolve `OQ-012`, phần unresolved của `OQ-013`, `OQ-014`, production authentication, deployment hoặc Open Question khác; không thay đổi MVP behavior, canonical Acceptance Criteria hoặc application code.
+- **Research consistency:** Report-facing User Research được đồng bộ với human-confirmed `EVD-001–019`, ba participant `P1/P2/P3` và limitation rằng tất cả cùng một minimart; không tạo transcript, quote hoặc evidence mới.
+- **First-slice boundary:** `US-PUT-001` được giữ là first completed and verified vertical slice. `SC-09` là quality/delivery criterion cho slice này và không chứng minh full MVP đã được implemented.
+- **Artifact references:** [`01-discovery/project-charter.md`](01-discovery/project-charter.md), [`01-discovery/user-research.md`](01-discovery/user-research.md), [`00-project-index.md`](00-project-index.md), [`../vault/08-decisions/decision-log.md`](../vault/08-decisions/decision-log.md), [`TRACEABILITY.md`](TRACEABILITY.md).
+- **Human verification:** Chờ human review documentation diff; không commit hoặc push.
