@@ -5,6 +5,12 @@
 - Yêu cầu sản phẩm là canonical tại [`vault/02-requirements/requirements.md`](../vault/02-requirements/requirements.md).
 - Mục lục này theo dõi deliverable môn học/báo cáo và không gán ID yêu cầu sản phẩm cho chúng.
 
+## Group Round 1 Report
+
+| Deliverable | Artifact | Trạng thái |
+|---|---|---|
+| Báo cáo nhóm Round 1 — Bài 1 + Bài 2 | [`report-round1/group-round1-report.md`](report-round1/group-round1-report.md) | **Completed / Human-reviewed** |
+
 ## Bài 1
 
 | Deliverable | Artifact phục vụ báo cáo | Nguồn/bằng chứng canonical | Người phụ trách | Trạng thái |
