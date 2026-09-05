@@ -16,9 +16,9 @@ Story cover execution/confirmation của subsequent relocation trong cùng một
 
 ## Traceability
 
-- Requirements: `REQ-001`, `REQ-002`, `REQ-004`, `CAND-REQ-003`, `CAND-REQ-004`, `CAND-REQ-010`, `CAND-REQ-011`.
+- Requirements: `REQ-001`, `REQ-002`, `REQ-004`, `CAND-REQ-003`, `FR-012`, `CAND-REQ-010`, `CAND-REQ-011`. Historical `CAND-REQ-004` was decomposed and superseded by `FR-012`/`FR-013`; it is not an active trace target.
 - Business rules: `CAND-BR-003`, `CAND-BR-007`, `CAND-BR-008`, `CAND-BR-015`.
-- Human decisions: `DEC-005`, `DEC-007`, `DEC-009`, `DEC-010`, `DEC-013`, `DEC-017`, `DEC-019`.
+- Human decisions: `DEC-005`, `DEC-007`, `DEC-009`, `DEC-010`, `DEC-013`, `DEC-017`, `DEC-019`, `DEC-024`.
 - Open questions: `OQ-013`, `OQ-014`, `OQ-022`.
 - Source classification: HUMAN PRODUCT DECISION / MVP ASSUMPTION. `EVD-010`, `EVD-011` chỉ là current-state context.
 

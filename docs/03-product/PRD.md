@@ -120,19 +120,34 @@ Consolidated detail nằm tại [User Flow](user-flow.md).
 
 ## 10. Functional requirements
 
-| ID | Approved requirement |
-|---|---|
-| `CAND-REQ-001` | Ghi actual quantity và compare với expected quantity trong Receive |
-| `CAND-REQ-002` | Ghi quantity discrepancy để phục vụ xử lý tiếp theo |
-| `CAND-REQ-003` | Duy trì/tra cứu quantity theo `Backroom` và `Sales Shelf`; Warehouse total bằng tổng location quantities |
-| `CAND-REQ-004` | Ghi/tra cứu Internal Transfer record/history với minimum fields đã duyệt |
-| `CAND-REQ-005` | Selected-scope Audit: scope, count, compare và result |
-| `CAND-REQ-006` | Multi-location Pick; full và `PARTIAL / INSUFFICIENT` result |
-| `CAND-REQ-007` | Initial Putaway allocation vào tracked destination |
-| `CAND-REQ-008` | Adjust request và Manager approve/reject trước quantity change |
-| `CAND-REQ-009` | External/manual expected quantity/reference do Purchasing cung cấp/chuẩn bị |
-| `CAND-REQ-010` | Four-role permission model |
-| `CAND-REQ-011` | Ngăn Pick/Transfer/Adjust confirm hoặc apply nếu operation tạo negative location quantity |
+Active canonical FR count là **12**. `CAND-REQ-004` đã được decomposed thành `FR-012` và `FR-013` tại `DEC-024`, được giữ như lịch sử `SUPERSEDED / DECOMPOSED` và không được double-count. Các active `CAND-REQ-*` là approved canonical requirements dù giữ tiền tố lịch sử.
+
+| ID | Approved requirement | Priority |
+|---|---|---|
+| `CAND-REQ-001` | Ghi actual quantity và compare với expected quantity trong Receive | MUST |
+| `CAND-REQ-002` | Ghi quantity discrepancy để phục vụ xử lý tiếp theo | MUST |
+| `CAND-REQ-003` | Duy trì/tra cứu quantity theo `Backroom` và `Sales Shelf`; Warehouse total bằng tổng location quantities | MUST |
+| `CAND-REQ-005` | Selected-scope Audit: scope, count, compare và result | MUST |
+| `CAND-REQ-006` | Multi-location Pick; full và `PARTIAL / INSUFFICIENT` result | MUST |
+| `CAND-REQ-007` | Initial Putaway allocation vào tracked destination | MUST |
+| `CAND-REQ-008` | Adjust request và Manager approve/reject trước quantity change | MUST |
+| `CAND-REQ-009` | External/manual expected quantity/reference do Purchasing cung cấp/chuẩn bị | MUST |
+| `CAND-REQ-010` | Four-role permission model | MUST |
+| `CAND-REQ-011` | Ngăn Pick/Transfer/Adjust confirm hoặc apply nếu operation tạo negative location quantity | MUST |
+| `FR-012` | Warehouse Staff confirm Internal Transfer và tạo minimum record | MUST |
+| `FR-013` | Manager tra cứu confirmed Transfer history với minimum displayed fields | MUST |
+
+### 10.1 Non-functional requirements
+
+Canonical NFR count là **5**. Approval và priority được ghi tại `DEC-025/026`.
+
+| ID | Approved NFR | Verification boundary | Priority |
+|---|---|---|---|
+| `NFR-001` | Stock-changing operation commit toàn bộ hoặc rollback toàn bộ khi thất bại | Không tồn tại partial write trên tested failure path | MUST |
+| `NFR-002` | Conflicting concurrent stock commands giữ per-location consistency và negative-stock invariant | Concurrency test chứng minh invariant; không có load target | MUST |
+| `NFR-003` | Same-key/same-payload Putaway replay không tạo allocation hoặc stock increment lần hai | `TEST-PUT-003`/equivalent; Putaway Round 1 only; retention window TBD | SHOULD |
+| `NFR-004` | Protected operations enforce approved permission outcome qua actor/auth boundary | Authorization behavior testable; production authentication mechanism TBD | MUST |
+| `NFR-005` | UI phân biệt rõ Pick `PARTIAL / INSUFFICIENT` với completed | UI/state/copy review và P2 usability evidence; không có numeric threshold | SHOULD |
 
 ## 11. Business rules
 
@@ -154,7 +169,7 @@ Consolidated detail nằm tại [User Flow](user-flow.md).
 | `CAND-BR-014` | Reference mismatch cần user review; system không tự chọn authoritative source |
 | `CAND-BR-015` | Location quantity không được âm; failed Pick/Transfer/Adjust validation không apply quantity change |
 
-Canonical wording nằm tại `vault/02-requirements/business-rules.md`.
+Canonical wording nằm tại `vault/02-requirements/business-rules.md`. Cả 15 active Business Rules có priority `MUST` theo `DEC-026`.
 
 ## 12. Canonical 9 User Stories
 
@@ -218,9 +233,11 @@ Không block MVP feature-set baseline nếu được giữ rõ:
 - `OQ-021`: Alert behavior.
 - `OQ-022`: barcode/QR, general scanner, mobile/offline, external integration.
 - `OQ-027–031`: AI data, anomaly definition, reorder authority, data availability và AI quality/safety criteria.
-- `OQ-033`: non-functional requirements và quantitative metrics.
+- `OQ-033`: `PARTIALLY DECIDED / OPEN`; năm NFR đã được approve, nhưng response-time, uptime, concurrent-user/load target, quantitative usability threshold, Putaway idempotency retention window và operating/deployment context vẫn mở.
 
 `OQ-015` đã được resolve bởi `DEC-019`. AI directions `AI-DIR-001–003` là `OPEN / FUTURE DIRECTION / NOT YET CANONICAL MVP REQUIREMENT`.
+
+Theo `DEC-026`, Alert functionality và `AI-DIR-001–003` có priority `OUT / DEFERRED` cho current MVP baseline. Priority này không đóng `OQ-021` hoặc `OQ-027–031`.
 
 ## 16. Success criteria
 
@@ -244,7 +261,8 @@ Không có quantitative business KPI được phê duyệt trong baseline này.
 | Receive | `CAND-REQ-001/002/009/010` | `CAND-BR-001/014` | `DEC-016/017/018` | `US-REC-001` | Receive |
 | Putaway | `CAND-REQ-003/007/010` | `CAND-BR-003/004` | `DEC-006/010/011/017/018` | `US-PUT-001` | Putaway |
 | Pick | `CAND-REQ-003/006/010/011` | `CAND-BR-003/005/006/015` | `DEC-010/012/017/018/019` | `US-PICK-001` | Pick operational path |
-| Transfer | `CAND-REQ-003/004/010/011` | `CAND-BR-003/007/008/015` | `DEC-005/007/009/010/013/017/018/019` | `US-TRF-001/002` | Transfer path/history |
+| Transfer execution | `CAND-REQ-003/010/011`, `FR-012` | `CAND-BR-003/007/008/015` | `DEC-005/007/009/010/013/017/018/019/024` | `US-TRF-001` | Transfer confirmation/record |
+| Transfer history | `FR-013`, `CAND-REQ-010` | `CAND-BR-008` | `DEC-013/017/024` | `US-TRF-002` | Confirmed history query |
 | Audit | `CAND-REQ-003/005/010` | `CAND-BR-002/003/009/010` | `DEC-010/014/017/018` | `US-AUD-001/002` | Audit match/mismatch/re-check |
 | Adjust | `CAND-REQ-003/008/010/011` | `CAND-BR-002/011/012/013/015` | `DEC-010/015/017/018/019` | `US-ADJ-001/002` | Request/decision/apply |
 | Permissions | `CAND-REQ-010` | — | `DEC-017` | Supporting/actor coverage across stories | Role participation |
