@@ -11,7 +11,7 @@
 |---|---|---|---|---|
 | Project Charter | [`01-discovery/project-charter.md`](01-discovery/project-charter.md) | Nguồn giảng viên + tri thức Vault đã duyệt | Product/BA — Thanh Ngân | Đang thực hiện |
 | User Research + Synthesis | [`01-discovery/user-research.md`](01-discovery/user-research.md) | `vault/01-sources/` | Product/BA — Thanh Ngân; UX/UI — Nghĩa | TBD — chưa có bằng chứng |
-| Requirements + Business Rules | [`02-requirements/requirements-and-business-rules.md`](02-requirements/requirements-and-business-rules.md) | `vault/02-requirements/` | Product/BA — Thanh Ngân | Round 2 decisions/rules đã cập nhật; một số OQ vẫn mở |
+| Requirements + Business Rules | [`02-requirements/requirements-and-business-rules.md`](02-requirements/requirements-and-business-rules.md) | `vault/02-requirements/` | Product/BA — Thanh Ngân | Requirements + NFR Round 1 human approved: 12 active FR, 5 NFR, 15 BR; active priority coverage 100%; `OQ-012/014` và phần unresolved của `OQ-013/032/033` vẫn mở |
 | Project Vault | [`../vault/00-index.md`](../vault/00-index.md) | `vault/` | AI/Vault — Ly Na | Đã scaffold |
 | Vault Q&A Benchmark | [`02-requirements/vault-qa-benchmark.md`](02-requirements/vault-qa-benchmark.md) | `vault/09-ai/qa-benchmark.md` | AI/Vault — Ly Na | Completed — 20 questions — Human reviewed — Accuracy: 100% |
 | AI Usage Log v1 | [`AI_USAGE_LOG.md`](AI_USAGE_LOG.md) | Việc dùng AI cá nhân đã kiểm chứng | Tất cả thành viên; Ly Na điều phối | 10 mục; Q&A Benchmark Round 1 đã được human review và chấp nhận; `US-PUT-001` slice và chẩn đoán CI đã được human verification |
@@ -20,7 +20,7 @@
 
 | Deliverable | Artifact phục vụ báo cáo | Nguồn/bằng chứng canonical | Người phụ trách | Trạng thái |
 |---|---|---|---|---|
-| PRD | [`03-product/PRD.md`](03-product/PRD.md) | `vault/02-requirements/`, `vault/03-domain/`, canonical stories và Decision Log | Product/BA — Thanh Ngân | Baseline Report Round 1 — HUMAN APPROVED PRODUCT DEFINITION; OQ được giữ rõ |
+| PRD | [`03-product/PRD.md`](03-product/PRD.md) | `vault/02-requirements/`, `vault/03-domain/`, canonical stories và Decision Log | Product/BA — Thanh Ngân | Baseline Report Round 1 — HUMAN APPROVED; 12 active FR, 5 canonical NFR và priority schema đã đồng bộ; OQ unresolved được giữ rõ |
 | MVP Scope | [`03-product/mvp-scope.md`](03-product/mvp-scope.md) | Requirements, Business Rules, OQ và Decision Log canonical | Product/BA — Thanh Ngân | Baseline IN / OUT / OPEN đã tạo |
 | User Flow | [`03-product/user-flow.md`](03-product/user-flow.md) | `vault/03-domain/workflow-overview.md`; canonical stories | UX/UI — Nghĩa + Story owner | Consolidated flow đã cập nhật; Pick/Transfer độc lập; Audit mismatch → re-check → Adjust consideration |
 | Functional Prototype | [`03-product/functional-prototype.md`](03-product/functional-prototype.md), [`05-design/screen-inventory.md`](05-design/screen-inventory.md) | Canonical stories/flow + human-reviewed usability decisions | UX/UI — Nghĩa | 10 base screens; 3 critical flows; Figma link recorded |

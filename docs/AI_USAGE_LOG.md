@@ -139,3 +139,14 @@ Không đưa secret, dữ liệu cá nhân, Context Pack tạm thời hoặc bư
 - **Human responsibility and decision:** Human chịu trách nhiệm verify source, approve/reject score và đã chấp nhận benchmark cuối cùng với Total 20, Correct 20, Partial 0, Wrong 0, Unsupported 0, Accuracy 100%.
 - **Scope guard:** Không thay đổi Question, Expected answer, Actual answer, Result hoặc supporting source; không đóng `OQ-013`, `OQ-014`, `OQ-027`, `OQ-029` hay Open Question nào khác.
 - **Artifact references:** [`../vault/09-ai/qa-benchmark.md`](../vault/09-ai/qa-benchmark.md), [`../vault/00-index.md`](../vault/00-index.md), [`00-project-index.md`](00-project-index.md).
+
+### AI-USE-011 — Requirements + NFR audit/finalization
+
+- **Task:** Audit Requirement Inventory và hỗ trợ đồng bộ documentation sau Requirements + NFR Round 1 human review.
+- **AI support:** AI đọc các artifact canonical/report-facing, phân loại FR/NFR/Business Rule/Constraint/Open Question, đề xuất decomposition và NFR candidates, hỗ trợ consistency checks, traceability update và diff verification. AI không tự canonicalize candidate hoặc quyết định metric.
+- **Human decisions:** Human approve `CFR-01`/`CFR-02` và canonicalize thành `FR-012`/`FR-013`; đánh dấu historical `CAND-REQ-004` là `SUPERSEDED / DECOMPOSED`; approve `NFR-001` đến `NFR-005`; chọn priority schema và priority cho scope/FR/BR/NFR/Alert/AI.
+- **Held/rejected proposals:** `CFR-03` đến `CFR-06` và `CNFR-06` tiếp tục `HOLD / NOT APPROVED`; không được canonicalize.
+- **Open-boundary guard:** `OQ-012`, `OQ-014`, phần unresolved của `OQ-013`, `OQ-032` và `OQ-033` tiếp tục mở. Không quyết định partial Putaway, Receive completion/handoff, UOM/decimal, production authentication, deployment, performance/uptime/concurrent-user metrics, Alert workflow hoặc AI implementation.
+- **Result:** Active canonical inventory được ghi nhận là 12 FR, 5 NFR và 15 Business Rules; priority coverage đầy đủ cho active requirements. Canonical Acceptance Criteria và application code không thay đổi.
+- **Artifact references:** [`../vault/02-requirements/requirements.md`](../vault/02-requirements/requirements.md), [`../vault/02-requirements/business-rules.md`](../vault/02-requirements/business-rules.md), [`../vault/02-requirements/open-questions.md`](../vault/02-requirements/open-questions.md), [`../vault/08-decisions/decision-log.md`](../vault/08-decisions/decision-log.md), [`02-requirements/requirements-and-business-rules.md`](02-requirements/requirements-and-business-rules.md), [`03-product/PRD.md`](03-product/PRD.md), [`TRACEABILITY.md`](TRACEABILITY.md).
+- **Human verification:** Chờ human review documentation diff; không commit hoặc push.

@@ -4,6 +4,8 @@
 
 Hai business rule được human review từ Research Synthesis v1 được bảo tồn. Mười hai business rule bổ sung được phê duyệt như HUMAN PRODUCT DECISIONS / MVP ASSUMPTIONS từ Round 2; `CAND-BR-015` được phê duyệt sau đó cho baseline Product Definition. Các rule dựa trên decision không phải verified research findings.
 
+Theo `DEC-026`, cả 15 rule `CAND-BR-001` đến `CAND-BR-015` là approved canonical Business Rules đang active và từng rule có priority `MUST`. Tiền tố lịch sử `CAND` được giữ để bảo toàn stable ID; nó không còn biểu thị trạng thái candidate.
+
 Tên quy trình và các khái niệm domain đã xác nhận chưa đủ để suy ra ngưỡng phê duyệt, chuyển trạng thái, cách tính tồn kho, hành vi ngoại lệ, quy tắc phân quyền hoặc quy tắc kiểm tra hợp lệ.
 
 Quy tắc trong tương lai phải dùng stable ID, dẫn bằng chứng, xác định yêu cầu/User Story bị ảnh hưởng và được con người phê duyệt.
