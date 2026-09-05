@@ -129,3 +129,13 @@ Không đưa secret, dữ liệu cá nhân, Context Pack tạm thời hoặc bư
 - **Human decision:** Human cập nhật trạng thái Taiga sau khi Technical Story Spec, implementation merge, frontend checks, backend PostgreSQL 18 checks, Playwright E2E và Traceability evidence đã pass.
 - **Scope guard:** First vertical slice được ghi nhận `Completed / Verified`; không claim toàn bộ MVP Done. `OQ-012`, `OQ-013`, `OQ-014`, production authentication và deployment giữ nguyên trạng thái.
 - **Human verification:** Chờ human review documentation diff trước khi tích hợp; không commit hoặc push trong lần đồng bộ này.
+
+### AI-USE-010 — Q&A Benchmark Round 1 human-review finalization
+
+- **Task:** Finalize trạng thái human review cho Q&A Benchmark Round 1 gồm 20 câu.
+- **AI support:** AI đọc Vault, tạo Actual answer draft, so khớp Expected answer với Actual answer và tính score draft.
+- **AI authority guard:** AI không tự xác nhận benchmark, không tự approve/reject score và không dùng output AI làm evidence có thẩm quyền.
+- **Human verification:** Human đã kiểm tra Expected answer, Actual answer, supporting source và score của 20 câu.
+- **Human responsibility and decision:** Human chịu trách nhiệm verify source, approve/reject score và đã chấp nhận benchmark cuối cùng với Total 20, Correct 20, Partial 0, Wrong 0, Unsupported 0, Accuracy 100%.
+- **Scope guard:** Không thay đổi Question, Expected answer, Actual answer, Result hoặc supporting source; không đóng `OQ-013`, `OQ-014`, `OQ-027`, `OQ-029` hay Open Question nào khác.
+- **Artifact references:** [`../vault/09-ai/qa-benchmark.md`](../vault/09-ai/qa-benchmark.md), [`../vault/00-index.md`](../vault/00-index.md), [`00-project-index.md`](00-project-index.md).

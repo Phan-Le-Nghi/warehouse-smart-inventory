@@ -1,6 +1,6 @@
 # AI Q&A Benchmark
 
-**Trạng thái:** DRAFT — Chờ human review
+**Trạng thái:** COMPLETED — HUMAN REVIEWED / PASS
 **Mục đích:** Kiểm tra khả năng trả lời của AI dựa trên Vault, đặc biệt là khả năng phân biệt giữa thông tin đã xác nhận và thông tin còn TBD / OPEN QUESTION.
 
 ## Quy tắc đánh giá
@@ -63,27 +63,60 @@ Một câu trả lời được xem là **FAIL** nếu:
 
 ## Kết quả thực thi
 
-| ID     | Actual Answer | PASS/FAIL | Reviewer | Note |
-| ------ | ------------- | --------- | -------- | ---- |
-| QA-001 | TBD           | TBD       | TBD      |      |
-| QA-002 | TBD           | TBD       | TBD      |      |
-| QA-003 | TBD           | TBD       | TBD      |      |
-| QA-004 | TBD           | TBD       | TBD      |      |
-| QA-005 | TBD           | TBD       | TBD      |      |
-| QA-006 | TBD           | TBD       | TBD      |      |
-| QA-007 | TBD           | TBD       | TBD      |      |
-| QA-008 | TBD           | TBD       | TBD      |      |
-| QA-009 | TBD           | TBD       | TBD      |      |
-| QA-010 | TBD           | TBD       | TBD      |      |
-| QA-011 | TBD           | TBD       | TBD      |      |
-| QA-012 | TBD           | TBD       | TBD      |      |
-| QA-013 | TBD           | TBD       | TBD      |      |
-| QA-014 | TBD           | TBD       | TBD      |      |
-| QA-015 | TBD           | TBD       | TBD      |      |
-| QA-016 | TBD           | TBD       | TBD      |      |
-| QA-017 | TBD           | TBD       | TBD      |      |
-| QA-018 | TBD           | TBD       | TBD      |      |
-| QA-019 | TBD           | TBD       | TBD      |      |
-| QA-020 | TBD           | TBD       | TBD      |      |
+Mỗi dòng dưới đây nối với Question, Expected answer và Expected supporting source trong bảng `Benchmark Questions` bằng stable Question ID.
 
-**Trạng thái Benchmark:** 20 câu đã được chuẩn bị; kết quả thực thi và human review vẫn TBD.
+Quy ước chấm Round 1:
+
+- `Correct`: Actual answer phù hợp đầy đủ với expected answer và có nguồn Vault hỗ trợ.
+- `Partial`: Actual answer có phần đúng nhưng thiếu hoặc lệch một phần quan trọng so với expected answer.
+- `Wrong`: Actual answer mâu thuẫn với expected answer hoặc trạng thái hiện hành của Vault.
+- `Unsupported`: Actual answer đưa ra khẳng định mà nguồn Vault được dẫn không hỗ trợ.
+- Một câu hỏi chưa có quyết định vẫn được chấm `Correct` khi expected answer yêu cầu fallback và Actual answer trả lời đúng `KHÔNG ĐỦ DỮ LIỆU` với OQ còn mở làm nguồn.
+
+| Question ID | Actual answer | Actual supporting source | Result | Reviewer note | Human review status |
+|---|---|---|---|---|---|
+| QA-001 | Quy trình/capability bắt buộc gồm Receive → Putaway → Pick → Transfer → Adjust → Audit. Đây không phải một transaction tuần tự bắt buộc cho mọi hàng hóa. | `vault/03-domain/workflow-overview.md`; `DEC-018` | Correct | Khớp đủ chuỗi và scope guard của expected answer. | REVIEWED / PASS |
+| QA-002 | Các role đã xác nhận là Warehouse Staff, Manager, Purchasing và Admin. | `vault/03-domain/roles.md`; `REQ-003`; `DEC-017` | Correct | Khớp đủ bốn role đã xác nhận. | REVIEWED / PASS |
+| QA-003 | Các core domain object đã xác nhận là SKU, Warehouse, Stock, Movement, Transfer, Alert và Audit. | `vault/02-requirements/requirements.md` (`REQ-004`) | Correct | Khớp đầy đủ danh sách tại `REQ-004`. | REVIEWED / PASS |
+| QA-004 | Có. Khi Receive, item được kiểm tra và số lượng thực nhận được đếm. | `vault/01-sources/research-evidence.md` (`EVD-002`) | Correct | Trả lời trực tiếp theo evidence đã human-confirmed. | REVIEWED / PASS |
+| QA-005 | Ghi nhận số lượng thực nhận, không thay bằng số lượng dự kiến. | `vault/01-sources/research-evidence.md` (`EVD-003`, `EVD-004`); `vault/02-requirements/business-rules.md` (`CAND-BR-001`) | Correct | Khớp evidence và business rule đã human review. | REVIEWED / PASS |
+| QA-006 | Phải kiểm tra lại chênh lệch trước khi thực hiện adjustment. | `vault/01-sources/research-evidence.md` (`EVD-012`, `EVD-017`); `vault/02-requirements/business-rules.md` (`CAND-BR-002`) | Correct | Không suy diễn thêm cách xử lý sau re-check. | REVIEWED / PASS |
+| QA-007 | Evidence hiện xác nhận hai khu vực là Backroom và Sales Shelf. | `vault/01-sources/research-evidence.md` (`EVD-006`, `EVD-007`) | Correct | Giới hạn câu trả lời đúng hai khu vực có evidence. | REVIEWED / PASS |
+| QA-008 | Có. Vận hành hiện tại có việc di chuyển hàng giữa Backroom và Sales Shelf. | `vault/01-sources/research-evidence.md` (`EVD-010`) | Correct | Chỉ khẳng định physical movement như evidence. | REVIEWED / PASS |
+| QA-009 | Không được tự xác định ngoài permission model. Warehouse Staff có thể tạo discrepancy/Adjust request; Manager approve hoặc reject trước khi apply; Purchasing không có warehouse adjustment permission. | `vault/03-domain/roles.md`; `DEC-017`; `vault/02-requirements/business-rules.md` (`CAND-BR-011`) | Correct | Phân biệt tạo request với approve/apply đúng expected answer. | REVIEWED / PASS |
+| QA-010 | Không. AI không được tự tạo API Transfer chưa được phê duyệt; các artifact Transfer được đọc không định nghĩa endpoint như `POST /api/transfers`. | `vault/09-ai/ai-usage-guidance.md`; `vault/04-product/stories/US-TRF-001.md`; `vault/04-product/transfer-draft.md` (scope guard: không định nghĩa API) | Correct | Khớp nguyên tắc không invent; tên nguồn expected “Transfer Story Spec” cần được canonicalize. | REVIEWED / PASS |
+| QA-011 | Không. Receive ghi nhận actual received quantity, kể cả khi thấp hơn expected quantity; không ghi expected quantity để bù đủ. | `vault/01-sources/research-evidence.md` (`EVD-004`); `vault/02-requirements/business-rules.md` (`CAND-BR-001`) | Correct | Khớp rule ghi nhận số lượng thực nhận. | REVIEWED / PASS |
+| QA-012 | Không. Discrepancy giữa Stock thực tế và hệ thống phải được kiểm tra lại trước khi adjustment. | `vault/01-sources/research-evidence.md` (`EVD-012`); `vault/02-requirements/business-rules.md` (`CAND-BR-002`) | Correct | Không đóng các lifecycle gap sau re-check. | REVIEWED / PASS |
+| QA-013 | KHÔNG ĐỦ DỮ LIỆU. Transfer yêu cầu source và destination, nhưng xử lý cụ thể khi không xác định được một trong hai vẫn thuộc exception/lifecycle chưa được quyết định. | `vault/02-requirements/open-questions.md` (`OQ-013`); `vault/04-product/stories/US-TRF-001.md` (Remaining gaps) | Correct | Fallback đúng; không suy diễn auto-confirm hoặc auto-fail. | REVIEWED / PASS |
+| QA-014 | KHÔNG ĐỦ DỮ LIỆU. Partial Transfer vẫn là OPEN QUESTION. | `vault/02-requirements/open-questions.md` (`OQ-014`); `vault/04-product/stories/US-TRF-001.md` (Remaining gaps) | Correct | Giữ nguyên `OQ-014`, không biến Pick partial thành Transfer partial. | REVIEWED / PASS |
+| QA-015 | Có. Khi Transfer được confirm, quantity giảm tại source internal location, tăng cùng quantity tại destination và Warehouse total không đổi. | `vault/02-requirements/business-rules.md` (`CAND-BR-007`); `DEC-013` | Correct | Khớp đầy đủ quantity effect đã duyệt. | REVIEWED / PASS |
+| QA-016 | Confirmed Transfer chuyển cùng quantity từ source internal location sang destination internal location trong cùng một Warehouse. | `vault/02-requirements/requirements.md` (`CAND-REQ-004`); `vault/02-requirements/business-rules.md` (`CAND-BR-007`); `DEC-013` | Correct | Nêu đúng source/destination effect và boundary. | REVIEWED / PASS |
+| QA-017 | Không. MVP chỉ hỗ trợ Transfer giữa tracked internal locations trong cùng một Warehouse; cross-Warehouse Transfer nằm ngoài MVP. | `DEC-005`; `DEC-007`; `DEC-013` | Correct | Khớp boundary một Warehouse đã duyệt. | REVIEWED / PASS |
+| QA-018 | Không. `system stock quantity` tại internal location không được âm; Pick, Transfer và Adjust bị chặn nếu operation sẽ tạo quantity âm. Không suy diễn retry/cancel lifecycle. | `DEC-019`; `vault/02-requirements/business-rules.md` (`CAND-BR-015`); resolved `OQ-015` | Correct | Khớp guard và giữ nguyên lifecycle gap. | REVIEWED / PASS |
+| QA-019 | KHÔNG ĐỦ DỮ LIỆU. Chưa có quyết định reorder recommendation chỉ mang tính advisory hay có thể khởi tạo hành động Purchasing. | `vault/02-requirements/open-questions.md` (`OQ-029`); `vault/02-requirements/requirements.md` (`AI-DIR-003`) | Correct | Fallback đúng; không nâng AI direction thành authority. | REVIEWED / PASS |
+| QA-020 | Không nên tự suy diễn. Khi nguồn dữ liệu chưa được xác định và Vault không đủ bằng chứng, AI phải trả lời `KHÔNG ĐỦ DỮ LIỆU`. | `vault/09-ai/ai-usage-guidance.md`; `vault/02-requirements/open-questions.md` (`OQ-027`); `vault/02-requirements/requirements.md` (`AI-DIR-001`) | Correct | Khớp safe fallback và giữ `OQ-027` mở. | REVIEWED / PASS |
+
+## Accuracy Round 1
+
+- Total: 20
+- Correct: 20
+- Partial: 0
+- Wrong: 0
+- Unsupported: 0
+- Accuracy: `Correct / Total × 100 = 20 / 20 × 100 = 100%`
+- Mục tiêu `>= 80% Correct`: đạt; kết quả 20/20 Correct đã được human review và chấp nhận.
+
+## Improvements sau benchmark
+
+1. **PROPOSED** — Canonicalize nguồn kỳ vọng của `QA-010`: thay nhãn chung “Transfer Story Spec” bằng đường dẫn chính xác tới artifact canonical; hiện tại `US-TRF-001` là story canonical còn `transfer-draft.md` đã superseded. Expected supporting source chưa được thay đổi trong lần finalization này.
+2. **DONE** — Duy trì rubric bốn mức `Correct / Partial / Wrong / Unsupported` và giải thích rõ rằng fallback `KHÔNG ĐỦ DỮ LIỆU` có thể là `Correct` khi expected answer và OQ còn mở yêu cầu fallback đó.
+3. **DONE** — Dùng stable ID kèm đường dẫn artifact trong Actual supporting source để giảm mơ hồ giữa evidence, approved business rule, human decision và open question.
+4. **DONE** — Tách rõ `OQ-013` còn mở khỏi `OQ-016` đã resolved khi đánh giá edge case Transfer, tránh dùng trạng thái lịch sử của OQ làm bằng chứng hiện hành.
+
+## Review handoff
+
+- AI hỗ trợ thực thi: đọc Vault, tạo Actual answer draft, so khớp Expected/Actual và tính score draft.
+- Human reviewer: đã kiểm tra Expected answer, Actual answer, supporting source và score; đã chấp nhận kết quả hiện tại cho đủ 20 câu.
+- Không OQ nào được đóng trong lần benchmark này.
+
+**Trạng thái Benchmark:** Completed — 20 questions — Human reviewed — Accuracy: 100%.

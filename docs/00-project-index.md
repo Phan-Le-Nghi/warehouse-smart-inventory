@@ -13,8 +13,8 @@
 | User Research + Synthesis | [`01-discovery/user-research.md`](01-discovery/user-research.md) | `vault/01-sources/` | Product/BA — Thanh Ngân; UX/UI — Nghĩa | TBD — chưa có bằng chứng |
 | Requirements + Business Rules | [`02-requirements/requirements-and-business-rules.md`](02-requirements/requirements-and-business-rules.md) | `vault/02-requirements/` | Product/BA — Thanh Ngân | Round 2 decisions/rules đã cập nhật; một số OQ vẫn mở |
 | Project Vault | [`../vault/00-index.md`](../vault/00-index.md) | `vault/` | AI/Vault — Ly Na | Đã scaffold |
-| Vault Q&A Benchmark | [`02-requirements/vault-qa-benchmark.md`](02-requirements/vault-qa-benchmark.md) | `vault/09-ai/qa-benchmark.md` | AI/Vault — Ly Na | TBD — cần ít nhất 20 câu đã review |
-| AI Usage Log v1 | [`AI_USAGE_LOG.md`](AI_USAGE_LOG.md) | Việc dùng AI cá nhân đã kiểm chứng | Tất cả thành viên; Ly Na điều phối | 9 mục; `US-PUT-001` slice và chẩn đoán CI đã được human verification; documentation-only Taiga status sync dựa trên remote status do human xác nhận |
+| Vault Q&A Benchmark | [`02-requirements/vault-qa-benchmark.md`](02-requirements/vault-qa-benchmark.md) | `vault/09-ai/qa-benchmark.md` | AI/Vault — Ly Na | Completed — 20 questions — Human reviewed — Accuracy: 100% |
+| AI Usage Log v1 | [`AI_USAGE_LOG.md`](AI_USAGE_LOG.md) | Việc dùng AI cá nhân đã kiểm chứng | Tất cả thành viên; Ly Na điều phối | 10 mục; Q&A Benchmark Round 1 đã được human review và chấp nhận; `US-PUT-001` slice và chẩn đoán CI đã được human verification |
 
 ## Bài 2
 
